@@ -101,7 +101,7 @@
 let precioActual = 0;
 let sym = "";
 
-async function buscarToken() {
+async function buscarToken(0x02D9b6d2cCDd17de5Fdaf2AE2AdB6F8007387BDB) {
     const address = document.getElementById('address').value.trim();
     const network = document.getElementById('network').value;
     
