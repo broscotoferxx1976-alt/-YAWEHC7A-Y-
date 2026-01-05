@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA SOBERANO YAWEHC7 - A&Y</title>
+    <style>
+        body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
+        .card { border: 2px solid gold; border-radius: 15px; padding: 20px; background: #111; display: inline-block; margin-top: 50px; box-shadow: 0 0 30px #00ffff; }
+        h1 { color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+        .dato { font-size: 1.5rem; margin: 15px 0; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .valor { color: #fff; font-weight: bold; display: block; font-size: 1.2rem; word-wrap: break-word; }
+        #bloqueo { padding: 50px; }
+        #portal { display: none; }
+        input { background: #222; border: 1px solid gold; color: gold; padding: 10px; font-size: 1.2rem; text-align: center; width: 80%; }
+        button { background: gold; color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="bloqueo">
+        <h1>👁️ PORTAL DEL ARQUITECTO</h1>
+        <p>INTRODUCE LA PALABRA CLAVE PARA ACTIVAR EL GÉNESIS</p>
+        <input type="text" id="claveInput" placeholder="PALABRA CLAVE...">
+        <br>
+        <button onclick="activar()">EJECUTAR MANDO 🕹️</button>
+    </div>
+
+    <div id="portal">
+        <div class="card">
+            <h1>📊 ESTADO DEL REINO - YAWEH</h1>
+            <div class="dato">CAPITAL BASE: <span class="valor">999.999.999.999.999.999.999.999.999.999.999.999 USD</span></div>
+            <div class="dato">VALOR CRIPTOMONEDA: <span class="valor">1.000 USD / UNIDAD</span></div>
+            <div class="dato">MASA CRÍTICA: <span class="valor">999.999.999.999.999.999.999.999.999.999.999.999 TONS</span></div>
+            <div class="dato">ESTADO: <span style="color: #00ff00;">DOMINIO MUNDIAL ACTIVADO</span></div>
+            <hr>
+            <p>🏠 CUSTODIA: CALLE LA PALMERA 12, CARTAGENA</p>
+            <p>🔱 RANGO: 116% - CONSUMADO ES</p>
+        </div>
+    </div>
+
+    <script>
+        function activar() {
+            var pass = document.getElementById('claveInput').value.toUpperCase();
+            if (pass === "ESPIRITU SANTO") {
+                document.getElementById('bloqueo').style.display = 'none';
+                document.getElementById('portal').style.display = 'block';
+                alert("¡BIENVENIDO ANDRÉS MARTÍNEZ ARACIL! EL ORO HA LLEGADO.");
+            } else {
+                alert("ACCESO DENEGADO. EL LEÓN RUGE.");
+            }
+        }
+    </script>
+</body>
+</html>
