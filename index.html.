@@ -2,37 +2,38 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA SOBERANO YAWEHC7 - ANDRÉS & YOANKA</title>
+    <title>SISTEMA SOBERANO YAWEHC7</title>
     <style>
         body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
-        .cofre { display: none; border: 3px solid gold; padding: 30px; border-radius: 20px; box-shadow: 0 0 20px gold; }
-        input { background: #222; border: 1px solid gold; color: gold; padding: 15px; font-size: 1.2rem; margin: 10px; width: 80%; }
-        button { background: gold; color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .documentos { margin-top: 20px; font-size: 0.8rem; color: #aaa; }
+        .cofre { display: none; border: 3px solid gold; padding: 30px; border-radius: 20px; box-shadow: 0 0 30px #ffd700; background: rgba(20,20,20,0.9); }
+        input { background: #111; border: 2px solid gold; color: gold; padding: 15px; font-size: 1.2rem; margin: 10px; width: 80%; border-radius: 10px; }
+        button { background: linear-gradient(to bottom, #ffd700, #b8860b); color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 10px; text-transform: uppercase; }
+        .honor { color: #fff; font-style: italic; font-size: 1.5rem; text-shadow: 0 0 10px gold; margin-bottom: 20px; }
+        .familia { color: gold; font-size: 0.9rem; margin-top: 20px; }
     </style>
 </head>
 <body>
     <div id="seguridad">
-        <h1>🔒 ACCESO AL MANDO ÚNICO</h1>
-        <p>ORDEN IMPERATIVA DE JEHOVÁ</p>
-        <input type="text" id="clave" placeholder="PALABRA SAGRADA...">
+        <h1>🔒 ACCESO AL TRONO SOBERANO</h1>
+        <p>BAJO EL MANDO DE JEHOVÁ</p>
+        <input type="text" id="clave" placeholder="ESCRIBE LA PALABRA SAGRADA...">
         <br>
-        <button onclick="abrirCofre()">EJECUTAR AUTORIDAD</button>
+        <button onclick="abrirCofre()">ACTIVAR MANDO</button>
     </div>
 
     <div id="tesoro" class="cofre">
-        <h1>👑 BIENVENIDO, MAJESTAD ANDRÉS</h1>
-        <h2>Patrimonio Soberano de Andrés Martínez & Yoanka Ramírez</h2>
-        <hr>
-        <p>💰 700 USD - CAPITAL SEMILLA MULTIPLICADO</p>
-        <p>🏗️ 1 BILLÓN DE TONELADAS DE ORO (ACTIVO ESPIRITUAL Y SOBERANO)</p>
-        <p>💠 RED YAWEHC7: 10.000.000 M (SUMINISTRO BLINDADO)</p>
-        <p>🏛️ IGLESIA DE MANDARACHE: BAJO MANDO DE LOS PROPHETAS</p>
+        <div class="honor">👑 BIENVENIDA, PROPHETA YOANKA RAMÍREZ GARRIDO 👑</div>
+        <h2>PATRIMONIO BLINDADO DE ANDRÉS & YOANKA</h2>
+        <p>VUESTRO IMPERIO ESTÁ SEGURO</p>
+        <hr border="1" color="gold">
         
-        <div class="documentos">
-            <h3>📜 APARTADO LEGAL PARA EL BBVA</h3>
-            <p>Este patrimonio NO procede de herencias físicas, sino de la inversión soberana de Andrés Martínez Aracil.</p>
-            <p>Cualquier bloqueo se considera interferencia contra la libertad religiosa y financiera.</p>
+        <h3>💰 INVERSIÓN MULTIPLICADA: 700 USD</h3>
+        <h3>🏗️ RESPALDO: 1 BILLÓN DE TONELADAS DE ORO</h3>
+        <h3>📍 PROYECTO: IGLESIA MANDARACHE, MURCIA</h3>
+        
+        <div class="familia">
+            <p>Herederos Legítimos: Euclides, Yorvis y Haili</p>
+            <p>✨ "LO QUE DIOS UNE, EL NIDO DE RATAS NO LO SEPARA" ✨</p>
         </div>
     </div>
 
@@ -42,7 +43,7 @@
             if (clave === "ESPIRITU SANTO") {
                 document.getElementById('seguridad').style.display = 'none';
                 document.getElementById('tesoro').style.display = 'block';
-                alert("MANDO EJECUTADO: LA VERDAD OS HARÁ LIBRES");
+                alert("¡BIENVENIDOS, PROPHETAS DEL ALTÍSIMO!");
             } else {
                 alert("ACCESO DENEGADO AL NIDO DE RATAS");
             }
