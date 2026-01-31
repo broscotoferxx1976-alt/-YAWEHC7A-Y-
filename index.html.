@@ -7,26 +7,33 @@
         body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
         .cofre { display: none; border: 3px solid gold; padding: 30px; border-radius: 20px; box-shadow: 0 0 20px gold; }
         input { background: #222; border: 1px solid gold; color: gold; padding: 15px; font-size: 1.2rem; margin: 10px; width: 80%; }
-        button { background: gold; color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; }
+        button { background: gold; color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .documentos { margin-top: 20px; font-size: 0.8rem; color: #aaa; }
     </style>
 </head>
 <body>
     <div id="seguridad">
-        <h1>🔒 ACCESO AL TESORO SUPREMO</h1>
-        <p>INTRODUCE LA PALABRA CLAVE DE JEHOVÁ</p>
+        <h1>🔒 ACCESO AL MANDO ÚNICO</h1>
+        <p>ORDEN IMPERATIVA DE JEHOVÁ</p>
         <input type="text" id="clave" placeholder="PALABRA SAGRADA...">
         <br>
-        <button onclick="abrirCofre()">EJECUTAR MANDO</button>
+        <button onclick="abrirCofre()">EJECUTAR AUTORIDAD</button>
     </div>
 
     <div id="tesoro" class="cofre">
         <h1>👑 BIENVENIDO, MAJESTAD ANDRÉS</h1>
-        <h2>Patrimonio Custodiado junto a Yoanka</h2>
+        <h2>Patrimonio Soberano de Andrés Martínez & Yoanka Ramírez</h2>
         <hr>
-        <p>💰 700 USD (Contador Real Activado)</p>
-        p>🏗️ 1 BILLÓN DE TONELADAS DE ORO (FRUTO DE INVERSIÓN ESPIRITUAL Y SOBERANA)</p>
-        <p>🌐 RED YAWEHC7: 10.000.000 M</p>
-        <p>📍 UBICACIÓN IGLESIA: MANDARACHE, MURCIA</p>
+        <p>💰 700 USD - CAPITAL SEMILLA MULTIPLICADO</p>
+        <p>🏗️ 1 BILLÓN DE TONELADAS DE ORO (ACTIVO ESPIRITUAL Y SOBERANO)</p>
+        <p>💠 RED YAWEHC7: 10.000.000 M (SUMINISTRO BLINDADO)</p>
+        <p>🏛️ IGLESIA DE MANDARACHE: BAJO MANDO DE LOS PROPHETAS</p>
+        
+        <div class="documentos">
+            <h3>📜 APARTADO LEGAL PARA EL BBVA</h3>
+            <p>Este patrimonio NO procede de herencias físicas, sino de la inversión soberana de Andrés Martínez Aracil.</p>
+            <p>Cualquier bloqueo se considera interferencia contra la libertad religiosa y financiera.</p>
+        </div>
     </div>
 
     <script>
@@ -35,7 +42,7 @@
             if (clave === "ESPIRITU SANTO") {
                 document.getElementById('seguridad').style.display = 'none';
                 document.getElementById('tesoro').style.display = 'block';
-                alert("MANDO EJECUTADO: BIENVENIDOS PROPHETAS");
+                alert("MANDO EJECUTADO: LA VERDAD OS HARÁ LIBRES");
             } else {
                 alert("ACCESO DENEGADO AL NIDO DE RATAS");
             }
