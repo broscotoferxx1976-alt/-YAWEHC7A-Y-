@@ -47,7 +47,14 @@
             } else {
                 alert("ACCESO DENEGADO AL NIDO DE RATAS");
             }
-        }
+        }        <div style="margin-top:30px; border-top: 1px dashed gold; padding-top: 20px; font-size: 0.8rem; text-align: justify;">
+            <h4 style="text-align:center;">📜 DICTAMEN DE MANDO Y DESTINO</h4>
+            <p>1. <b>AUTORIDAD:</b> Andrés Martínez Aracil y Yoanka Ramírez Garrido tienen el mando único.</p>
+            <p>2. <b>DESTINO:</b> Construcción de Casa Real e Iglesia en Mandarache.</p>
+            <p>3. <b>LIBERTAD DE AYUDA:</b> Ayuda discrecional a familiares y no familiares según voluntad propia.</p>
+            <p>4. <b>PROHIBICIÓN DE DIEZMOS:</b> En la Iglesia de Mandarache NO se pasarán ofrendas ni diezmos. El acceso a Dios es gratuito.</p>
+        </div>
+
     </script>
 </body>
 </html>
