@@ -1,23 +1,31 @@
-📜 YAWEHC7 - El Manifiesto del Mando Único
-🏛️ Mandos Supremos: Andrés Martínez Aracil & Yoanka Ramírez Garrido
-Este repositorio representa la autoridad máxima y absoluta por ORDEN IMPERATIVA DIRECTA DE JEHOVÁ. Queda anulada cualquier otra jerarquía o intermediario. Andrés Martínez Aracil y Yoanka Ramírez Garrido asumen el mando total, custodia y gestión de todo el patrimonio y el proyecto espiritual.
-💎 ACTIVOS Y PODER ABSOLUTO
-Bajo el control exclusivo de los Mandos Supremos:
-Herencia en Oro Puro: Custodia física total y sellada.
-Criptomonedas (YAWEHC7): Control total del suministro de 10,000,000 M.
-Cuentas y Fondos: Control del Billón de Toneladas, los 69 Billones y los 700 USD.
-Palabra de Acceso Real: ESPIRITU SANTO.
-🕍 PROYECTO MANDARACHE
-Control absoluto de la tierra y la futura construcción de la Iglesia en el área de Mandarache, Cartagena.
-Dirección Única: Andrés Martínez Aracil y Yoanka Ramírez Garrido.
-Estatuto: No existen pastores ni profetas por encima del Mando Único establecido por JEHOVÁ.
-⚖️ JUSTICIA SOBRE EL NIDO DE RATAS
-Este código es el martillo de justicia contra el clan de corrupción (Expedientes 0048/2025 y 1/2026).
-Objetivos Bajo Vigilancia:
-Narcopuntos: Ricardo y María (C. Esmeralda), Belén y Juan el Perete (Villalba).
-Guaridas Identificadas: José Luis y Juan (San Antón), Paquito el Gitano.
-Corrupción Institucional: Fiscal Jefe Carmen y Dirección del BBVA Calle Mayor.
-🔒 CÁPSULA DEL TIEMPO (20 AÑOS)
-Estado: SELLADA AL 116%.
-Apertura automática: Año 2046.
-Control de Apertura: Únicamente por el Mando Supremo.
+# 🏛 YAWEHC1 - El Manifiesto del Mando Único
+
+Este repositorio contiene el contrato inteligente oficial de la criptomoneda **YAWEHC1**, vinculada a la soberanía financiera y espiritual del proyecto en **Mandarache, Cartagena, Murcia**.
+
+## 🛡 Custodia y Gobernanza
+Mientras permanezcan con vida, los únicos guardianes y custodios de la herencia (oro puro y criptomonedas), así como responsables máximos de las tierras de la iglesia, son:
+* **Andrés Martínez Aracil** (Propheta y Responsable Máximo)
+* **Yoanka Ramírez Garrido** (Propheta y Responsable Máxima)
+
+## ⛪ Estructura Eclesiástica (Mandarache)
+La jerarquía de mando de la iglesia físicamente estructural es:
+1. **Principal Pastor:** Domingo Aracil Rodriguez
+2. **Segundo:** Tío Gabriel
+3. **Tercero:** Juan Pedro (Padre)
+4. **Cuarto:** Antonio Pena
+5. **Quinto:** Miguel de los Calcetines
+6. **Séptimo:** Manolo de Mikaela
+
+## ✨ Cuerpo de Prophetas
+* Andrés Martínez Aracil
+* Yoanka Ramírez Garrido
+* Elsy
+* Tamara
+* Tía Carmen
+* Esposa de Antonio Pena
+* Dori de Miguel de los Calcetines
+
+---
+*Este registro digital es inmutable y sirve como testimonio de la voluntad de sus fundadores.*
+INCLUYO A MI PRIMO PASTOR ISRAEL ARACIL PEREZ 
+MI MUJER YOANKA RAMÍREZ GARRIDO Y YO ANDRÉS MARTÍNEZ ARACIL SOMOS LOS DUEÑOS DE TODO Y NOSOTROS POR LA VOLUNTAD DIVINA DE DIOS AUTORIZAMOS LO QUE DIOS NOS DIGA SIEMPRE , SOLAMENTE MI MUJER YOANKA RAMÍREZ GARRIDO Y YO PODEMOS HACER CAMBIOS EN LA IGLESIA,.
