@@ -15,6 +15,7 @@ La jerarquía de mando de la iglesia físicamente estructural es:
 4. **Cuarto:** Antonio Pena
 5. **Quinto:** Miguel de los Calcetines
 6. **Séptimo:** Manolo de Mikaela
+7. ISRAEL ARACIL PEREZ 
 
 ## ✨ Cuerpo de Prophetas
 * Andrés Martínez Aracil
@@ -26,6 +27,4 @@ La jerarquía de mando de la iglesia físicamente estructural es:
 * Dori de Miguel de los Calcetines
 
 ---
-*Este registro digital es inmutable y sirve como testimonio de la voluntad de sus fundadores.*
-INCLUYO A MI PRIMO PASTOR ISRAEL ARACIL PEREZ 
-MI MUJER YOANKA RAMÍREZ GARRIDO Y YO ANDRÉS MARTÍNEZ ARACIL SOMOS LOS DUEÑOS DE TODO Y NOSOTROS POR LA VOLUNTAD DIVINA DE DIOS AUTORIZAMOS LO QUE DIOS NOS DIGA SIEMPRE , SOLAMENTE MI MUJER YOANKA RAMÍREZ GARRIDO Y YO PODEMOS HACER CAMBIOS EN LA IGLESIA,.
+*Este registro digital es testimonio de la voluntad de sus fundadores y la gestión del Billón de Toneladas bajo la palabra clave ESPIRITU SANTO.*
