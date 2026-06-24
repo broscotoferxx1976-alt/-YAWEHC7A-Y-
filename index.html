@@ -28,7 +28,7 @@
         };
 
         async function obtenerPrecios() {
-            const url = `https://pro-api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${Object.values(tokens).join(',')}&vs_currencies=usd&x_cg_pro_api_key=${API_KEY}`;
+            const url = `https://pro-api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${Object.values(tokens).join(',')}&vs_currencies=usd&x_cg_demo_api_key=${API_KEY}`;
             const respuesta = await fetch(url);
             const datos = await respuesta.json();
             // Aquí el sistema leerá los precios reales de los contratos
