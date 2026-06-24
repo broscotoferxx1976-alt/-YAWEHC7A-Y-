@@ -3,68 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC SOBERANO</title>
-    <!-- Esto hace que el navegador reconozca la web como App -->
-    <link rel="manifest" href='data:application/manifest+json,{"name":"SISTEMA YAWEHC","short_name":"YAWEHC","start_url":"/","display":"standalone","background_color":"%23000","theme_color":"%23ffd700"}'>
-    
+    <title>YAWEHC.com | Ecosistema Financiero</title>
+    <link rel="manifest" href='data:application/manifest+json,{"name":"YAWEHC Financial","short_name":"YAWEHC","start_url":"/","display":"standalone","background_color":"%23000","theme_color":"%23ffd700"}'>
     <style>
-        body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 20px; margin: 0; }
-        .contenedor { border: 3px solid gold; padding: 20px; border-radius: 20px; box-shadow: 0 0 30px #ffd700; background: rgba(20,20,20,0.9); max-width: 600px; margin: auto; }
-        input { background: #111; border: 2px solid gold; color: gold; padding: 15px; font-size: 1.2rem; margin: 10px; width: 80%; border-radius: 10px; }
-        button { background: linear-gradient(to bottom, #ffd700, #b8860b); color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 10px; text-transform: uppercase; margin: 10px; }
-        .btn-unicaja { background: linear-gradient(to bottom, #00a000, #004d00); color: white; border: 2px solid #fff; }
-        .honor { color: #fff; font-style: italic; font-size: 1.3rem; text-shadow: 0 0 10px gold; margin-bottom: 20px; }
+        body { background: #050505; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; }
+        .dashboard { max-width: 800px; margin: auto; background: #121212; border: 1px solid #333; padding: 20px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .header { border-bottom: 2px solid #ffd700; padding-bottom: 10px; margin-bottom: 20px; }
+        h1 { color: #ffd700; margin: 0; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        .activo { background: #1a1a1a; padding: 15px; margin: 10px 0; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #ffd700; }
+        .btn-action { background: #ffd700; color: #000; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; }
+        .status { font-size: 0.8rem; color: #888; }
     </style>
 </head>
 <body>
-    <div class="contenedor">
-        <div id="seguridad">
-            <h1>🔒 ACCESO AL TRONO SOBERANO</h1>
-            <input type="text" id="clave" placeholder="ESCRIBE LA PALABRA SAGRADA...">
-            <br>
-            <button onclick="abrirCofre()">ACTIVAR MANDO</button>
+    <div class="dashboard">
+        <div class="header">
+            <h1>YAWEHC.com | ECOSISTEMA</h1>
+            <p class="status">Estado: Nodo conectado - Cuenta: <span id="account">No conectada</span></p>
         </div>
 
-        <div id="tesoro" style="display: none;">
-            <div class="honor">👑 BIENVENIDA, PROPHETA YOANKA RAMÍREZ GARRIDO 👑</div>
-            
-            <div style="background: #222; padding: 15px; border-radius: 10px; margin: 10px 0; text-align: left; font-size: 0.9rem;">
-                <h3>📊 ESTADO DE ACTIVOS</h3>
-                <p>💰 INVERSIÓN: 700 USD</p>
-                <p>🏗️ ORO: 1 BILLÓN DE TONELADAS</p>
-                <h3>🌐 ECOSISTEMA YAWEHC</h3>
-                <p>🔹 YAWEHC1: <a href="https://bscscan.com/address/0x1601dc6f0b441bd2ff054433730485a8e25" style="color:white;" target="_blank">Pool</a></p>
-                <p>🔹 YAWEHC2: <a href="https://bscscan.com/address/0x0a7dd4079b106e08d1dc6686b7d0b53c40c" style="color:white;" target="_blank">Pool</a></p>
-                <p>🔹 YAWEHC3 (A): <a href="https://bscscan.com/address/0xbc66e83e510ec51b8d61b8ea618f8949eddc" style="color:white;" target="_blank">Pool</a></p>
-                <p>🔹 YAWEHC3 (B): <a href="https://bscscan.com/address/0x92b434def1b89052e85587034ef4c227003" style="color:white;" target="_blank">Pool</a></p>
-                <p>🔹 YAWEHC4: <a href="https://bscscan.com/address/0x250c2d91ed87307071ea333d145175fbe5d" style="color:white;" target="_blank">Pool</a></p>
-                <p>🔹 A&YCOIN: <a href="https://bscscan.com/address/0xfc378ea42f465d0ab95dd0e9f4599f836decfe44" style="color:white;" target="_blank">Token</a></p>
+        <div id="lista-activos">
+            <div class="activo">
+                <span>YAWEHC1 (Liquidity Pool)</span>
+                <button class="btn-action" onclick="window.open('https://bscscan.com/address/0x1601dc6f0b441bd2ff054433730485a8e25')">DETALLE</button>
             </div>
-
-            <button class="btn-unicaja" onclick="transferencia()">🚀 SOLICITAR TRANSFERENCIA</button>
-            <button onclick="conectarWallet()" style="background: gold; color: black; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; margin: 10px auto; display: block;">CONECTAR WALLET</button>
+            <div class="activo">
+                <span>YAWEHC4 (Asset Vault)</span>
+                <button class="btn-action" onclick="window.open('https://bscscan.com/address/0x250c2d91ed87307071ea333d145175fbe5d')">DETALLE</button>
+            </div>
+            <div class="activo">
+                <span>A&YCOIN (Native Token)</span>
+                <button class="btn-action" onclick="window.open('https://bscscan.com/address/0xfc378ea42f465d0ab95dd0e9f4599f836decfe44')">DETALLE</button>
+            </div>
         </div>
+
+        <button onclick="conectarWallet()" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 1rem;" class="btn-action">CONECTAR WALLET DE GESTIÓN</button>
     </div>
 
     <script>
-        function abrirCofre() {
-            if (document.getElementById('clave').value === "ESPIRITU SANTO") {
-                document.getElementById('seguridad').style.display = 'none';
-                document.getElementById('tesoro').style.display = 'block';
-            } else {
-                alert("ACCESO DENEGADO");
-            }
-        }
-        function transferencia() { alert("ORDEN DE TRASLADO EJECUTADA"); }
         async function conectarWallet() {
             if (window.ethereum) {
                 try {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    alert("¡Conectado! Cuenta: " + accounts[0]);
-                } catch (e) { alert("Error: " + e.message); }
-            } else {
-                alert("No se detectó MetaMask. Abre esto en tu navegador de MetaMask.");
-            }
+                    document.getElementById('account').innerText = accounts[0].substring(0,6) + "...";
+                } catch (e) { console.error(e); }
+            } else { alert("MetaMask no detectado."); }
         }
     </script>
 </body>
