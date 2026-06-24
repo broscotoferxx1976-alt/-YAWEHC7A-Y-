@@ -8,7 +8,7 @@
         .container { max-width: 800px; margin: auto; }
         .section { background: #2d2d2d; padding: 20px; margin: 20px 0; border-radius: 10px; }
         select, button { padding: 15px; width: 80%; margin: 10px; border-radius: 5px; font-size: 16px; }
-        button { background: #00ff00; border: none; font-weight: bold; cursor: pointer; }
+        button { background: #00ff00; border: none; font-weight: bold; cursor: pointer; color: black; }
     </style>
 </head>
 <body>
@@ -40,9 +40,11 @@
         const swapBtn = document.getElementById('swapBtn');
 
         connectWalletBtn.addEventListener('click', async () => {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            walletAddressDisplay.innerText = "Conectado: " + accounts[0].substring(0, 6) + "...";
-            connectWalletBtn.innerText = "Billetera Conectada";
+            if (window.ethereum) {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                walletAddressDisplay.innerText = "Conectado: " + accounts[0].substring(0, 6) + "...";
+                connectWalletBtn.innerText = "Billetera Conectada";
+            }
         });
 
         swapBtn.addEventListener('click', () => {
