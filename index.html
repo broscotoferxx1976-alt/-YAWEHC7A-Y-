@@ -3,54 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v1.0</title>
-    <!-- Incluimos ethers.js para gestionar la billetera -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
     <style>
         body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
         .container { max-width: 800px; margin: auto; }
         .section { background: #2d2d2d; padding: 20px; margin: 20px 0; border-radius: 10px; }
-        button { padding: 15px 30px; cursor: pointer; background: #00ff00; border: none; border-radius: 5px; font-weight: bold; color: black; font-size: 16px; }
+        button { padding: 15px 30px; cursor: pointer; background: #00ff00; border: none; border-radius: 5px; font-weight: bold; color: black; font-size: 16px; margin: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>YAWEHC TERMINAL v1.0</h1>
-
         <div class="section">
             <h2>1. Conexión de Billetera</h2>
             <button id="connectWallet">Conectar Billetera</button>
             <p id="walletAddress" style="margin-top: 10px; color: #00ff00;"></p>
         </div>
-
         <div class="section">
-            <h2>2. Swap (Intercambio)</h2>
-            <button id="swapBtn">Abrir Swap</button>
+            <h2>2. Swap (Intercambio) - Activo Seleccionado</h2>
+            <p id="tokenInfo">Token: YAWEHC1</p>
+            <p style="font-size: 12px; color: #888;">Contrato: 0x1601dc6ff5dbf0b441bd2ff054433730485a8e25</p>
+            <button id="swapBtn">Intercambiar YAWEHC1</button>
         </div>
     </div>
 
     <script>
         const connectWalletBtn = document.getElementById('connectWallet');
         const walletAddressDisplay = document.getElementById('walletAddress');
+        const swapBtn = document.getElementById('swapBtn');
 
         connectWalletBtn.addEventListener('click', async () => {
             if (window.ethereum) {
-                try {
-                    // Pedir acceso a la billetera
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    const address = accounts[0];
-                    walletAddressDisplay.innerText = "Conectado: " + address.substring(0, 6) + "..." + address.substring(38);
-                    connectWalletBtn.innerText = "Billetera Conectada";
-                    connectWalletBtn.style.background = "#008000";
-                } catch (error) {
-                    alert("Error al conectar la billetera.");
-                }
-            } else {
-                alert("Por favor, instala MetaMask.");
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                walletAddressDisplay.innerText = "Conectado: " + accounts[0].substring(0, 6) + "...";
+                connectWalletBtn.innerText = "Billetera Conectada";
             }
         });
 
-        document.getElementById('swapBtn').addEventListener('click', () => {
-            alert('Interfaz de Swap lista para vincular contratos.');
+        swapBtn.addEventListener('click', () => {
+            alert('Iniciando transacción para el contrato: 0x1601...8e25. Asegúrate de tener saldo en tu billetera.');
         });
     </script>
 </body>
