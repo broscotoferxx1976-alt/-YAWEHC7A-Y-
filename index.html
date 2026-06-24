@@ -3,51 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC.com | Ecosistema Financiero</title>
+    <title>YAWEHC.com | Terminal Financiera</title>
     <link rel="manifest" href='data:application/manifest+json,{"name":"YAWEHC Financial","short_name":"YAWEHC","start_url":"/","display":"standalone","background_color":"%23000","theme_color":"%23ffd700"}'>
     <style>
-        body { background: #050505; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; }
-        .dashboard { max-width: 800px; margin: auto; background: #121212; border: 1px solid #333; padding: 20px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .header { border-bottom: 2px solid #ffd700; padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { color: #ffd700; margin: 0; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        .activo { background: #1a1a1a; padding: 15px; margin: 10px 0; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #ffd700; }
-        .btn-action { background: #ffd700; color: #000; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; }
-        .status { font-size: 0.8rem; color: #888; }
+        body { background: #000; color: #fff; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
+        .dashboard { max-width: 800px; margin: auto; background: #0a0a0a; border: 1px solid #444; padding: 20px; border-radius: 15px; }
+        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #ffd700; }
+        .btn-gold { background: #ffd700; color: #000; border: none; padding: 12px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; text-transform: uppercase; }
+        input { background: #000; border: 1px solid #ffd700; color: #fff; padding: 10px; width: 100px; }
     </style>
 </head>
 <body>
     <div class="dashboard">
-        <div class="header">
-            <h1>YAWEHC.com | ECOSISTEMA</h1>
-            <p class="status">Estado: Nodo conectado - Cuenta: <span id="account">No conectada</span></p>
+        <h1>YAWEHC.com | TERMINAL</h1>
+        
+        <div class="stat-card">
+            <h3>📊 SALDO DE WALLET</h3>
+            <p id="balance">--- ETH</p>
+            <button class="btn-gold" onclick="conectarWallet()">ACTUALIZAR SALDO</button>
         </div>
 
-        <div id="lista-activos">
-            <div class="activo">
-                <span>YAWEHC1 (Liquidity Pool)</span>
-                <button class="btn-action" onclick="window.open('https://bscscan.com/address/0x1601dc6f0b441bd2ff054433730485a8e25')">DETALLE</button>
-            </div>
-            <div class="activo">
-                <span>YAWEHC4 (Asset Vault)</span>
-                <button class="btn-action" onclick="window.open('https://bscscan.com/address/0x250c2d91ed87307071ea333d145175fbe5d')">DETALLE</button>
-            </div>
-            <div class="activo">
-                <span>A&YCOIN (Native Token)</span>
-                <button class="btn-action" onclick="window.open('https://bscscan.com/address/0xfc378ea42f465d0ab95dd0e9f4599f836decfe44')">DETALLE</button>
-            </div>
+        <div class="stat-card">
+            <h3>🧮 CALCULADORA DE POSICIÓN</h3>
+            <input type="number" id="cantidad" placeholder="Cant."> 
+            <select id="activo">
+                <option value="1">YAWEHC1</option>
+                <option value="2">YAWEHC4</option>
+            </select>
+            <button class="btn-gold" onclick="calcular()">CALCULAR VALOR</button>
+            <p id="resultado"></p>
         </div>
-
-        <button onclick="conectarWallet()" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 1rem;" class="btn-action">CONECTAR WALLET DE GESTIÓN</button>
     </div>
 
     <script>
         async function conectarWallet() {
             if (window.ethereum) {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    document.getElementById('account').innerText = accounts[0].substring(0,6) + "...";
-                } catch (e) { console.error(e); }
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const balance = await window.ethereum.request({ method: 'eth_getBalance', params: [accounts[0], 'latest'] });
+                document.getElementById('balance').innerText = (parseInt(balance, 16) / 1e18).toFixed(4) + " ETH";
             } else { alert("MetaMask no detectado."); }
+        }
+        function calcular() {
+            const cant = document.getElementById('cantidad').value;
+            document.getElementById('resultado').innerText = "VALOR ESTIMADO: " + (cant * 700) + " USD";
         }
     </script>
 </body>
