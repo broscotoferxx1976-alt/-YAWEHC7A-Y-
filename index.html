@@ -2,46 +2,40 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC | Ecosistema DeFi</title>
+    <title>YAWEHC TERMINAL v1.0</title>
     <style>
-        body { background: #0a0a0c; color: #d1d4dc; font-family: 'Courier New', monospace; padding: 20px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 600px; }
-        .card { background: #131722; border: 1px solid #2a2e39; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        h2 { color: #f3ba2f; font-size: 1rem; margin-bottom: 15px; border-bottom: 1px solid #2a2e39; padding-bottom: 5px; }
-        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; text-align: center; text-decoration: none; }
-        .btn-connect { background: #f3ba2f; color: #000; }
-        .btn-swap { background: #00ff88; color: #000; }
-        .info-text { font-size: 0.85rem; line-height: 1.5; color: #787b86; }
-        .token-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; }
+        body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .section { background: #2d2d2d; padding: 20px; margin: 20px 0; border-radius: 10px; }
+        button { padding: 10px 20px; cursor: pointer; background: #00ff00; border: none; border-radius: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>YAWEHC TERMINAL v1.0</h1>
 
-<div class="container">
-    <!-- 1. CONEXIÓN DE BILLETERA -->
-    <div class="card">
-        <h2>CONEXIÓN DE BILLETERA</h2>
-        <button class="btn btn-connect" onclick="alert('Conectando a BSC Network...')">CONECTAR METAMASK / TRUST WALLET</button>
-    </div>
+        <!-- Conexión de Billetera -->
+        <div class="section">
+            <h2>1. Conexión de Billetera</h2>
+            <button id="connectWallet">Conectar Billetera</button>
+        </div>
 
-    <!-- 2. PORTAL DE INTERCAMBIO (SWAP) -->
-    <div class="card">
-        <h2>PORTAL DE INTERCAMBIO (SWAP)</h2>
-        <a href="https://pancakeswap.finance/" target="_blank" class="btn btn-swap">IR A PANCAKESWAP (COMPRA AQUÍ)</a>
-    </div>
+        <!-- Swap -->
+        <div class="section">
+            <h2>2. Swap (Intercambio)</h2>
+            <p>Intercambia tus activos de forma descentralizada.</p>
+            <button id="swapBtn">Abrir Swap</button>
+        </div>
 
-    <!-- 3. TOKENOMICS E INFORMACIÓN -->
-    <div class="card">
-        <h2>TOKENOMICS E INFORMACIÓN</h2>
-        <div class="info-text">
-            <p>Ecosistema descentralizado operando en BSC Network.</p>
-            <div class="token-row"><span>YAWEHC1</span><span>DESPLEGADO</span></div>
-            <div class="token-row"><span>YAWEHC4</span><span>DESPLEGADO</span></div>
-            <p style="margin-top:10px;">Seguridad: Auditoría interna de contratos maestros.</p>
+        <!-- Tokenomics -->
+        <div class="section">
+            <h2>3. Tokenomics</h2>
+            <ul>
+                <li>YAWEHC1: 10% Liquidez</li>
+                <li>YAWEHC3: 5% Marketing</li>
+                <li>YAWEHC10: 5% Desarrollo</li>
+            </ul>
         </div>
     </div>
-</div>
-
 </body>
 </html>
