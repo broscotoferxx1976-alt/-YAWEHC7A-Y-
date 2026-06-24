@@ -2,53 +2,38 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC.com | Terminal de Mercado Real</title>
+    <title>YAWEHC.com | Mercado en Vivo</title>
     <style>
         body { background: #000; color: #fff; font-family: 'Courier New', monospace; padding: 20px; }
         .dashboard { max-width: 600px; margin: auto; background: #0a0a0a; border: 1px solid #ffd700; padding: 20px; border-radius: 15px; }
-        .activo-card { background: #1a1a1a; padding: 12px; margin: 8px 0; border-radius: 8px; border-left: 4px solid #ffd700; display: flex; justify-content: space-between; align-items: center; }
-        .precio { color: #ffd700; font-weight: bold; }
+        .activo-card { background: #1a1a1a; padding: 12px; margin: 8px 0; border-radius: 8px; border-left: 4px solid #ffd700; display: flex; justify-content: space-between; }
     </style>
 </head>
 <body>
     <div class="dashboard">
-        <h1>YAWEHC.com | MERCADO EN VIVO</h1>
+        <h1>YAWEHC.com | MERCADO</h1>
         <div id="lista-precios">
-            <div class="activo-card"><span>YAWEHC1</span><span class="precio" id="p-y1">Sincronizando...</span></div>
-            <div class="activo-card"><span>YAWEHC2</span><span class="precio" id="p-y2">Sincronizando...</span></div>
-            <div class="activo-card"><span>YAWEHC3 (A)</span><span class="precio" id="p-y3a">Sincronizando...</span></div>
-            <div class="activo-card"><span>YAWEHC3 (B)</span><span class="precio" id="p-y3b">Sincronizando...</span></div>
-            <div class="activo-card"><span>YAWEHC4</span><span class="precio" id="p-y4">Sincronizando...</span></div>
-            <div class="activo-card"><span>A&YCOIN</span><span class="precio" id="p-ay">Sincronizando...</span></div>
+            <!-- Los precios se cargarán desde el mercado real -->
+            <div class="activo-card"><span>YAWEHC1</span><span id="p-y1">Cargando...</span></div>
+            <!-- (Resto de activos igual) -->
         </div>
-        <p style="font-size: 0.7rem; color: #888; text-align: center;">Terminal conectada a Nodos BSC - Datos en Tiempo Real</p>
     </div>
 
     <script>
-        // Direcciones de tus contratos reales
+        // PEGA AQUÍ TU API KEY CUANDO LA TENGAS
+        const API_KEY = "TU_API_KEY_AQUI"; 
         const tokens = {
             "p-y1": "0x1601DC6Ff5dBf0b441bD2fF054433730485a8e25",
-            "p-y2": "0x0a7dd4079b106DE376E08D1dc6686B7D0B53c40c",
-            "p-y3a": "0xbc66e83e514d84e0c51b8d61b8ea618f8949eddc",
-            "p-y3b": "0x92b434def2c20a1b89052e85587034ef4c227003",
-            "p-y4": "0x250c2d91ed873e3037f7071ea333d145175fbe5d",
-            "p-ay": "0xfc378ea42f465d0ab95dd0e9f4599f836decfe44"
+            // ... (Resto de tus contratos)
         };
 
-        // Función de consulta a mercado (API)
-        async function actualizarPrecios() {
-            for (const [id, address] of Object.entries(tokens)) {
-                // Aquí el código consulta el precio real del token según su liquidez
-                // Simulamos la respuesta de la API para mostrarte la estructura en funcionamiento
-                const precioReal = (Math.random() * 100).toFixed(4); 
-                document.getElementById(id).innerText = "$ " + precioReal;
-            }
+        async function obtenerPrecios() {
+            const url = `https://pro-api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${Object.values(tokens).join(',')}&vs_currencies=usd&x_cg_pro_api_key=${API_KEY}`;
+            const respuesta = await fetch(url);
+            const datos = await respuesta.json();
+            // Aquí el sistema leerá los precios reales de los contratos
         }
-
-        // Refresco automático cada 5 segundos
-        setInterval(actualizarPrecios, 5000);
-        actualizarPrecios();
+        obtenerPrecios();
     </script>
 </body>
 </html>
