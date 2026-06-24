@@ -2,50 +2,198 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL | V1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAWEHC TERMINAL | Crypto App</title>
     <style>
-        body { background: #050505; color: #00ff41; font-family: 'Courier New', Courier, monospace; padding: 20px; }
-        .terminal { max-width: 800px; margin: auto; border: 1px solid #333; padding: 20px; background: #000; box-shadow: 0 0 20px rgba(0, 255, 65, 0.1); }
-        h1 { color: #fff; font-size: 1.2rem; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
-        .row { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 10px; border-bottom: 1px solid #222; }
-        .header { color: #888; font-size: 0.8rem; text-transform: uppercase; }
-        .price { color: #fff; }
-        .ticker { color: #ffd700; font-weight: bold; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background: #0a0a0c; 
+            color: #d1d4dc; 
+            font-family: 'Courier New', Courier, monospace; 
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .app-container { 
+            width: 100%; 
+            max-width: 650px; 
+            background: #131722; 
+            border: 1px solid #2a2e39; 
+            border-radius: 12px; 
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .header { 
+            border-bottom: 1px solid #2a2e39; 
+            padding-bottom: 16px; 
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { 
+            color: #ffffff; 
+            font-size: 1.25rem; 
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .network-badge {
+            background: rgba(243, 186, 47, 0.1);
+            color: #f3ba2f;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 1px solid rgba(243, 186, 47, 0.2);
+        }
+        .crypto-table { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+        .table-header { 
+            display: grid; 
+            grid-template-columns: 2fr 1fr 1.2fr; 
+            padding: 8px 12px; 
+            color: #787b86; 
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .token-row { 
+            display: grid; 
+            grid-template-columns: 2fr 1fr 1.2fr; 
+            align-items: center;
+            background: #1c2030; 
+            padding: 14px 12px; 
+            border-radius: 6px; 
+            border-left: 4px solid #f3ba2f;
+            transition: background 0.2s;
+        }
+        .token-row:hover { background: #222638; }
+        .token-info { display: flex; flex-direction: column; gap: 4px; }
+        .token-name { color: #ffffff; font-weight: bold; font-size: 0.95rem; }
+        .token-status { color: #787b86; font-size: 0.75rem; }
+        .token-price { color: #00ff88; font-weight: bold; font-size: 1rem; text-align: left; }
+        .action-zone { display: flex; justify-content: flex-end; }
+        .btn-copy { 
+            background: #2a2e39; 
+            color: #d1d4dc; 
+            border: none; 
+            padding: 6px 10px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-family: inherit;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .btn-copy:hover { background: #f3ba2f; color: #000; }
+        .footer {
+            margin-top: 20px;
+            padding-top: 12px;
+            border-top: 1px solid #2a2e39;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #4c526e;
+        }
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <h1>YAWEHC // TERMINAL // MARKET_DATA</h1>
-        <div class="row header">
-            <span>Asset</span>
-            <span>Price</span>
-            <span>Change</span>
+
+    <div class="app-container">
+        <div class="header">
+            <h1>YAWEHC TERMINAL v1.0</h1>
+            <span class="network-badge">BSC NETWORK</span>
         </div>
-        <div class="row">
-            <span class="ticker">YAGÜE C1</span>
-            <span class="price">$0.00</span>
-            <span>--</span>
+
+        <div class="crypto-table">
+            <div class="table-header">
+                <span>ACTIVO</span>
+                <span>ESTADO</span>
+                <span style="text-align: right;">CONTRATO</span>
+            </div>
+
+            <!-- YAWEHC1 -->
+            <div class="token-row">
+                <div class="token-info">
+                    <span class="token-name">YAWEHC1</span>
+                    <span class="token-status">Listo para operar</span>
+                </div>
+                <div class="token-price">ONLINE</div>
+                <div class="action-zone">
+                    <button class="btn-copy" onclick="copiarContrato('0x1601DC6Ff5dBf0b441bD2fF054433730485a8e25', this)">COPIAR</button>
+                </div>
+            </div>
+
+            <!-- YAWEHC2 -->
+            <div class="token-row">
+                <div class="token-info">
+                    <span class="token-name">YAWEHC2</span>
+                    <span class="token-status">Listo para operar</span>
+                </div>
+                <div class="token-price">ONLINE</div>
+                <div class="action-zone">
+                    <button class="btn-copy" onclick="copiarContrato('0x8979313437a342416f404285750d99532832D376', this)">COPIAR</button>
+                </div>
+            </div>
+
+            <!-- YAWEHC3 -->
+            <div class="token-row">
+                <div class="token-info">
+                    <span class="token-name">YAWEHC3</span>
+                    <span class="token-status">Listo para operar</span>
+                </div>
+                <div class="token-price">ONLINE</div>
+                <div class="action-zone">
+                    <button class="btn-copy" onclick="copiarContrato('0x4016664971d5b3dE2499dC21908a8E9c74895690', this)">COPIAR</button>
+                </div>
+            </div>
+
+            <!-- YAWEHC3B -->
+            <div class="token-row">
+                <div class="token-info">
+                    <span class="token-name">YAWEHC3B</span>
+                    <span class="token-status">Listo para operar</span>
+                </div>
+                <div class="token-price">ONLINE</div>
+                <div class="action-zone">
+                    <button class="btn-copy" onclick="copiarContrato('0x116e0018e69818817a783777f9859f518eE4268e', this)">COPIAR</button>
+                </div>
+            </div>
+
+            <!-- A&YCOIN TOKEN -->
+            <div class="token-row">
+                <div class="token-info">
+                    <span class="token-name">A&YCOIN TOKEN</span>
+                    <span class="token-status">Listo para operar</span>
+                </div>
+                <div class="token-price">ONLINE</div>
+                <div class="action-zone">
+                    <button class="btn-copy" onclick="copiarContrato('0x838c64c78d063717d2d31284d7d3d8a7d1880486', this)">COPIAR</button>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <span class="ticker">YAGÜE C2</span>
-            <span class="price">$0.00</span>
-            <span>--</span>
-        </div>
-        <div class="row">
-            <span class="ticker">YAGÜE C3</span>
-            <span class="price">$0.00</span>
-            <span>--</span>
-        </div>
-        <div class="row">
-            <span class="ticker">YAGÜE C3B</span>
-            <span class="price">$0.00</span>
-            <span>--</span>
-        </div>
-        <div class="row">
-            <span class="ticker">A&YCOIN TOKEN</span>
-            <span class="price">$0.00</span>
-            <span>--</span>
+
+        <div class="footer">
+            YAWEHC Ecosystem • Panel de Control de Activos Digitales
         </div>
     </div>
+
+    <script>
+        function copiarContrato(contrato, elemento) {
+            navigator.clipboard.writeText(contrato).then(() => {
+                const textoOriginal = elemento.innerText;
+                elemento.innerText = "COPIADO ✔";
+                elemento.style.background = "#00ff88";
+                elemento.style.color = "#000";
+                
+                setTimeout(() => {
+                    elemento.innerText = textoOriginal;
+                    elemento.style.background = "#2a2e39";
+                    elemento.style.color = "#d1d4dc";
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
 </body>
-</html>
+    </html>
+    
