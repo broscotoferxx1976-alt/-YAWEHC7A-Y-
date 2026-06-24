@@ -3,39 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v1.0</title>
+    <!-- Incluimos ethers.js para gestionar la billetera -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
     <style>
         body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
         .container { max-width: 800px; margin: auto; }
         .section { background: #2d2d2d; padding: 20px; margin: 20px 0; border-radius: 10px; }
-        button { padding: 10px 20px; cursor: pointer; background: #00ff00; border: none; border-radius: 5px; font-weight: bold; color: black; }
+        button { padding: 15px 30px; cursor: pointer; background: #00ff00; border: none; border-radius: 5px; font-weight: bold; color: black; font-size: 16px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>YAWEHC TERMINAL v1.0</h1>
+
         <div class="section">
             <h2>1. Conexión de Billetera</h2>
             <button id="connectWallet">Conectar Billetera</button>
+            <p id="walletAddress" style="margin-top: 10px; color: #00ff00;"></p>
         </div>
+
         <div class="section">
             <h2>2. Swap (Intercambio)</h2>
             <button id="swapBtn">Abrir Swap</button>
         </div>
-        <div class="section">
-            <h2>3. Tokenomics</h2>
-            <ul>
-                <li>YAWEHC1</li>
-                <li>YAWEHC2</li>
-                <li>YAWEHC3</li>
-                <li>YAWEHC3(b)</li>
-                <li>YAWEHC4</li>
-                <li>A&YCOIN TOKEN</li>
-            </ul>
-        </div>
     </div>
+
     <script>
-        document.getElementById('connectWallet').addEventListener('click', () => alert('Conectando...'));
-        document.getElementById('swapBtn').addEventListener('click', () => alert('Abriendo Swap...'));
+        const connectWalletBtn = document.getElementById('connectWallet');
+        const walletAddressDisplay = document.getElementById('walletAddress');
+
+        connectWalletBtn.addEventListener('click', async () => {
+            if (window.ethereum) {
+                try {
+                    // Pedir acceso a la billetera
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const address = accounts[0];
+                    walletAddressDisplay.innerText = "Conectado: " + address.substring(0, 6) + "..." + address.substring(38);
+                    connectWalletBtn.innerText = "Billetera Conectada";
+                    connectWalletBtn.style.background = "#008000";
+                } catch (error) {
+                    alert("Error al conectar la billetera.");
+                }
+            } else {
+                alert("Por favor, instala MetaMask.");
+            }
+        });
+
+        document.getElementById('swapBtn').addEventListener('click', () => {
+            alert('Interfaz de Swap lista para vincular contratos.');
+        });
     </script>
 </body>
 </html>
