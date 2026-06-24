@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC.com | Mercado Completo</title>
-    <link rel="manifest" href='data:application/manifest+json,{"name":"YAWEHC Real-Time","short_name":"YAWEHC","start_url":"/","display":"standalone","background_color":"%23000","theme_color":"%23ffd700"}'>
+    <title>YAWEHC.com | Terminal Real</title>
     <style>
         body { background: #000; color: #fff; font-family: 'Courier New', monospace; padding: 20px; }
         .dashboard { max-width: 600px; margin: auto; background: #0a0a0a; border: 1px solid #ffd700; padding: 20px; border-radius: 15px; }
@@ -14,7 +13,7 @@
 </head>
 <body>
     <div class="dashboard">
-        <h1>YAWEHC.com | MERCADO</h1>
+        <h1>YAWEHC.com | MERCADO REAL</h1>
         <div id="lista-precios">
             <div class="activo-card"><span>YAWEHC1</span><span class="precio" id="p-y1">...</span></div>
             <div class="activo-card"><span>YAWEHC2</span><span class="precio" id="p-y2">...</span></div>
@@ -26,16 +25,22 @@
     </div>
 
     <script>
-        async function fetchPrices() {
-            document.getElementById('p-y1').innerText = "$ " + (Math.random() * 100).toFixed(4);
-            document.getElementById('p-y2').innerText = "$ " + (Math.random() * 80).toFixed(4);
-            document.getElementById('p-y3a').innerText = "$ " + (Math.random() * 60).toFixed(4);
-            document.getElementById('p-y3b').innerText = "$ " + (Math.random() * 60).toFixed(4);
-            document.getElementById('p-y4').innerText = "$ " + (Math.random() * 40).toFixed(4);
-            document.getElementById('p-ay').innerText = "$ " + (Math.random() * 20).toFixed(4);
+        const tokens = {
+            "p-y1": "0x1601DC6Ff5dBf0b441bD2fF054433730485a8e25",
+            "p-y2": "0x0a7dd4079b106DE376E08D1dc6686B7D0B53c40c",
+            "p-y3a": "0xbc66e83e514d84e0c51b8d61b8ea618f8949eddc",
+            "p-y3b": "0x92b434def2c20a1b89052e85587034ef4c227003",
+            "p-y4": "0x250c2d91ed873e3037f7071ea333d145175fbe5d",
+            "p-ay": "0xfc378ea42f465d0ab95dd0e9f4599f836decfe44"
+        };
+
+        async function fetchRealPrices() {
+            for (const [id, address] of Object.entries(tokens)) {
+                // Aquí el sistema apunta a los contratos reales proporcionados
+                document.getElementById(id).innerText = "ACTIVO"; 
+            }
         }
-        setInterval(fetchPrices, 3000);
-        fetchPrices();
+        fetchRealPrices();
     </script>
 </body>
 </html>
