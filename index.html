@@ -13,25 +13,39 @@
     <div class="dashboard">
         <h1>YAWEHC.com | MERCADO</h1>
         <div id="lista-precios">
-            <!-- Los precios se cargarán desde el mercado real -->
             <div class="activo-card"><span>YAWEHC1</span><span id="p-y1">Cargando...</span></div>
-            <!-- (Resto de activos igual) -->
+            <div class="activo-card"><span>YAWEHC3</span><span id="p-y3">Cargando...</span></div>
+            <div class="activo-card"><span>YAWEHC10</span><span id="p-y10">Cargando...</span></div>
+            <div class="activo-card"><span>YAWEHC12</span><span id="p-y12">Cargando...</span></div>
         </div>
     </div>
 
     <script>
-        // PEGA AQUÍ TU API KEY CUANDO LA TENGAS
-        const API_KEY = "CG-Dtc8YGJLtZa53Mqg8iiFHd6f"; 
+        const API_KEY = "CG-Dtc8YGJLtZa53Mqg8iiFHd6f";
+        // Mapeo de IDs de elemento HTML a direcciones de contrato
         const tokens = {
             "p-y1": "0x1601DC6Ff5dBf0b441bD2fF054433730485a8e25",
-            // ... (Resto de tus contratos)
+            "p-y3": "TU_CONTRATO_Y3_AQUI",
+            "p-y10": "TU_CONTRATO_Y10_AQUI",
+            "p-y12": "TU_CONTRATO_Y12_AQUI"
         };
 
         async function obtenerPrecios() {
-            const url = `https://pro-api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${Object.values(tokens).join(',')}&vs_currencies=usd&x_cg_demo_api_key=${API_KEY}`;
-            const respuesta = await fetch(url);
-            const datos = await respuesta.json();
-            // Aquí el sistema leerá los precios reales de los contratos
+            const direcciones = Object.values(tokens).join(',');
+            // URL corregida para el plan gratuito
+            const url = `https://api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${direcciones}&vs_currencies=usd&x_cg_demo_api_key=${API_KEY}`;
+            
+            try {
+                const respuesta = await fetch(url);
+                const datos = await respuesta.json();
+
+                for (const [id, contrato] of Object.entries(tokens)) {
+                    const precio = datos[contrato.toLowerCase()]?.usd;
+                    document.getElementById(id).innerText = precio ? `$${precio}` : "N/A";
+                }
+            } catch (error) {
+                console.error("Error al conectar:", error);
+            }
         }
         obtenerPrecios();
     </script>
