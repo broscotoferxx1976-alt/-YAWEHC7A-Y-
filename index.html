@@ -13,26 +13,26 @@
     <div class="dashboard">
         <h1>YAWEHC.com | MERCADO</h1>
         <div id="lista-precios">
-            <div class="activo-card"><span>YAWEHC1</span><span id="p-y1">Cargando...</span></div>
-            <div class="activo-card"><span>YAWEHC3</span><span id="p-y3">Cargando...</span></div>
-            <div class="activo-card"><span>YAWEHC10</span><span id="p-y10">Cargando...</span></div>
-            <div class="activo-card"><span>YAWEHC12</span><span id="p-y12">Cargando...</span></div>
+            <div class="activo-card"><span>Yagüe C1</span><span id="p-c1">Cargando...</span></div>
+            <div class="activo-card"><span>Yagüe C2</span><span id="p-c2">Cargando...</span></div>
+            <div class="activo-card"><span>Yagüe C3</span><span id="p-c3">Cargando...</span></div>
+            <div class="activo-card"><span>Yagüe C3B</span><span id="p-c3b">Cargando...</span></div>
+            <div class="activo-card"><span>A&YCOIN TOKEN</span><span id="p-ay">Cargando...</span></div>
         </div>
     </div>
 
     <script>
         const API_KEY = "CG-Dtc8YGJLtZa53Mqg8iiFHd6f";
-        // Mapeo de IDs de elemento HTML a direcciones de contrato
         const tokens = {
-            "p-y1": "0x1601DC6Ff5dBf0b441bD2fF054433730485a8e25",
-            "p-y3": "TU_CONTRATO_Y3_AQUI",
-            "p-y10": "TU_CONTRATO_Y10_AQUI",
-            "p-y12": "TU_CONTRATO_Y12_AQUI"
+            "p-c1": "0x1601DC6Ff5dBf0b441bD2fF054433730485a8e25",
+            "p-c2": "0x8979313437a342416f404285750d99532832D376",
+            "p-c3": "0x4016664971d5b3dE2499dC21908a8E9c74895690",
+            "p-c3b": "0x116e0018e69818817a783777f9859f518eE4268e",
+            "p-ay": "0x838c64c78d063717d2d31284d7d3d8a7d1880486"
         };
 
         async function obtenerPrecios() {
             const direcciones = Object.values(tokens).join(',');
-            // URL corregida para el plan gratuito
             const url = `https://api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${direcciones}&vs_currencies=usd&x_cg_demo_api_key=${API_KEY}`;
             
             try {
