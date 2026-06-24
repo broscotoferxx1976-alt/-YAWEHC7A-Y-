@@ -1,43 +1,45 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>SISTEMA SOBERANO YAWEHC7</title>
+    <!-- AQUÍ PEGA TU CÓDIGO DE GOOGLE ANALYTICS -->
     <style>
-        body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
-        .contenedor { border: 3px solid gold; padding: 30px; border-radius: 20px; box-shadow: 0 0 30px #ffd700; background: rgba(20,20,20,0.9); max-width: 600px; margin: auto; }
+        body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
+        .contenedor { border: 3px solid gold; padding: 20px; border-radius: 20px; box-shadow: 0 0 30px #ffd700; background: rgba(20,20,20,0.9); max-width: 600px; margin: auto; }
+        .logo-marca { width: 150px; margin-bottom: 10px; } /* Estilo para tu logo YOANDKA */
         input { background: #111; border: 2px solid gold; color: gold; padding: 15px; font-size: 1.2rem; margin: 10px; width: 80%; border-radius: 10px; }
         button { background: linear-gradient(to bottom, #ffd700, #b8860b); color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 10px; text-transform: uppercase; margin: 10px; }
         .btn-unicaja { background: linear-gradient(to bottom, #00a000, #004d00); color: white; border: 2px solid #fff; }
-        .honor { color: #fff; font-style: italic; font-size: 1.5rem; text-shadow: 0 0 10px gold; margin-bottom: 20px; }
+        .honor { color: #fff; font-style: italic; font-size: 1.3rem; text-shadow: 0 0 10px gold; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <div class="contenedor">
+        <!-- Bloque de Seguridad -->
         <div id="seguridad">
             <h1>🔒 ACCESO AL TRONO SOBERANO</h1>
-            <p>BAJO EL MANDO DE JEHOVÁ</p>
             <input type="text" id="clave" placeholder="ESCRIBE LA PALABRA SAGRADA...">
             <br>
             <button onclick="abrirCofre()">ACTIVAR MANDO</button>
         </div>
 
+        <!-- Bloque del Tesoro -->
         <div id="tesoro" style="display: none;">
+            <!-- Pega aquí la etiqueta <img> de tu logo YOANDKA -->
             <div class="honor">👑 BIENVENIDA, PROPHETA YOANKA RAMÍREZ GARRIDO 👑</div>
-            <h2>PATRIMONIO BLINDADO DE ANDRÉS & YOANKA</h2>
-            <hr border="1" color="gold">
             
-            <div style="background: #222; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                <h3>📊 ESTADO DE ACTIVOS SOBERANOS</h3>
-                <p>💰 INVERSIÓN: 700 USD (ACTIVO)</p>
-                <p>🏗️ RESPALDO: 1 BILLÓN DE TONELADAS DE ORO</p>
-                <p>🏦 ENTIDAD AUTORIZADA: <b>UNICAJA BANCO</b></p>
+            <div style="background: #222; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                <h3>📊 ESTADO DE ACTIVOS</h3>
+                <p>💰 INVERSIÓN: 700 USD</p>
+                <p>🏗️ ORO: 1 BILLÓN DE TONELADAS</p>
+                <h3>🌐 ECOSISTEMA YAWEHC</h3>
+                <p>YAWEHC1: <a href="#" style="color:gold;">[LINK A LIQUIDITY POOL]</a></p>
             </div>
 
-            <button class="btn-unicaja" onclick="transferencia()">🚀 SOLICITAR TRANSFERENCIA A UNICAJA</button>
-
-            <div id="mensaje_transferencia" style="display:none; color: #00ff00; font-weight: bold; margin-top: 20px;">
-                ⚠️ ORDEN ENVIADA: Trasladando fondos de inversión a Unicaja... Operación bajo soberanía de Andrés Martínez Aracil.
+            <button class="btn-unicaja" onclick="transferencia()">🚀 SOLICITAR TRANSFERENCIA</button>
+            <div id="mensaje_transferencia" style="display:none; color: #00ff00; font-weight: bold; margin-top: 10px;">
+                ⚠️ ORDEN ENVIADA A UNICAJA.
             </div>
         </div>
     </div>
@@ -48,16 +50,12 @@
             if (clave === "ESPIRITU SANTO") {
                 document.getElementById('seguridad').style.display = 'none';
                 document.getElementById('tesoro').style.display = 'block';
-            } else {
-                alert("ACCESO DENEGADO");
-            }
+            } else { alert("ACCESO DENEGADO"); }
         }
         function transferencia() {
             document.getElementById('mensaje_transferencia').style.display = 'block';
-            alert("ORDEN DE TRASLADO EJECUTADA HACIA UNICAJA");
+            alert("ORDEN DE TRASLADO EJECUTADA");
         }
     </script>
 </body>
 </html>
-
-
