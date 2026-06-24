@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>SISTEMA SOBERANO YAWEHC7</title>
-    <!-- Cargamos Web3Modal para el selector profesional de billeteras -->
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
-    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-
     <style>
         body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
         .contenedor { border: 3px solid gold; padding: 20px; border-radius: 20px; box-shadow: 0 0 30px #ffd700; background: rgba(20,20,20,0.9); max-width: 600px; margin: auto; }
@@ -29,18 +24,11 @@
         <div id="tesoro" style="display: none;">
             <div class="honor">👑 BIENVENIDA, PROPHETA YOANKA RAMÍREZ GARRIDO 👑</div>
             <button class="btn-unicaja" onclick="transferencia()">🚀 SOLICITAR TRANSFERENCIA</button>
-            <button id="btn-conectar" style="background: gold; color: black; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; margin: 10px auto; display: block;">CONECTAR WALLET</button>
+            <button onclick="conectarWallet()" style="background: gold; color: black; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; margin: 10px auto; display: block;">CONECTAR WALLET</button>
         </div>
     </div>
 
     <script>
-        // Configuración de Web3Modal
-        const Web3Modal = window.Web3Modal.default;
-        const web3Modal = new Web3Modal({
-            cacheProvider: true,
-            providerOptions: {}
-        });
-
         function abrirCofre() {
             var clave = document.getElementById('clave').value;
             if (clave === "ESPIRITU SANTO") {
@@ -50,22 +38,22 @@
                 alert("ACCESO DENEGADO");
             }
         }
-
-        document.getElementById("btn-conectar").addEventListener("click", async () => {
-            try {
-                const provider = await web3Modal.connect();
-                const ethersProvider = new ethers.providers.Web3Provider(provider);
-                const signer = ethersProvider.getSigner();
-                const address = await signer.getAddress();
-                alert("¡Conectado! Cuenta: " + address);
-            } catch (error) {
-                alert("Conexión cancelada o error.");
-            }
-        });
-
         function transferencia() {
             alert("ORDEN DE TRASLADO EJECUTADA");
+        }
+        async function conectarWallet() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    alert("¡Conectado exitosamente! Cuenta: " + accounts[0]);
+                } catch (error) {
+                    alert("Error al conectar: " + error.message);
+                }
+            } else {
+                alert("No se detectó MetaMask.");
+            }
         }
     </script>
 </body>
 </html>
+
