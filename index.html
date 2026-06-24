@@ -2,52 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC.com | Mercado en Vivo</title>
+    <title>YAWEHC TERMINAL | V1.0</title>
     <style>
-        body { background: #000; color: #fff; font-family: 'Courier New', monospace; padding: 20px; }
-        .dashboard { max-width: 600px; margin: auto; background: #0a0a0a; border: 1px solid #ffd700; padding: 20px; border-radius: 15px; }
-        .activo-card { background: #1a1a1a; padding: 12px; margin: 8px 0; border-radius: 8px; border-left: 4px solid #ffd700; display: flex; justify-content: space-between; }
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', Courier, monospace; padding: 20px; }
+        .terminal { max-width: 800px; margin: auto; border: 1px solid #333; padding: 20px; background: #000; box-shadow: 0 0 20px rgba(0, 255, 65, 0.1); }
+        h1 { color: #fff; font-size: 1.2rem; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+        .row { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 10px; border-bottom: 1px solid #222; }
+        .header { color: #888; font-size: 0.8rem; text-transform: uppercase; }
+        .price { color: #fff; }
+        .ticker { color: #ffd700; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="dashboard">
-        <h1>YAWEHC.com | MERCADO</h1>
-        <div id="lista-precios">
-            <div class="activo-card"><span>YAWEHC1</span><span id="p-c1">Cargando...</span></div>
-            <div class="activo-card"><span>YAWEHC2</span><span id="p-c2">Cargando...</span></div>
-            <div class="activo-card"><span>YAWEHC3</span><span id="p-c3">Cargando...</span></div>
-            <div class="activo-card"><span>YAWEHC3B</span><span id="p-c3b">Cargando...</span></div>
-            <div class="activo-card"><span>A&YCOIN TOKEN</span><span id="p-ay">Cargando...</span></div>
+    <div class="terminal">
+        <h1>YAWEHC // TERMINAL // MARKET_DATA</h1>
+        <div class="row header">
+            <span>Asset</span>
+            <span>Price</span>
+            <span>Change</span>
+        </div>
+        <div class="row">
+            <span class="ticker">YAGÜE C1</span>
+            <span class="price">$0.00</span>
+            <span>--</span>
+        </div>
+        <div class="row">
+            <span class="ticker">YAGÜE C2</span>
+            <span class="price">$0.00</span>
+            <span>--</span>
+        </div>
+        <div class="row">
+            <span class="ticker">YAGÜE C3</span>
+            <span class="price">$0.00</span>
+            <span>--</span>
+        </div>
+        <div class="row">
+            <span class="ticker">YAGÜE C3B</span>
+            <span class="price">$0.00</span>
+            <span>--</span>
+        </div>
+        <div class="row">
+            <span class="ticker">A&YCOIN TOKEN</span>
+            <span class="price">$0.00</span>
+            <span>--</span>
         </div>
     </div>
-
-    <script>
-        const API_KEY = "CG-Dtc8YGJLtZa53Mqg8iiFHd6f";
-        const tokens = {
-            "p-c1": "0x1601DC6Ff5dBf0b441bD2fF054433730485a8e25",
-            "p-c2": "0x8979313437a342416f404285750d99532832D376",
-            "p-c3": "0x4016664971d5b3dE2499dC21908a8E9c74895690",
-            "p-c3b": "0x116e0018e69818817a783777f9859f518eE4268e",
-            "p-ay": "0x838c64c78d063717d2d31284d7d3d8a7d1880486"
-        };
-
-        async function obtenerPrecios() {
-            const direcciones = Object.values(tokens).join(',');
-            const url = `https://api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${direcciones}&vs_currencies=usd&x_cg_demo_api_key=${API_KEY}`;
-            
-            try {
-                const respuesta = await fetch(url);
-                const datos = await respuesta.json();
-
-                for (const [id, contrato] of Object.entries(tokens)) {
-                    const precio = datos[contrato.toLowerCase()]?.usd;
-                    document.getElementById(id).innerText = precio ? `$${precio}` : "N/A";
-                }
-            } catch (error) {
-                console.error("Error al conectar:", error);
-            }
-        }
-        obtenerPrecios();
-    </script>
 </body>
 </html>
