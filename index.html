@@ -2,9 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA SOBERANO YAWEHC7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAWEHC SOBERANO</title>
+    <!-- Esto hace que el navegador reconozca la web como App -->
+    <link rel="manifest" href='data:application/manifest+json,{"name":"SISTEMA YAWEHC","short_name":"YAWEHC","start_url":"/","display":"standalone","background_color":"%23000","theme_color":"%23ffd700"}'>
+    
     <style>
-        body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
+        body { background: #000; color: gold; font-family: 'Courier New', monospace; text-align: center; padding: 20px; margin: 0; }
         .contenedor { border: 3px solid gold; padding: 20px; border-radius: 20px; box-shadow: 0 0 30px #ffd700; background: rgba(20,20,20,0.9); max-width: 600px; margin: auto; }
         input { background: #111; border: 2px solid gold; color: gold; padding: 15px; font-size: 1.2rem; margin: 10px; width: 80%; border-radius: 10px; }
         button { background: linear-gradient(to bottom, #ffd700, #b8860b); color: black; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 10px; text-transform: uppercase; margin: 10px; }
@@ -14,7 +18,6 @@
 </head>
 <body>
     <div class="contenedor">
-        <!-- Bloque de Seguridad -->
         <div id="seguridad">
             <h1>🔒 ACCESO AL TRONO SOBERANO</h1>
             <input type="text" id="clave" placeholder="ESCRIBE LA PALABRA SAGRADA...">
@@ -22,21 +25,20 @@
             <button onclick="abrirCofre()">ACTIVAR MANDO</button>
         </div>
 
-        <!-- Bloque del Tesoro -->
         <div id="tesoro" style="display: none;">
             <div class="honor">👑 BIENVENIDA, PROPHETA YOANKA RAMÍREZ GARRIDO 👑</div>
             
-            <div style="background: #222; padding: 15px; border-radius: 10px; margin: 10px 0;">
+            <div style="background: #222; padding: 15px; border-radius: 10px; margin: 10px 0; text-align: left; font-size: 0.9rem;">
                 <h3>📊 ESTADO DE ACTIVOS</h3>
                 <p>💰 INVERSIÓN: 700 USD</p>
                 <p>🏗️ ORO: 1 BILLÓN DE TONELADAS</p>
                 <h3>🌐 ECOSISTEMA YAWEHC</h3>
-                <p style="color: gold; margin: 5px 0;">🔹 <b>YAWEHC1:</b> <a href="https://bscscan.com/address/0x1601dc6f0b441bd2ff054433730485a8e25" style="color:white;" target="_blank">Ver Pool</a></p>
-                <p style="color: gold; margin: 5px 0;">🔹 <b>YAWEHC2:</b> <a href="https://bscscan.com/address/0x0a7dd4079b106e08d1dc6686b7d0b53c40c" style="color:white;" target="_blank">Ver Pool</a></p>
-                <p style="color: gold; margin: 5px 0;">🔹 <b>YAWEHC3 (A):</b> <a href="https://bscscan.com/address/0xbc66e83e510ec51b8d61b8ea618f8949eddc" style="color:white;" target="_blank">Ver Pool</a></p>
-                <p style="color: gold; margin: 5px 0;">🔹 <b>YAWEHC3 (B):</b> <a href="https://bscscan.com/address/0x92b434def1b89052e85587034ef4c227003" style="color:white;" target="_blank">Ver Pool</a></p>
-                <p style="color: gold; margin: 5px 0;">🔹 <b>YAWEHC4:</b> <a href="https://bscscan.com/address/0x250c2d91ed87307071ea333d145175fbe5d" style="color:white;" target="_blank">Ver Pool</a></p>
-                <p style="color: gold; margin: 5px 0;">🔹 <b>A&YCOIN:</b> <a href="https://bscscan.com/address/0xfc378ea42f465d0ab95dd0e9f4599f836decfe44" style="color:white;" target="_blank">Ver Token</a></p>
+                <p>🔹 YAWEHC1: <a href="https://bscscan.com/address/0x1601dc6f0b441bd2ff054433730485a8e25" style="color:white;" target="_blank">Pool</a></p>
+                <p>🔹 YAWEHC2: <a href="https://bscscan.com/address/0x0a7dd4079b106e08d1dc6686b7d0b53c40c" style="color:white;" target="_blank">Pool</a></p>
+                <p>🔹 YAWEHC3 (A): <a href="https://bscscan.com/address/0xbc66e83e510ec51b8d61b8ea618f8949eddc" style="color:white;" target="_blank">Pool</a></p>
+                <p>🔹 YAWEHC3 (B): <a href="https://bscscan.com/address/0x92b434def1b89052e85587034ef4c227003" style="color:white;" target="_blank">Pool</a></p>
+                <p>🔹 YAWEHC4: <a href="https://bscscan.com/address/0x250c2d91ed87307071ea333d145175fbe5d" style="color:white;" target="_blank">Pool</a></p>
+                <p>🔹 A&YCOIN: <a href="https://bscscan.com/address/0xfc378ea42f465d0ab95dd0e9f4599f836decfe44" style="color:white;" target="_blank">Token</a></p>
             </div>
 
             <button class="btn-unicaja" onclick="transferencia()">🚀 SOLICITAR TRANSFERENCIA</button>
@@ -46,27 +48,22 @@
 
     <script>
         function abrirCofre() {
-            var clave = document.getElementById('clave').value;
-            if (clave === "ESPIRITU SANTO") {
+            if (document.getElementById('clave').value === "ESPIRITU SANTO") {
                 document.getElementById('seguridad').style.display = 'none';
                 document.getElementById('tesoro').style.display = 'block';
             } else {
                 alert("ACCESO DENEGADO");
             }
         }
-        function transferencia() {
-            alert("ORDEN DE TRASLADO EJECUTADA");
-        }
+        function transferencia() { alert("ORDEN DE TRASLADO EJECUTADA"); }
         async function conectarWallet() {
             if (window.ethereum) {
                 try {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    alert("¡Conectado exitosamente! Cuenta: " + accounts[0]);
-                } catch (error) {
-                    alert("Error al conectar: " + error.message);
-                }
+                    alert("¡Conectado! Cuenta: " + accounts[0]);
+                } catch (e) { alert("Error: " + e.message); }
             } else {
-                alert("No se detectó MetaMask.");
+                alert("No se detectó MetaMask. Abre esto en tu navegador de MetaMask.");
             }
         }
     </script>
