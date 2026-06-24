@@ -54,8 +54,7 @@
     CONECTAR WALLET
 </button>
 
-    CONECTAR WALLET
-</button>
+
 
             <div id="mensaje_transferencia" style="display:none; color: #00ff-top: 10px;">
                 ⚠️ ORDEN ENVIADA A UNICAJA.
@@ -65,7 +64,11 @@
 
     <script>
         function abrirCofre() {
-            var clave = document.getElementById('clave').value.toUpperCase();
+            function abrirCofre() {
+    var clave = document.getElementById('clave').value; // <--- ¡AQUÍ ESTÁ EL TRUCO!
+    if (clave === "ESPIRITU SANTO") {
+        // ... el resto de tu código
+        
             if (clave === "ESPIRITU SANTO") {
                 document.getElementById('seguridad').style.display = 'none';
                 document.getElementById('tesoro').style.display = 'block';
