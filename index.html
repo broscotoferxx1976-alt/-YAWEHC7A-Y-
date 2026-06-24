@@ -16,12 +16,10 @@
     <div class="container">
         <h1>YAWEHC TERMINAL v1.0</h1>
         <div class="section">
-            <h2>1. Conexión</h2>
-            <button id="connectWallet" onclick="connect()">Conectar Billetera</button>
-            <p id="walletAddress"></p>
+            <button id="connectWallet">Conectar Billetera</button>
+            <p id="status"></p>
         </div>
         <div class="section">
-            <h2>2. Swap</h2>
             <select id="tokenSelector">
                 <option value="0x1601dc6ff5dbf0b441bd2ff054433730485a8e25">YAWEHC1</option>
                 <option value="0x0a7dd4079b106de376e08d1dc6686b7d0b53c40c">YAWEHC2</option>
@@ -30,42 +28,32 @@
                 <option value="0x250c2d91ed873e3037f7071ea333d145175fbe5d">YAWEHC4</option>
                 <option value="0xfc378ea42f465d0ab95dd0e9f4599f836decfe44">A&YCOIN TOKEN</option>
             </select>
-            <button id="swapBtn" onclick="hacerSwap()">Intercambiar</button>
+            <button id="swapBtn">Intercambiar</button>
         </div>
     </div>
 
     <script>
-        async function connect() {
-            if (typeof window.ethereum !== 'undefined') {
+        document.getElementById('connectWallet').addEventListener('click', async () => {
+            if (window.ethereum) {
                 try {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    document.getElementById('walletAddress').innerText = "Conectado: " + accounts[0].substring(0, 10) + "...";
-                } catch (e) {
-                    alert("Error al conectar: " + e.message);
-                }
+                    document.getElementById('status').innerText = "Conectado: " + accounts[0].slice(0,6) + "...";
+                } catch (err) { document.getElementById('status').innerText = "Error: " + err.message; }
             } else {
-                alert("MetaMask no detectado. Abre esto dentro de tu App de Billetera.");
+                alert("Por favor, abre esta página dentro del navegador de tu aplicación MetaMask.");
             }
-        }
+        });
 
-        async function hacerSwap() {
+        document.getElementById('swapBtn').addEventListener('click', async () => {
+            if (!window.ethereum) return alert("Billetera no detectada");
             const address = document.getElementById('tokenSelector').value;
-            alert("Preparando transacción para: " + address);
-            // Intento básico de envío
             try {
                 await window.ethereum.request({
                     method: 'eth_sendTransaction',
-                    params: [{
-                        from: window.ethereum.selectedAddress,
-                        to: address,
-                        value: '0x0',
-                    }],
+                    params: [{ from: window.ethereum.selectedAddress, to: address, value: '0x0' }]
                 });
-            } catch (e) {
-                console.error(e);
-                alert("Transacción cancelada o fallida.");
-            }
-        }
+            } catch (err) { console.error(err); }
+        });
     </script>
 </body>
 </html>
