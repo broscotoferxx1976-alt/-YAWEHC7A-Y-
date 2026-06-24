@@ -75,6 +75,24 @@
             document.getElementById('mensaje_transferencia').style.display = 'block';
             alert("ORDEN DE TRASLADO EJECUTADA");
         }
-    </script>
+    <script>
+    async function conectarWallet() {
+        if (window.ethereum) {
+            try {
+                // Solicitar acceso a la cuenta
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                // Mensaje de confirmación
+                alert("¡Conectado exitosamente! Cuenta detectada: " + accounts[0]);
+            } catch (error) {
+                // Si el usuario cancela o hay error
+                alert("Error al conectar: " + error.message);
+            }
+        } else {
+            // Si no detecta Metamask
+            alert("No se detectó MetaMask. Asegúrate de tenerlo instalado o usa el navegador de tu DApp.");
+        }
+    }
+</script>
+    
 </body>
 </html>
