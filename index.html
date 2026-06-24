@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC.com | Terminal Financiera</title>
+    <title>YAWEHC.com | Terminal BNB</title>
     <link rel="manifest" href='data:application/manifest+json,{"name":"YAWEHC Financial","short_name":"YAWEHC","start_url":"/","display":"standalone","background_color":"%23000","theme_color":"%23ffd700"}'>
     <style>
         body { background: #000; color: #fff; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
-        .dashboard { max-width: 800px; margin: auto; background: #0a0a0a; border: 1px solid #444; padding: 20px; border-radius: 15px; }
-        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #ffd700; }
-        .btn-gold { background: #ffd700; color: #000; border: none; padding: 12px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; text-transform: uppercase; }
-        input { background: #000; border: 1px solid #ffd700; color: #fff; padding: 10px; width: 100px; }
+        .dashboard { max-width: 800px; margin: auto; background: #0a0a0a; border: 1px solid #ffd700; padding: 20px; border-radius: 15px; }
+        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #444; }
+        .btn-gold { background: #ffd700; color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; border-radius: 5px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        select, input { background: #000; border: 1px solid #ffd700; color: #fff; padding: 10px; width: 90%; margin: 5px 0; }
     </style>
 </head>
 <body>
@@ -18,34 +18,40 @@
         <h1>YAWEHC.com | TERMINAL</h1>
         
         <div class="stat-card">
-            <h3>📊 SALDO DE WALLET</h3>
-            <p id="balance">--- ETH</p>
-            <button class="btn-gold" onclick="conectarWallet()">ACTUALIZAR SALDO</button>
+            <h3>📊 SALDO EN BNB (BSC)</h3>
+            <p id="balance">--- BNB</p>
+            <button class="btn-gold" onclick="conectarBNB()">CONECTAR WALLET (BNB)</button>
         </div>
 
         <div class="stat-card">
-            <h3>🧮 CALCULADORA DE POSICIÓN</h3>
-            <input type="number" id="cantidad" placeholder="Cant."> 
+            <h3>🧮 CALCULADORA ECOSISTEMA</h3>
+            <input type="number" id="cantidad" placeholder="Cantidad de activos..."> 
             <select id="activo">
-                <option value="1">YAWEHC1</option>
-                <option value="2">YAWEHC4</option>
+                <option value="YAWEHC1">YAWEHC1</option>
+                <option value="YAWEHC2">YAWEHC2</option>
+                <option value="YAWEHC3A">YAWEHC3 (A)</option>
+                <option value="YAWEHC3B">YAWEHC3 (B)</option>
+                <option value="YAWEHC4">YAWEHC4</option>
+                <option value="AYCOIN">A&YCOIN</option>
             </select>
-            <button class="btn-gold" onclick="calcular()">CALCULAR VALOR</button>
-            <p id="resultado"></p>
+            <button class="btn-gold" onclick="calcular()">CALCULAR VALOR (USD)</button>
+            <p id="resultado" style="color: gold; font-size: 1.2rem;"></p>
         </div>
     </div>
 
     <script>
-        async function conectarWallet() {
+        async function conectarBNB() {
             if (window.ethereum) {
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                 const balance = await window.ethereum.request({ method: 'eth_getBalance', params: [accounts[0], 'latest'] });
-                document.getElementById('balance').innerText = (parseInt(balance, 16) / 1e18).toFixed(4) + " ETH";
+                document.getElementById('balance').innerText = (parseInt(balance, 16) / 1e18).toFixed(4) + " BNB";
             } else { alert("MetaMask no detectado."); }
         }
         function calcular() {
             const cant = document.getElementById('cantidad').value;
-            document.getElementById('resultado').innerText = "VALOR ESTIMADO: " + (cant * 700) + " USD";
+            const activo = document.getElementById('activo').value;
+            const total = cant * 700;
+            document.getElementById('resultado').innerText = activo + ": " + total.toLocaleString() + " USD";
         }
     </script>
 </body>
