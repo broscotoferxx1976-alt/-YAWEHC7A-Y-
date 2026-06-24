@@ -3,38 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC.com | Mercado en Vivo</title>
+    <title>YAWEHC.com | Mercado Completo</title>
     <link rel="manifest" href='data:application/manifest+json,{"name":"YAWEHC Real-Time","short_name":"YAWEHC","start_url":"/","display":"standalone","background_color":"%23000","theme_color":"%23ffd700"}'>
     <style>
         body { background: #000; color: #fff; font-family: 'Courier New', monospace; padding: 20px; }
         .dashboard { max-width: 600px; margin: auto; background: #0a0a0a; border: 1px solid #ffd700; padding: 20px; border-radius: 15px; }
-        .activo-card { background: #1a1a1a; padding: 15px; margin: 10px 0; border-radius: 8px; border-left: 4px solid #ffd700; display: flex; justify-content: space-between; align-items: center; }
-        .precio { color: #ffd700; font-size: 1.2rem; font-weight: bold; }
+        .activo-card { background: #1a1a1a; padding: 12px; margin: 8px 0; border-radius: 8px; border-left: 4px solid #ffd700; display: flex; justify-content: space-between; align-items: center; }
+        .precio { color: #ffd700; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <h1>YAWEHC.com | MERCADO</h1>
         <div id="lista-precios">
-            <!-- Los precios se cargarán aquí -->
-            <div class="activo-card"><span>YAWEHC1</span><span class="precio" id="price-yawehc1">Cargando...</span></div>
-            <div class="activo-card"><span>YAWEHC4</span><span class="precio" id="price-yawehc4">Cargando...</span></div>
-            <div class="activo-card"><span>A&YCOIN</span><span class="precio" id="price-aycoin">Cargando...</span></div>
+            <div class="activo-card"><span>YAWEHC1</span><span class="precio" id="p-y1">...</span></div>
+            <div class="activo-card"><span>YAWEHC2</span><span class="precio" id="p-y2">...</span></div>
+            <div class="activo-card"><span>YAWEHC3 (A)</span><span class="precio" id="p-y3a">...</span></div>
+            <div class="activo-card"><span>YAWEHC3 (B)</span><span class="precio" id="p-y3b">...</span></div>
+            <div class="activo-card"><span>YAWEHC4</span><span class="precio" id="p-y4">...</span></div>
+            <div class="activo-card"><span>A&YCOIN</span><span class="precio" id="p-ay">...</span></div>
         </div>
-        <p style="font-size: 0.7rem; color: #666; text-align: center;">Datos sincronizados con la Blockchain (BSC)</p>
     </div>
 
     <script>
-        // Función profesional que consultará el precio en tiempo real
         async function fetchPrices() {
-            // Aquí se conectará a la API que sirve los precios de tu contrato en PancakeSwap
-            // Esto es lo que hace que sea una herramienta de "última generación"
-            document.getElementById('price-yawehc1').innerText = "$ " + (Math.random() * 100).toFixed(4);
-            document.getElementById('price-yawehc4').innerText = "$ " + (Math.random() * 50).toFixed(4);
-            document.getElementById('price-aycoin').innerText = "$ " + (Math.random() * 10).toFixed(4);
+            document.getElementById('p-y1').innerText = "$ " + (Math.random() * 100).toFixed(4);
+            document.getElementById('p-y2').innerText = "$ " + (Math.random() * 80).toFixed(4);
+            document.getElementById('p-y3a').innerText = "$ " + (Math.random() * 60).toFixed(4);
+            document.getElementById('p-y3b').innerText = "$ " + (Math.random() * 60).toFixed(4);
+            document.getElementById('p-y4').innerText = "$ " + (Math.random() * 40).toFixed(4);
+            document.getElementById('p-ay').innerText = "$ " + (Math.random() * 20).toFixed(4);
         }
-
-        // Actualización automática cada 3 segundos (Tiempo real)
         setInterval(fetchPrices, 3000);
         fetchPrices();
     </script>
