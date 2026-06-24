@@ -47,9 +47,24 @@
             }
         });
 
-        swapBtn.addEventListener('click', () => {
-            const selectedContract = tokenSelector.value;
-            alert('Iniciando transacción para el contrato: ' + selectedContract);
+        swapBtn.addEventListener('click', async () => {
+            const contractAddress = tokenSelector.value;
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            
+            try {
+                // Aquí preparamos la llamada para interactuar con el contrato seleccionado
+                await window.ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [{
+                        from: accounts[0],
+                        to: contractAddress,
+                        value: '0x0', // Aquí se puede definir la cantidad de envío
+                        data: '0x',   // Aquí iría el código de la función 'swap' del contrato
+                    }],
+                });
+            } catch (error) {
+                console.error("Error al enviar la transacción:", error);
+            }
         });
     </script>
 </body>
