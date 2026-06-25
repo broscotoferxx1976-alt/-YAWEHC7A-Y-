@@ -16,65 +16,25 @@
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
     <div class="section">
-        <button id="connectWallet">Conectar Billetera</button>
-        <p id="status"></p>
-    </div>
-    <div class="section">
-        <select id="tokenSelector">
-            <option value="0x1601dc6ff5dbf0b441bd2ff054433730485a8e25">YAWEHC1</option>
-            <option value="0x0a7dd4079b106de376e08d1dc6686b7d0b53c40c">YAWEHC2</option>
-            <option value="0xbc66e83e514d84e0c51b8d61b8ea618f8949eddc">YAWEHC3</option>
-            <option value="0x92b434def2c20a1b89052e85587034ef4c227003">YAWEHC3 (B)</option>
-            <option value="0x250c2d91ed873e3037f7071ea333d145175fbe5d">YAWEHC4</option>
-            <option value="0xfc378ea42f465d0ab95dd0e9f4599f836decfe44">A&YCOIN TOKEN</option>
-        </select>
         <div id="chart-container"></div>
-        <input type="text" id="destAddress" placeholder="Dirección destino">
-        <input type="number" id="amount" placeholder="Cantidad a enviar">
-        <button id="sendBtn">Enviar Tokens</button>
     </div>
+    
+    <script>
+        const container = document.getElementById('chart-container');
+        container.style.width = '100%';
+        container.style.height = '250px';
 
-<script>
-    // Inicialización del gráfico
-    const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-        width: 350,
-        height: 250,
-        layout: { backgroundColor: '#000', textColor: '#ddd' },
-        grid: { vertLines: { color: '#222' }, horzLines: { color: '#222' } }
-    });
-
-    const candleSeries = chart.addCandlestickSeries();
-
-    // Datos iniciales
-    const data = [
-        { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
-        { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
-        { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
-    ];
-    candleSeries.setData(data);
-
-    // Lógica del selector
-    document.getElementById('tokenSelector').addEventListener('change', (e) => {
-        console.log("Token cambiado a:", e.target.value);
-    });
-
-    // Lógica del botón de envío
-    document.getElementById('sendBtn').addEventListener('click', async () => {
-        const to = document.getElementById('destAddress').value;
-        const amount = document.getElementById('amount').value;
-        if (!to || !amount) return;
-
-        const transferData = "0xa9059cbb" + to.substring(2).padStart(64, '0') + 
-                             (BigInt(amount) * BigInt(10**18)).toString(16).padStart(64, '0');
-        
-        await window.ethereum.request({ 
-            method: 'eth_sendTransaction', 
-            params: [{ 
-                from: window.ethereum.selectedAddress, 
-                to: document.getElementById('tokenSelector').value, 
-                data: transferData 
-            }] 
+        const chart = LightweightCharts.createChart(container, {
+            width: container.clientWidth,
+            height: 250,
+            layout: { backgroundColor: '#000000', textColor: '#FFFFFF' }
         });
-    });
-            </script>
-            
+
+        const candleSeries = chart.addCandlestickSeries();
+        candleSeries.setData([
+            { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
+            { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
+            { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
+        ]);
+    </script>
+</body>
