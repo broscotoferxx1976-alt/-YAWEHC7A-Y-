@@ -2,48 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL PRO</title>
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <title>YAWEHC TERMINAL v2.0</title>
+    <!-- Web3Modal y WalletConnect -->
+    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <style>
-        body { background-color: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
-        .section { background: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        select, input, button { padding: 15px; margin: 5px; width: 90%; }
-        button { background: #00ff00; font-weight: bold; cursor: pointer; border: none; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
+        .section { background: #2d2d2d; padding: 20px; border-radius: 10px; }
+        button { padding: 15px; width: 100%; background: #00ff00; border: none; cursor: pointer; font-weight: bold; font-size: 18px; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
-    
     <div class="section">
-        <p>Acceso Directo al Contrato:</p>
-        <select id="token-select">
-            <option value="0xTuDireccionContrato1">YAWEHC1</option>
-            <option value="0xTuDireccionContrato2">YAWEHC2</option>
-            <option value="0xTuDireccionContrato3">YAWEHC3</option>
-            <option value="0xTuDireccionContrato3B">YAWEHC3(B)</option>
-            <option value="0xTuDireccionContrato4">YAWEHC4</option>
-            <option value="0xTuDireccionContratoAY">A&YCOIN TOKEN</option>
-        </select>
-        <button onclick="irAlContrato()">IR AL CONTRATO (SWAP)</button>
-    </div>
-
-    <div class="section">
-        <div id="chart-container" style="height: 250px;"></div>
+        <button id="connect-btn">CONECTAR BILLETERA</button>
+        <p id="address-display">Estado: Desconectado</p>
     </div>
 
     <script>
-        function irAlContrato() {
-            const addr = document.getElementById('token-select').value;
-            // Redirige al usuario al explorador oficial de BSC para ese contrato
-            window.open('https://bscscan.com/address/' + addr, '_blank');
-        }
+        const Web3Modal = window.Web3Modal.default;
+        const WalletConnectProvider = window.WalletConnectProvider.default;
 
-        const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-            width: document.getElementById('chart-container').clientWidth,
-            height: 250,
-            layout: { backgroundColor: '#000', textColor: '#FFF' }
+        const web3Modal = new Web3Modal({
+            cacheProvider: false,
+            providerOptions: {
+                walletconnect: {
+                    package: WalletConnectProvider,
+                    options: { infuraId: "84842078b09946638c03157f83405213" }
+                }
+            }
         });
-        chart.addCandlestickSeries().setData([{ time: '2026-06-25', open: 1.0, high: 1.5, low: 0.8, close: 1.2 }]);
+
+        document.getElementById('connect-btn').onclick = async () => {
+            try {
+                const instance = await web3Modal.connect();
+                const provider = new ethers.providers.Web3Provider(instance);
+                const signer = provider.getSigner();
+                const address = await signer.getAddress();
+                document.getElementById('address-display').innerText = "Conectado: " + address;
+            } catch (error) {
+                console.error("Conexión cancelada por el usuario");
+            }
+        };
     </script>
 </body>
 </html>
