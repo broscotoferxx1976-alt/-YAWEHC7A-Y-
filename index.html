@@ -18,19 +18,25 @@
     </div>
 
     <script>
-        const container = document.getElementById('chart-container');
-        const chart = LightweightCharts.createChart(container, {
-            width: container.clientWidth,
-            height: 250,
-            layout: { backgroundColor: '#000000', textColor: '#FFFFFF' }
-        });
+        setTimeout(function() {
+            const container = document.getElementById('chart-container');
+            container.innerHTML = ''; 
+            
+            const chart = LightweightCharts.createChart(container, {
+                width: container.clientWidth,
+                height: 250,
+                layout: { backgroundColor: '#000000', textColor: '#FFFFFF' }
+            });
 
-        const candleSeries = chart.addCandlestickSeries();
-        candleSeries.setData([
-            { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
-            { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
-            { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
-        ]);
+            const candleSeries = chart.addCandlestickSeries();
+            candleSeries.setData([
+                { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
+                { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
+                { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
+            ]);
+            
+            chart.timeScale().fitContent();
+        }, 1000);
     </script>
 </body>
 </html>
