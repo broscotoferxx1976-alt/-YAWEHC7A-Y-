@@ -10,7 +10,15 @@
         .section { background: #2d2d2d; padding: 20px; margin: 20px auto; border-radius: 10px; max-width: 500px; }
         input, select, button { padding: 15px; width: 90%; margin: 10px 0; border-radius: 5px; border: none; }
         button { background: #00ff00; font-weight: bold; cursor: pointer; color: black; }
-        #chart-container { width: 100%; height: 250px; margin-top: 10px; background: #000; border-radius: 5px; }
+        #chart-container { 
+    width: 100%; 
+    height: 250px; 
+    margin-top: 10px; 
+    background: #000; 
+    border-radius: 5px; 
+    overflow: hidden; 
+        }
+        
     </style>
 </head>
 <body>
@@ -61,6 +69,17 @@
                                  (BigInt(amount) * BigInt(10**18)).toString(16).padStart(64, '0');
             await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: window.ethereum.selectedAddress, to: tokenAddress, data: transferData }] });
         });
+  // ... al principio de tu script
+const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
+    width: 450, 
+    height: 250,
+    layout: { backgroundColor: '#000', textColor: '#ddd' },
+    grid: { vertLines: { color: '#333' }, horzLines: { color: '#333' } }
+});
+const candleSeries = chart.addCandlestickSeries();
+// ... el resto de tu lógica de actualización y botones
+        
+// ... resto de tu código
     </script>
 </body>
 </html>
