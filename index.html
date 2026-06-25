@@ -29,7 +29,55 @@
         <button onclick="ejecutarSwap()">SWAP</button>
     </div>
     <div class="section" id="visor-cripto">> Terminal operativo. Conecta para iniciar.</div>
+<!-- Añade este bloque justo después de tu visor de terminal -->
+<div class="section" id="dashboard-visual">
+    <h3>📊 ANÁLISIS DE MERCADO: <span id="token-label">YAWEHC1</span></h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
+        <div style="background:#1e1e1e; padding:10px; border-radius:5px;">
+            <small>TENDENCIA (7d)</small>
+            <div id="tendencia-val" style="color:#00ff00; font-size:1.2em;">+3.2% ↗</div>
+        </div>
+        <div style="background:#1e1e1e; padding:10px; border-radius:5px;">
+            <small>VOLUMEN</small>
+            <div id="volumen-val" style="color:#00ffff; font-size:1.2em;">1.2M USD</div>
+        </div>
+        <div style="background:#1e1e1e; padding:10px; border-radius:5px;">
+            <small>PRECIO VS VALOR</small>
+            <div id="valor-val" style="color:#ffff00; font-size:1.2em;">0.95 / 1.00</div>
+        </div>
+    </div>
+</div>
 
+<script>// Valores definidos por el profeta
+const valoresAsignados = {
+    "YAWEHC1": 1.00,
+    "YAWEHC2": 1.50,
+    "A&YCOIN TOKEN": 2.00
+};
+
+// Función para actualizar el panel
+function actualizarDashboard(token, precioMercado) {
+    const valorAsignado = valoresAsignados[token] || 1.00;
+    const diferencia = precioMercado - valorAsignado;
+    
+    // Actualiza el visor de "Precio vs Valor"
+    document.getElementById("valor-val").innerText = `${precioMercado.toFixed(2)} / ${valorAsignado.toFixed(2)}`;
+    
+    // Lógica adicional para mostrar si está por encima o por debajo de tu valor
+    console.log("Diferencia según el profeta: " + diferencia);
+}
+    
+    // Función para actualizar los datos al cambiar el token
+    document.getElementById("token-select").addEventListener("change", function() {
+        const tokenSeleccionado = this.value;
+        document.getElementById("token-label").innerText = tokenSeleccionado;
+        
+        // Aquí es donde inyectaremos la lógica de lectura de datos real
+        // Por ahora, el sistema ya está listo para recibir el "feed" de datos
+        console.log("Cargando métricas para: " + tokenSeleccionado);
+    });
+</script>
+    
     <script>
         let account = null;
         const btnConnect = document.getElementById("btn-connect");
