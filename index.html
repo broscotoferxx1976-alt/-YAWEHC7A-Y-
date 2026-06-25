@@ -84,11 +84,30 @@
         });
 
         // 3. Función Swap
-        async function ejecutarSwap() {
-            if (!account) { alert("Conecta tu billetera primero"); return; }
-            const contract = document.getElementById('contractAddress').value;
-            alert("Preparando SWAP para: " + contract + ". Confirma en tu billetera.");
-                                                     }
+async function ejecutarSwap() {
+    if (!account) { 
+        alert("Conecta tu billetera primero"); 
+        return; 
+    }
+    const contractAddr = document.getElementById('contractAddress').value;
+
+    try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+
+        const tx = await signer.sendTransaction({
+            to: contractAddr,
+            value: ethers.utils.parseEther("0.001")
+        });
+
+        alert("Transacción enviada: " + tx.hash);
+    } catch (error) {
+        console.error(error);
+        alert("Error al ejecutar el swap: " + error.message);
+    }
+}
+        
+        
     </script>
 </body>
 </html>
