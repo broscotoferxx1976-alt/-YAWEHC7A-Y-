@@ -39,12 +39,12 @@
         <p>> Esperando conexión... Conecta tu billetera para ver tus activos.</p>
     </div>
 
-    <script>
+        <script>
         const Web3Modal = window.Web3Modal.default;
         const WalletConnectProvider = window.WalletConnectProvider.default;
 
         const web3Modal = new Web3Modal({
-            cacheProvider: true,
+            cacheProvider: false, // Cambiado a false para forzar una nueva petición de conexión
             providerOptions: {
                 walletconnect: {
                     package: WalletConnectProvider,
@@ -54,12 +54,25 @@
         });
 
         document.getElementById("btn-connect").addEventListener("click", async () => {
-            const provider = await web3Modal.connect();
-            const library = new ethers.providers.Web3Provider(provider);
-            const accounts = await library.listAccounts();
-            
-            document.getElementById("btn-connect").innerText = "Conectado: " + accounts[0].substring(0,8) + "...";
-            document.getElementById("visor-cripto").innerHTML = "> Billetera activa: " + accounts[0] + "<br>> ¡Conexión Universal establecida con éxito!";
+            try {
+                // Forzamos el reset para que borre intentos previos bloqueados
+                web3Modal.clearCachedProvider();
+                
+                const provider = await web3Modal.connect();
+                const library = new ethers.providers.Web3Provider(provider);
+                
+                // Pedimos acceso explícito a las cuentas
+                const accounts = await library.send("eth_requestAccounts", []);
+                const address = accounts[0];
+                
+                document.getElementById("btn-connect").innerText = "Conectado: " + address.substring(0,8) + "...";
+                document.getElementById("visor-cripto").innerHTML = "> Billetera activa: " + address + "<br>> ¡Conexión Universal autorizada!";
+                
+                console.log("Conectado con:", address);
+            } catch (error) {
+                console.error("Error de conexión:", error);
+                alert("No se pudo conectar. Asegúrate de aprobar la solicitud en MetaMask.");
+            }
         });
 
         function ejecutarAccion() {
@@ -67,6 +80,7 @@
             if (!addr) { alert("Ingresa una dirección de contrato."); return; }
             alert("Ejecutando SWAP en: " + addr);
         }
-    </script>
+                    </script>
+    
 </body>
 </html>
