@@ -3,47 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
-    <!-- Web3Modal y WalletConnect -->
-    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <style>
-        body { background: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
-        .section { background: #2d2d2d; padding: 20px; border-radius: 10px; }
-        button { padding: 15px; width: 100%; background: #00ff00; border: none; cursor: pointer; font-weight: bold; font-size: 18px; }
+        body { background-color: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
+        .section { background: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        select, input, button { padding: 15px; margin: 5px; width: 90%; display: block; }
+        button { background: #00ff00; font-weight: bold; cursor: pointer; border: none; color: black; }
+        input { color: black; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
+    
     <div class="section">
-        <button id="connect-btn">CONECTAR BILLETERA</button>
-        <p id="address-display">Estado: Desconectado</p>
+        <button id="btn-connect" onclick="connectWallet()">Conectar Billetera</button>
+        <select id="token-select">
+            <option value="YAWEHC1">YAWEHC1</option>
+            <option value="YAWEHC2">YAWEHC2</option>
+            <option value="YAWEHC3">YAWEHC3</option>
+        </select>
+        <input type="text" id="contractAddress" placeholder="Dirección contrato">
+        <button onclick="ejecutarAccion()">SWAP</button>
+    </div>
+
+    <div class="section" id="chart-container" style="height: 200px;">
+        <!-- Espacio para el visor -->
     </div>
 
     <script>
-        const Web3Modal = window.Web3Modal.default;
-        const WalletConnectProvider = window.WalletConnectProvider.default;
-
-        const web3Modal = new Web3Modal({
-            cacheProvider: false,
-            providerOptions: {
-                walletconnect: {
-                    package: WalletConnectProvider,
-                    options: { infuraId: "84842078b09946638c03157f83405213" }
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    alert("Conectado: " + accounts[0]);
+                } catch (err) {
+                    alert("Error al conectar: " + err.message);
                 }
+            } else {
+                alert("MetaMask no detectado. Por favor, abre esta web dentro del navegador de tu billetera.");
             }
-        });
+        }
 
-        document.getElementById('connect-btn').onclick = async () => {
-            try {
-                const instance = await web3Modal.connect();
-                const provider = new ethers.providers.Web3Provider(instance);
-                const signer = provider.getSigner();
-                const address = await signer.getAddress();
-                document.getElementById('address-display').innerText = "Conectado: " + address;
-            } catch (error) {
-                console.error("Conexión cancelada por el usuario");
-            }
-        };
+        function ejecutarAccion() {
+            const addr = document.getElementById('contractAddress').value;
+            alert("Operación preparada para: " + addr);
+        }
     </script>
 </body>
 </html>
