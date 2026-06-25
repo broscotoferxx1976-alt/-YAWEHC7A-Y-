@@ -2,63 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL PRO</title>
-    <!-- Librerías necesarias para el selector de billeteras -->
-    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
-    <script src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
-    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-    
+    <title>YAWEHC TERMINAL v2.0</title>
     <style>
         body { background: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
         .section { background: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        button { padding: 15px; margin: 5px; background: #00ff00; border: none; cursor: pointer; font-weight: bold; }
+        button { padding: 15px; margin: 5px; background: #00ff00; border: none; cursor: pointer; font-weight: bold; font-size: 16px; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
     <div class="section">
-        <button id="btn-connect">Conectar Billetera</button>
-        <span id="wallet-address">No conectado</span>
+        <button id="btn-connect" onclick="connectWallet()">Conectar Billetera</button>
+        <p id="wallet-address">Estado: Desconectado</p>
     </div>
 
-        <script>
-        const Web3Modal = window.Web3Modal.default;
-        const WalletConnectProvider = window.WalletConnectProvider.default;
-
-        const web3Modal = new Web3Modal({
-            network: "binance", // Especificamos BSC para que vaya directo
-            cacheProvider: true,
-            providerOptions: {
-                walletconnect: {
-                    package: WalletConnectProvider,
-                    options: { infuraId: "84842078b09946638c03157f83405213" }
+    <script>
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    document.getElementById('wallet-address').innerText = "Conectado: " + accounts[0];
+                } catch (error) {
+                    alert("Error al conectar: " + error.message);
                 }
+            } else {
+                alert("MetaMask no detectado. Abre esta web desde el navegador de tu app MetaMask.");
             }
-        });
-
-        document.getElementById('btn-connect').onclick = async () => {
-            try {
-                // 1. Abrir el modal y esperar la conexión
-                const instance = await web3Modal.connect();
-                
-                // 2. Crear el provider
-                const provider = new ethers.providers.Web3Provider(instance);
-                const signer = provider.getSigner();
-                
-                // 3. Obtener la dirección
-                const address = await signer.getAddress();
-                
-                // 4. Mostrar en la web
-                document.getElementById('wallet-address').innerText = address.substring(0,6) + "..." + address.substring(38);
-                
-                // Si la conexión falla, se captura aquí
-            } catch (error) {
-                console.error("Error de conexión:", error);
-                alert("La conexión fue cancelada o no se pudo establecer. Inténtalo de nuevo.");
-            }
-        };
-        </script>
-    
+        }
+    </script>
 </body>
 </html>
