@@ -49,37 +49,6 @@
             grid: { vertLines: { color: '#222' }, horzLines: { color: '#222' } }
         });
         const candleSeries = chart.addCandlestickSeries();
-
-        async function updateChart(tokenAddress) {
-            candleSeries.setData([
-                { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
-                { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
-                { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
-            ]);
-        }
-
-        document.getElementById('tokenSelector').addEventListener('change', (e) => { updateChart(e.target.value); });
-        updateChart('0x1601dc6ff5dbf0b441bd2ff054433730485a8e25');
-
-        document.getElementById('sendBtn').addEventListener('click', async () => {
-            const tokenAddress = document.getElementById('tokenSelector').value;
-            const to = document.getElementById('destAddress').value;
-            const amount = document.getElementById('amount').value;
-            const transferData = "0xa9059cbb" + to.substring(2).padStart(64, '0') + 
-                                 (BigInt(amount) * BigInt(10**18)).toString(16).padStart(64, '0');
-            await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: window.ethereum.selectedAddress, to: tokenAddress, data: transferData }] });
-        });
-  // ... al principio de tu script
-const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-    width: 450, 
-    height: 250,
-    layout: { backgroundColor: '#000', textColor: '#ddd' },
-    grid: { vertLines: { color: '#333' }, horzLines: { color: '#333' } }
-});
-const candleSeries = chart.addCandlestickSeries();
-// ... el resto de tu lógica de actualización y botones
-        
-// ... resto de tu código
-    </script>
-</body>
-</html>
+// Función para alimentar el gráfico con datos reales o de prueba
+async function updateChart(tokenAddress) {
+    
