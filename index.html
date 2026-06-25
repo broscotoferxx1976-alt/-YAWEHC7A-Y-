@@ -48,13 +48,57 @@
     </div>
 </div>
 
-<script>// Valores definidos por el profeta
-const valoresAsignados = {
-    "YAWEHC1": 1.00,
-    "YAWEHC2": 1.50,
-    "A&YCOIN TOKEN": 2.00
-};
 
+
+    // 1. Valores definidos por el profeta
+    const valoresAsignados = {
+        "YAWEHC1": 1.00,
+        "YAWEHC2": 1.50,
+        "A&YCOIN TOKEN": 2.00
+    };
+
+    // 2. Función para calcular la diferencia y actualizar el panel
+    function actualizarDashboard(token, precioMercado) {
+        const valorAsignado = valoresAsignados[token] || 1.00;
+        const diferencia = precioMercado - valorAsignado;
+        document.getElementById("valor-val").innerText = `${precioMercado.toFixed(2)} / ${valorAsignado.toFixed(2)}`;
+        console.log("Diferencia según el profeta: " + diferencia);
+    }
+
+    // 3. Motor de lectura: Obtiene datos reales de la blockchain
+    async function obtenerDatosMercado(token) {
+        const visor = document.getElementById("terminal-output");
+        visor.innerText += `\n> Consultando datos en blockchain para ${token}...`;
+        
+        try {
+            // Consulta a la API de mercado
+            const datosReales = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${document.getElementById("contractAddress").value}`);
+            const json = await datosReales.json();
+            
+            const volumen = json.pairs[0].volume.h24;
+            const precio = json.pairs[0].priceUsd;
+            
+            // Actualización del dashboard visual
+            document.getElementById("volumen-val").innerText = (volumen / 1000000).toFixed(2) + "M USD";
+            document.getElementById("tendencia-val").innerText = json.pairs[0].priceChange.h24 + "% ↗";
+            
+            // Integración con el motor matemático
+            actualizarDashboard(token, parseFloat(precio));
+            
+            visor.innerText += `\n> Datos actualizados exitosamente.`;
+        } catch (err) {
+            visor.innerText += "\n> Esperando sincronización con el nodo...";
+        }
+    }
+
+    // 4. Disparador: Se activa al cambiar el token en el menú
+    document.getElementById("token-select").addEventListener("change", function() {
+        const tokenSeleccionado = this.value;
+        document.getElementById("token-label").innerText = tokenSeleccionado;
+        obtenerDatosMercado(tokenSeleccionado);
+    });
+</script>
+    
 // Función para actualizar el panel
 function actualizarDashboard(token, precioMercado) {
     const valorAsignado = valoresAsignados[token] || 1.00;
@@ -65,6 +109,28 @@ function actualizarDashboard(token, precioMercado) {
     
     // Lógica adicional para mostrar si está por encima o por debajo de tu valor
     console.log("Diferencia según el profeta: " + diferencia);
+}
+   // Función para obtener datos reales del contrato
+async function obtenerDatosMercado(token) {
+    visor.innerText += `\n> Consultando datos en blockchain para ${token}...`;
+    
+    try {
+        // Aquí conectamos con la API que lee el volumen y precio en la BSC
+        // Por ahora, simularemos la llegada de datos reales
+        const datosReales = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${document.getElementById("contractAddress").value}`);
+        const json = await datosReales.json();
+        
+        // Actualizamos los valores en el panel visual
+        const volumen = json.pairs[0].volume.h24;
+        const precio = json.pairs[0].priceUsd;
+        
+        document.getElementById("volumen-val").innerText = (volumen / 1000000).toFixed(2) + "M USD";
+        document.getElementById("tendencia-val").innerText = json.pairs[0].priceChange.h24 + "% ↗";
+        
+        visor.innerText += `\n> Datos actualizados exitosamente.`;
+    } catch (err) {
+        visor.innerText += "\n> Esperando sincronización con el nodo...";
+    }
 }
     
     // Función para actualizar los datos al cambiar el token
