@@ -2,59 +2,47 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL v2.0</title>
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <title>YAWEHC TERMINAL PRO</title>
+    <!-- Cargamos Web3Modal para los logos universales -->
+    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <style>
-        body { background-color: #1a1a1a; color: white; font-family: sans-serif; padding: 15px; }
-        .section { background: #2d2d2d; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
-        select, input, button { padding: 12px; margin: 5px; width: 90%; }
-        button { background: #00ff00; font-weight: bold; cursor: pointer; border: none; }
-        #chart-container { width: 100%; height: 250px; background-color: #000; }
+        body { background: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
+        .section { background: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        button { padding: 15px; margin: 5px; background: #00ff00; border: none; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
-    
     <div class="section">
-        <button id="btn-connect" onclick="connectWallet()">Conectar Billetera</button>
+        <button id="btn-connect">Conectar Billetera</button>
         <p id="wallet-address">Estado: Desconectado</p>
-        
-        <select id="token-select">
-            <option value="YAWEHC1">YAWEHC1</option>
-            <option value="YAWEHC2">YAWEHC2</option>
-            <option value="YAWEHC3">YAWEHC3</option>
-            <option value="AYCOIN">A&YCOIN TOKEN</option>
-        </select>
-        <input type="text" id="contractAddress" placeholder="Dirección contrato">
-        <button onclick="ejecutarSwap()">SWAP</button>
-    </div>
-
-    <div class="section">
-        <div id="chart-container"></div>
     </div>
 
     <script>
-        // Lógica Conexión
-        async function connectWallet() {
-            if (window.ethereum) {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                document.getElementById('wallet-address').innerText = "Conectado: " + accounts[0].substring(0,10) + "...";
-            } else { alert("Abre esta web desde el navegador de tu app MetaMask."); }
-        }
-
-        // Lógica SWAP
-        function ejecutarSwap() {
-            const addr = document.getElementById('contractAddress').value;
-            alert("Iniciando SWAP con el contrato: " + addr);
-        }
-
-        // Gráfico (Visor)
-        const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-            width: document.getElementById('chart-container').clientWidth,
-            height: 250,
-            layout: { backgroundColor: '#000', textColor: '#FFF' }
+        const Web3Modal = window.Web3Modal.default;
+        const web3Modal = new Web3Modal({
+            cacheProvider: false,
+            providerOptions: {
+                walletconnect: {
+                    package: window.WalletConnectProvider.default,
+                    options: { infuraId: "84842078b09946638c03157f83405213" }
+                }
+            }
         });
-        chart.addCandlestickSeries().setData([{ time: '2026-06-25', open: 1.0, high: 1.5, low: 0.8, close: 1.2 }]);
+
+        document.getElementById('btn-connect').onclick = async () => {
+            try {
+                const instance = await web3Modal.connect();
+                const provider = new ethers.providers.Web3Provider(instance);
+                const signer = provider.getSigner();
+                const address = await signer.getAddress();
+                document.getElementById('wallet-address').innerText = "Conectado: " + address;
+            } catch (e) {
+                console.log("Conexión cancelada", e);
+            }
+        };
     </script>
 </body>
 </html>
