@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+/**
+ * @title YAWEHC1 Token
+ * @dev Contrato para la red BNB Smart Chain. 
+ * Custodiado por Andrés Martínez Aracil y Yoanka Ramírez Garrido.
+ */
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract Yawehc1Token is ERC20, ERC20Burnable, Ownable {
+
+    // Se crean 10.000.000 de monedas YAWEHC1 al desplegar
+    constructor() 
+        ERC20("YAWEHC1", "YWH") 
+        Ownable(msg.sender) 
+    {
+        _mint(msg.sender, 10000000 * 10 ** decimals());
+    }
+
+    // Solo Andrés (propietario) puede emitir más si el proyecto crece
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+}
