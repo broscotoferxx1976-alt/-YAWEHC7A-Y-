@@ -3,72 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC ECOSYSTEM v2.0</title>
-    <!-- Cargamos la librería de gráficos de TradingView -->
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-  body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .section { background: #2d2d2d; padding: 20px; margin: 20px auto; border-radius: 10px; max-width: 600px; }
+    <title>YAWEHC TERMINAL v2.0</title>
+    
+    <!-- ESTO ES LO QUE TE FALTA: Las etiquetas <style> y </style> -->
+    <style>
+        body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .section { background: #2d2d2d; padding: 20px; margin: 20px auto; border-radius: 10px; max-width: 500px; }
         input, select, button { padding: 15px; width: 90%; margin: 10px 0; border-radius: 5px; border: none; }
         button { background: #00ff00; font-weight: bold; cursor: pointer; color: black; }
-        #chart-container { width: 100%; height: 300px; margin-top: 20px; background: #000; border-radius: 5px; }
-</style>  
-    
-        
+        #chart-container { width: 100%; height: 250px; margin-top: 10px; background: #000; border-radius: 5px; }
+    </style>
+    <!-- AQUÍ TERMINA EL ESTILO -->
+
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
+    <!-- El resto de tu contenido va aquí abajo -->
     <div class="section">
         <button id="connectWallet">Conectar Billetera</button>
         <p id="status"></p>
     </div>
-    <div class="section">
-        <select id="tokenSelector">
-            <option value="0x1601dc6ff5dbf0b441bd2ff054433730485a8e25">YAWEHC1</option>
-            <option value="0x0a7dd4079b106de376e08d1dc6686b7d0b53c40c">YAWEHC2</option>
-            <option value="0xbc66e83e514d84e0c51b8d61b8ea618f8949eddc">YAWEHC3</option>
-            <option value="0x92b434def2c20a1b89052e85587034ef4c227003">YAWEHC3 (B)</option>
-            <option value="0x250c2d91ed873e3037f7071ea333d145175fbe5d">YAWEHC4</option>
-            <option value="0xfc378ea42f465d0ab95dd0e9f4599f836decfe44">A&YCOIN TOKEN</option>
-        </select>
-        <!-- Aquí aparecerá el gráfico -->
-        <div id="chart-container"></div>
-        <input type="text" id="destAddress" placeholder="Dirección destino">
-        <input type="number" id="amount" placeholder="Cantidad a enviar">
-        <button id="sendBtn">Enviar Tokens</button>
-    </div>
-
-    <script>
-        // Inicializar Gráfico con ajuste automático
-const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
-    width: 450, // Ajuste para móvil
-    height: 250,
-    layout: { backgroundColor: '#000', textColor: '#ddd' },
-    grid: { vertLines: { color: '#222' }, horzLines: { color: '#222' } }
-});
-        
-        });
-        const candleSeries = chart.addCandlestickSeries();
-
-        // Datos de ejemplo (Esto se conectará a la liquidez real)
-        candleSeries.setData([
-            { time: '2026-06-20', open: 1, high: 1.2, low: 0.9, close: 1.1 },
-            { time: '2026-06-21', open: 1.1, high: 1.5, low: 1.0, close: 1.4 },
-            { time: '2026-06-22', open: 1.4, high: 1.6, low: 1.3, close: 1.3 }
-        ]);
-
-        // Funcionalidad de envío intacta
-        document.getElementById('sendBtn').addEventListener('click', async () => {
-            const tokenAddress = document.getElementById('tokenSelector').value;
-            const to = document.getElementById('destAddress').value;
-            const amount = document.getElementById('amount').value;
-            const transferData = "0xa9059cbb" + to.substring(2).padStart(64, '0') + 
-                                 (BigInt(amount) * BigInt(10**18)).toString(16).padStart(64, '0');
-
-            await window.ethereum.request({
-                method: 'eth_sendTransaction',
-                params: [{ from: window.ethereum.selectedAddress, to: tokenAddress, data: transferData }]
-            });
-        });
-    </script>
+    <!-- ... y sigue con el resto de tu código ... -->
 </body>
 </html>
