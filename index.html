@@ -3,26 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
-    <!-- Importamos Web3Modal y Ethers.js para la potencia máxima -->
-    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
-    <script src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-
     <style>
         body { background-color: #1a1a1a; color: white; font-family: sans-serif; }
         .section { background: #2d2d2d; padding: 15px; margin: 10px; border-radius: 8px; }
         select, input, button { padding: 12px; margin: 5px; border-radius: 5px; }
         button { background: #00ff00; font-weight: bold; cursor: pointer; border: none; }
-        input { color: black; }
-        #visor-cripto { height: 250px; border: 2px solid #444; overflow-y: auto; color: #00ff00; font-family: monospace; padding: 10px; }
+        #visor-cripto { height: 250px; border: 2px solid #444; color: #00ff00; padding: 10px; overflow-y: auto; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
-
     <div class="section">
-        <button id="btn-connect">Conectar Billetera Universal</button>
+        <button id="btn-connect">Conectar Billetera</button>
         <select id="token-select">
             <option value="YAWEHC1">YAWEHC1</option>
             <option value="YAWEHC2">YAWEHC2</option>
@@ -31,56 +24,31 @@
             <option value="YAWEHC4">YAWEHC4</option>
             <option value="A&YCOIN TOKEN">A&YCOIN TOKEN</option>
         </select>
-        <input type="text" id="contractAddress" placeholder="Dirección contrato">
-        <button onclick="ejecutarAccion()">SWAP</button>
+        <button onclick="ejecutarSwap()">SWAP</button>
     </div>
+    <div class="section" id="visor-cripto">> Terminal listo. Presiona Conectar.</div>
 
-    <div class="section" id="visor-cripto">
-        <p>> Esperando conexión... Conecta tu billetera para ver tus activos.</p>
-    </div>
-
-        <script>
-        const Web3Modal = window.Web3Modal.default;
-        const WalletConnectProvider = window.WalletConnectProvider.default;
-
-        const web3Modal = new Web3Modal({
-            cacheProvider: false, // Cambiado a false para forzar una nueva petición de conexión
-            providerOptions: {
-                walletconnect: {
-                    package: WalletConnectProvider,
-                    options: { infuraId: "84842078b09946638c03157f83405213" }
-                }
-            }
-        });
+    <script>
+        let account = null;
 
         document.getElementById("btn-connect").addEventListener("click", async () => {
-            try {
-                // Forzamos el reset para que borre intentos previos bloqueados
-                web3Modal.clearCachedProvider();
-                
-                const provider = await web3Modal.connect();
-                const library = new ethers.providers.Web3Provider(provider);
-                
-                // Pedimos acceso explícito a las cuentas
-                const accounts = await library.send("eth_requestAccounts", []);
-                const address = accounts[0];
-                
-                document.getElementById("btn-connect").innerText = "Conectado: " + address.substring(0,8) + "...";
-                document.getElementById("visor-cripto").innerHTML = "> Billetera activa: " + address + "<br>> ¡Conexión Universal autorizada!";
-                
-                console.log("Conectado con:", address);
-            } catch (error) {
-                console.error("Error de conexión:", error);
-                alert("No se pudo conectar. Asegúrate de aprobar la solicitud en MetaMask.");
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    account = accounts[0];
+                    document.getElementById("btn-connect").innerText = "Conectado: " + account.substring(0,8) + "...";
+                    document.getElementById("visor-cripto").innerText = "> Conectado a: " + account + "\n> Terminal listo para intercambio.";
+                } catch (e) { alert("Usuario denegó el acceso"); }
+            } else {
+                alert("Por favor, abre esta página desde el navegador de tu billetera (MetaMask/Trust).");
             }
         });
 
-        function ejecutarAccion() {
-            const addr = document.getElementById('contractAddress').value;
-            if (!addr) { alert("Ingresa una dirección de contrato."); return; }
-            alert("Ejecutando SWAP en: " + addr);
+        async function ejecutarSwap() {
+            if (!account) { alert("¡Primero conecta la billetera!"); return; }
+            const tokenSeleccionado = document.getElementById("token-select").value;
+            alert("Iniciando transacción segura para: " + tokenSeleccionado + " desde: " + account);
         }
-                    </script>
-    
+    </script>
 </body>
 </html>
