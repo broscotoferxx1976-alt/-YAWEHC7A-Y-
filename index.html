@@ -22,12 +22,13 @@
         <span id="wallet-address">No conectado</span>
     </div>
 
-    <script>
+        <script>
         const Web3Modal = window.Web3Modal.default;
         const WalletConnectProvider = window.WalletConnectProvider.default;
 
         const web3Modal = new Web3Modal({
-            cacheProvider: false,
+            network: "binance", // Especificamos BSC para que vaya directo
+            cacheProvider: true,
             providerOptions: {
                 walletconnect: {
                     package: WalletConnectProvider,
@@ -37,12 +38,27 @@
         });
 
         document.getElementById('btn-connect').onclick = async () => {
-            const instance = await web3Modal.connect();
-            const provider = new ethers.providers.Web3Provider(instance);
-            const signer = provider.getSigner();
-            const address = await signer.getAddress();
-            document.getElementById('wallet-address').innerText = address;
+            try {
+                // 1. Abrir el modal y esperar la conexión
+                const instance = await web3Modal.connect();
+                
+                // 2. Crear el provider
+                const provider = new ethers.providers.Web3Provider(instance);
+                const signer = provider.getSigner();
+                
+                // 3. Obtener la dirección
+                const address = await signer.getAddress();
+                
+                // 4. Mostrar en la web
+                document.getElementById('wallet-address').innerText = address.substring(0,6) + "..." + address.substring(38);
+                
+                // Si la conexión falla, se captura aquí
+            } catch (error) {
+                console.error("Error de conexión:", error);
+                alert("La conexión fue cancelada o no se pudo establecer. Inténtalo de nuevo.");
+            }
         };
-    </script>
+        </script>
+    
 </body>
 </html>
