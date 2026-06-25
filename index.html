@@ -1,29 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC TERMINAL v2.0</title>
-    
-    <!-- ESTO ES LO QUE TE FALTA: Las etiquetas <style> y </style> -->
-    <style>
-        body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .section { background: #2d2d2d; padding: 20px; margin: 20px auto; border-radius: 10px; max-width: 500px; }
-        input, select, button { padding: 15px; width: 90%; margin: 10px 0; border-radius: 5px; border: none; }
-        button { background: #00ff00; font-weight: bold; cursor: pointer; color: black; }
-        #chart-container { width: 100%; height: 250px; margin-top: 10px; background: #000; border-radius: 5px; }
-    </style>
-    <!-- AQUÍ TERMINA EL ESTILO -->
+<script>
+    // Inicializar Gráfico
+    const chart = LightweightCharts.createChart(document.getElementById('chart-container'), {
+        width: 450, height: 250,
+        layout: { backgroundColor: '#000', textColor: '#ddd' },
+        grid: { vertLines: { color: '#222' }, horzLines: { color: '#222' } }
+    });
+    const candleSeries = chart.addCandlestickSeries();
 
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-</head>
-<body>
-    <h1>YAWEHC TERMINAL v2.0</h1>
-    <!-- El resto de tu contenido va aquí abajo -->
-    <div class="section">
-        <button id="connectWallet">Conectar Billetera</button>
-        <p id="status"></p>
-    </div>
-    <!-- ... y sigue con el resto de tu código ... -->
-</body>
-</html>
+    // Función para actualizar con datos reales
+    async function updateChart(tokenAddress) {
+        // Aquí conectaremos la API de precios. 
+        // Por ahora, simularemos la carga del histórico de YAWEHC1
+        console.log("Cargando datos para: " + tokenAddress);
+        candleSeries.setData([
+            { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
+            { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
+            { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
+        ]);
+    }
+
+    // Al cambiar el selector, actualizamos el gráfico
+    document.getElementById('tokenSelector').addEventListener('change', (e) => {
+        updateChart(e.target.value);
+    });
+
+    // Carga inicial
+    updateChart('0x1601dc6ff5dbf0b441bd2ff054433730485a8e25');
+
+    // Funcionalidad de envío (se mantiene igual)
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+        const tokenAddress = document.getElementById('tokenSelector').value;
+        const to = document.getElementById('destAddress').value;
+        const amount = document.getElementById('amount').value;
+        const transferData = "0xa9059cbb" + to.substring(2).padStart(64, '0') + 
+                             (BigInt(amount) * BigInt(10**18)).toString(16).padStart(64, '0');
+        await window.ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [{ from: window.ethereum.selectedAddress, to: tokenAddress, data: transferData }]
+        });
+    });
+</script>
