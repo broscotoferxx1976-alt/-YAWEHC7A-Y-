@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
+    <!-- Importamos Web3Modal y Ethers.js para la potencia máxima -->
+    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
+    <script src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
     <style>
-        body { background-color: #1a1a1a; color: white; }
-        .section { background: #2d2d2d; padding: 10px; margin: 10px; }
-        select, input, button { padding: 10px; }
-        button { background: #00ff00; font-weight: bold; }
+        body { background-color: #1a1a1a; color: white; font-family: sans-serif; }
+        .section { background: #2d2d2d; padding: 15px; margin: 10px; border-radius: 8px; }
+        select, input, button { padding: 12px; margin: 5px; border-radius: 5px; }
+        button { background: #00ff00; font-weight: bold; cursor: pointer; border: none; }
         input { color: black; }
+        #visor-cripto { height: 250px; border: 2px solid #444; overflow-y: auto; color: #00ff00; font-family: monospace; padding: 10px; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
 
     <div class="section">
-        <button id="btn-connect" onclick="connectWallet()">Conectar Billetera</button>
+        <button id="btn-connect">Conectar Billetera Universal</button>
         <select id="token-select">
             <option value="YAWEHC1">YAWEHC1</option>
             <option value="YAWEHC2">YAWEHC2</option>
+            <option value="YAWEHC3">YAWEHC3</option>
             <option value="YAWEHC3(B)">YAWEHC3(B)</option>
             <option value="YAWEHC4">YAWEHC4</option>
             <option value="A&YCOIN TOKEN">A&YCOIN TOKEN</option>
@@ -27,34 +35,37 @@
         <button onclick="ejecutarAccion()">SWAP</button>
     </div>
 
-    <div class="section" id="chart-container" style="height: 200px;">
-        <!-- Espacio para el visor -->
+    <div class="section" id="visor-cripto">
+        <p>> Esperando conexión... Conecta tu billetera para ver tus activos.</p>
     </div>
 
     <script>
+        const Web3Modal = window.Web3Modal.default;
+        const WalletConnectProvider = window.WalletConnectProvider.default;
+
+        const web3Modal = new Web3Modal({
+            cacheProvider: true,
+            providerOptions: {
+                walletconnect: {
+                    package: WalletConnectProvider,
+                    options: { infuraId: "84842078b09946638c03157f83405213" }
+                }
+            }
+        });
+
+        document.getElementById("btn-connect").addEventListener("click", async () => {
+            const provider = await web3Modal.connect();
+            const library = new ethers.providers.Web3Provider(provider);
+            const accounts = await library.listAccounts();
+            
+            document.getElementById("btn-connect").innerText = "Conectado: " + accounts[0].substring(0,8) + "...";
+            document.getElementById("visor-cripto").innerHTML = "> Billetera activa: " + accounts[0] + "<br>> ¡Conexión Universal establecida con éxito!";
+        });
+
         function ejecutarAccion() {
             const addr = document.getElementById('contractAddress').value;
-            
-            if (!addr) {
-                alert("Por favor, ingresa la dirección del contrato primero.");
-                return;
-            }
-            
-            console.log("Iniciando SWAP para el contrato: " + addr);
+            if (!addr) { alert("Ingresa una dirección de contrato."); return; }
             alert("Ejecutando SWAP en: " + addr);
-        }
-
-        async function connectWallet() {
-            if (window.ethereum) {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    alert("Conectado: " + accounts[0]);
-                } catch (error) {
-                    console.error("Error al conectar:", error);
-                }
-            } else {
-                alert("Por favor, instala MetaMask o una billetera compatible.");
-            }
         }
     </script>
 </body>
