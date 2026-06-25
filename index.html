@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
     <style>
         body { background-color: #1a1a1a; color: white; font-family: monospace; padding: 20px; }
         .section { background: #2d2d2d; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
         select, input, button { padding: 10px; margin: 5px; border-radius: 5px; border: none; }
         button { background: #00ff00; color: black; cursor: pointer; font-weight: bold; }
         input { color: black; }
-        #visor-cripto { height: 250px; overflow-y: auto; background: #000; color: #00ff00; padding: 10px; }
     </style>
 </head>
 <body>
@@ -30,42 +30,19 @@
         <button onclick="ejecutarSwap()">SWAP</button>
     </div>
 
-    <div class="section" id="visor-cripto">
-        > Terminal operativo. Conecta para iniciar.
-    </div>
-
-    <div class="section" id="dashboard-visual">
-        <h3>📊 ANÁLISIS DE MERCADO: <span id="token-label">YAWEHC1</span></h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; text-align: center;">
-            <div style="background:#1e1e1e; padding: 10px; border-radius:5px;">
-                <small>TENDENCIA (7d)</small>
-                <div id="tendencia-val" style="color: #00ff00; font-size:1.2em;">+3.2% ↗</div>
-            </div>
-            <div style="background:#1e1e1e; padding: 10px; border-radius:5px;">
-                <small>VOLUMEN</small>
-                <div id="volumen-val" style="color: #00ffff; font-size:1.2em;">1.2M USD</div>
-            </div>
-            <div style="background:#1e1e1e; padding: 10px; border-radius:5px;">
-                <small>PRECIO VS VALOR</small>
-                <div id="valor-val" style="color: #ffff00; font-size:1.2em;">0.95 / 1.00</div>
-            </div>
-        </div>
-    </div>
-
     <script>
         // 1. Lógica para cambiar contrato automáticamente
         document.getElementById('token-select').addEventListener('change', function() {
             const selector = document.getElementById('token-select');
             const inputContrato = document.getElementById('contractAddress');
-            document.getElementById('token-label').innerText = selector.value;
             
             const direcciones = {
-                "YAWEHC1": "0x1601dc6ff5dbf0b441bd2ff054433730485a8e25",
-                "YAWEHC2": "0x0a7dd4079b106de376e08d1dc6686b7d0b53c40c",
-                "YAWEHC3": "0x92b434def2c20a1b89052e85587034ef4c227003",
-                "YAWEHC3(B)": "0xbc66e83e514d84e0c51b8d61b8ea618f8949eddc",
-                "YAWEHC4": "0x250c2d91ed873e3037f7071ea333d145175fbe5d",
-                "A&YCOIN TOKEN": "0xfc378ea42f465d0ab95dd0e9f4599f836decfe44"
+                "YAWEHC1": "0x1601dc6ff5dbf0b441bd2...",
+                "YAWEHC2": "0xTU_DIR_YAWEHC2",
+                "YAWEHC3": "0xTU_DIR_YAWEHC3",
+                "YAWEHC3(B)": "0xTU_DIR_YAWEHC3B",
+                "YAWEHC4": "0xTU_DIR_YAWEHC4",
+                "A&YCOIN TOKEN": "0xTU_DIR_AYCOIN"
             };
             inputContrato.value = direcciones[selector.value] || "";
         });
@@ -83,31 +60,25 @@
             }
         });
 
-        // 3. Función Swap
-async function ejecutarSwap() {
-    if (!account) { 
-        alert("Conecta tu billetera primero"); 
-        return; 
-    }
-    const contractAddr = document.getElementById('contractAddress').value;
+        // 3. Función Swap (Definitiva)
+        async function ejecutarSwap() {
+            if (!account) { alert("Conecta tu billetera primero"); return; }
+            const contractAddr = document.getElementById('contractAddress').value;
 
-    try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+            try {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
 
-        const tx = await signer.sendTransaction({
-            to: contractAddr,
-            value: ethers.utils.parseEther("0.001")
-        });
-
-        alert("Transacción enviada: " + tx.hash);
-    } catch (error) {
-        console.error(error);
-        alert("Error al ejecutar el swap: " + error.message);
-    }
-}
-        
-        
+                const tx = await signer.sendTransaction({
+                    to: contractAddr,
+                    value: ethers.utils.parseEther("0.001") 
+                });
+                alert("Transacción enviada: " + tx.hash);
+            } catch (error) {
+                console.error(error);
+                alert("Error: " + error.message);
+            }
+        }
     </script>
 </body>
 </html>
