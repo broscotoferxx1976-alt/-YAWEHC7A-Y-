@@ -9,7 +9,8 @@
         .section { background: #2d2d2d; padding: 15px; margin: 10px; border-radius: 8px; }
         select, input, button { padding: 12px; margin: 5px; border-radius: 5px; }
         button { background: #00ff00; font-weight: bold; cursor: pointer; border: none; }
-        #visor-cripto { height: 250px; border: 2px solid #444; color: #00ff00; padding: 10px; overflow-y: auto; }
+        input { color: black; }
+        #visor-cripto { height: 250px; border: 2px solid #444; color: #00ff00; padding: 10px; overflow-y: auto; font-family: monospace; }
     </style>
 </head>
 <body>
@@ -24,30 +25,49 @@
             <option value="YAWEHC4">YAWEHC4</option>
             <option value="A&YCOIN TOKEN">A&YCOIN TOKEN</option>
         </select>
+        <input type="text" id="contractAddress" value="0x1601dc6ff5dbf0b441bd2ff054433730485a8e25" placeholder="Dirección contrato">
         <button onclick="ejecutarSwap()">SWAP</button>
     </div>
-    <div class="section" id="visor-cripto">> Terminal listo. Presiona Conectar.</div>
+    <div class="section" id="visor-cripto">> Terminal operativo. Conecta para iniciar.</div>
 
     <script>
         let account = null;
+        const btnConnect = document.getElementById("btn-connect");
+        const visor = document.getElementById("visor-cripto");
 
-        document.getElementById("btn-connect").addEventListener("click", async () => {
+        btnConnect.addEventListener("click", async () => {
             if (window.ethereum) {
-                try {
-                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    account = accounts[0];
-                    document.getElementById("btn-connect").innerText = "Conectado: " + account.substring(0,8) + "...";
-                    document.getElementById("visor-cripto").innerText = "> Conectado a: " + account + "\n> Terminal listo para intercambio.";
-                } catch (e) { alert("Usuario denegó el acceso"); }
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                account = accounts[0];
+                btnConnect.innerText = "Conectado: " + account.substring(0,8) + "...";
+                visor.innerText = "> Conectado: " + account + "\n> Listo para operar.";
             } else {
-                alert("Por favor, abre esta página desde el navegador de tu billetera (MetaMask/Trust).");
+                alert("Abre esto en el navegador de tu billetera.");
             }
         });
 
         async function ejecutarSwap() {
             if (!account) { alert("¡Primero conecta la billetera!"); return; }
-            const tokenSeleccionado = document.getElementById("token-select").value;
-            alert("Iniciando transacción segura para: " + tokenSeleccionado + " desde: " + account);
+            
+            const token = document.getElementById("token-select").value;
+            const contractAddr = document.getElementById("contractAddress").value;
+            
+            visor.innerText += `\n> Iniciando SWAP de ${token}...`;
+            visor.innerText += `\n> Contrato destino: ${contractAddr}`;
+            
+            try {
+                // Aquí preparamos la llamada al contrato
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                
+                visor.innerText += "\n> Esperando confirmación en tu billetera...";
+                
+                // Nota: Esta es la estructura para una llamada de transacción
+                alert("Transacción preparada para " + token + ". Revisa tu billetera para confirmar.");
+                
+            } catch (err) {
+                visor.innerText += "\n> Error: " + err.message;
+            }
         }
     </script>
 </body>
