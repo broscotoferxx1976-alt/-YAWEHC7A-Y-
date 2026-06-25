@@ -50,7 +50,7 @@
 
 
 
-   <script> // 1. Valores definidos por el profeta
+   // 1. Valores definidos por el profeta
     const valoresAsignados = {
         "YAWEHC1": 1.00,
         "YAWEHC2": 1.50,
@@ -97,7 +97,9 @@
         document.getElementById("token-label").innerText = tokenSeleccionado;
         obtenerDatosMercado(tokenSeleccionado);
     });
-</script>
+
+       
+
     
 // Función para actualizar el panel
 function actualizarDashboard(token, precioMercado) {
@@ -142,9 +144,9 @@ async function obtenerDatosMercado(token) {
         // Por ahora, el sistema ya está listo para recibir el "feed" de datos
         console.log("Cargando métricas para: " + tokenSeleccionado);
     });
-</script>
+
     
-    <script>
+    
         let account = null;
         const btnConnect = document.getElementById("btn-connect");
         const visor = document.getElementById("visor-cripto");
