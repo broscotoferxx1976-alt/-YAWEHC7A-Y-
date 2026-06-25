@@ -50,6 +50,24 @@
         });
         const candleSeries = chart.addCandlestickSeries();
 // Función para alimentar el gráfico con datos reales o de prueba
-async function updateChart(tokenAddress) {
-    
-    
+
+    async function updateChart(tokenAddress) {
+        // Datos de prueba para el gráfico
+        const data = [
+            { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
+            { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
+            { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
+        ];
+        candleSeries.setData(data);
+    }
+
+    // Escuchador para el selector de tokens
+    document.getElementById('tokenSelector').addEventListener('change', (e) => {
+        updateChart(e.target.value);
+    });
+
+    // Llamada inicial para cargar el gráfico al entrar
+    updateChart('0x1601dc6ff5dbf0b441bd2ff054433730485a8e25');
+    </script>
+</body>
+</html>  
