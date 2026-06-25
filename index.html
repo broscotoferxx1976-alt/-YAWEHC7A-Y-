@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
     <style>
-        body { background-color: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
-        .section { background: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        select, input, button { padding: 15px; margin: 5px; width: 90%; display: block; }
-        button { background: #00ff00; font-weight: bold; cursor: pointer; border: none; color: black; }
+        body { background-color: #1a1a1a; color: white; }
+        .section { background: #2d2d2d; padding: 10px; margin: 10px; }
+        select, input, button { padding: 10px; }
+        button { background: #00ff00; font-weight: bold; }
         input { color: black; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
-    
+
     <div class="section">
         <button id="btn-connect" onclick="connectWallet()">Conectar Billetera</button>
         <select id="token-select">
             <option value="YAWEHC1">YAWEHC1</option>
             <option value="YAWEHC2">YAWEHC2</option>
-            <option value="YAWEHC3">YAWEHC3</option>
+            <option value="YAWEHC3(B)">YAWEHC3(B)</option>
+            <option value="YAWEHC4">YAWEHC4</option>
+            <option value="A&YCOIN TOKEN">A&YCOIN TOKEN</option>
         </select>
         <input type="text" id="contractAddress" placeholder="Dirección contrato">
         <button onclick="ejecutarAccion()">SWAP</button>
@@ -30,22 +32,29 @@
     </div>
 
     <script>
+        function ejecutarAccion() {
+            const addr = document.getElementById('contractAddress').value;
+            
+            if (!addr) {
+                alert("Por favor, ingresa la dirección del contrato primero.");
+                return;
+            }
+            
+            console.log("Iniciando SWAP para el contrato: " + addr);
+            alert("Ejecutando SWAP en: " + addr);
+        }
+
         async function connectWallet() {
             if (window.ethereum) {
                 try {
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                     alert("Conectado: " + accounts[0]);
-                } catch (err) {
-                    alert("Error al conectar: " + err.message);
+                } catch (error) {
+                    console.error("Error al conectar:", error);
                 }
             } else {
-                alert("MetaMask no detectado. Por favor, abre esta web dentro del navegador de tu billetera.");
+                alert("Por favor, instala MetaMask o una billetera compatible.");
             }
-        }
-
-        function ejecutarAccion() {
-            const addr = document.getElementById('contractAddress').value;
-            alert("Operación preparada para: " + addr);
         }
     </script>
 </body>
