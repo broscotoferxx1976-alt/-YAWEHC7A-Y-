@@ -3,62 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL PRO</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <!-- Librerías necesarias para el selector de billeteras -->
+    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
+    <script src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    
     <style>
         body { background: #1a1a1a; color: white; font-family: sans-serif; padding: 20px; }
         .section { background: #2d2d2d; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
         button { padding: 15px; margin: 5px; background: #00ff00; border: none; cursor: pointer; font-weight: bold; }
-        select, input { padding: 15px; margin: 5px; width: 200px; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
     <div class="section">
-        <button id="connectBtn">Conectar Billetera</button>
-        <span id="walletAddress">No conectado</span>
-        <br>
-        <select id="token-select">
-            <option value="YAWEHC1">YAWEHC1</option>
-            <option value="YAWEHC2">YAWEHC2</option>
-            <option value="YAWEHC3">YAWEHC3</option>
-            <option value="YAWEHC3B">YAWEHC3(B)</option>
-            <option value="YAWEHC4">YAWEHC4</option>
-            <option value="AYCOIN">A&YCOIN TOKEN</option>
-        </select>
-        <input type="text" id="contractAddress" placeholder="Dirección contrato">
-        <button id="swapBtn">SWAP</button>
+        <button id="btn-connect">Conectar Billetera</button>
+        <span id="wallet-address">No conectado</span>
     </div>
 
-    <div class="section"><div id="chart-container" style="height: 250px;"></div></div>
-
     <script>
-        let signer;
-        // Conectar Billetera
-        document.getElementById('connectBtn').onclick = async () => {
-            if (window.ethereum) {
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                await provider.send("eth_requestAccounts", []);
-                signer = provider.getSigner();
-                const address = await signer.getAddress();
-                document.getElementById('walletAddress').innerText = address.substring(0, 10) + "...";
-            } else { alert("Instala MetaMask"); }
-        };
+        const Web3Modal = window.Web3Modal.default;
+        const WalletConnectProvider = window.WalletConnectProvider.default;
 
-        // Función Swap básica
-        document.getElementById('swapBtn').onclick = async () => {
-            if (!signer) return alert("Conecta tu billetera primero");
-            const address = document.getElementById('contractAddress').value;
-            if (!address) return alert("Introduce dirección contrato");
-            
-            // Aquí se prepara la llamada al contrato
-            alert("Iniciando SWAP con el contrato: " + address);
-            // Lógica de transacción (se completará con la ABI del contrato)
-        };
+        const web3Modal = new Web3Modal({
+            cacheProvider: false,
+            providerOptions: {
+                walletconnect: {
+                    package: WalletConnectProvider,
+                    options: { infuraId: "84842078b09946638c03157f83405213" }
+                }
+            }
+        });
 
-        // Gráfico
-        const chart = LightweightCharts.createChart(document.getElementById('chart-container'), { width: 800, height: 250, layout: { backgroundColor: '#000', textColor: '#FFF' } });
-        chart.addCandlestickSeries().setData([{ time: '2026-06-25', open: 1, high: 2, low: 0.5, close: 1.5 }]);
+        document.getElementById('btn-connect').onclick = async () => {
+            const instance = await web3Modal.connect();
+            const provider = new ethers.providers.Web3Provider(instance);
+            const signer = provider.getSigner();
+            const address = await signer.getAddress();
+            document.getElementById('wallet-address').innerText = address;
+        };
     </script>
 </body>
 </html>
