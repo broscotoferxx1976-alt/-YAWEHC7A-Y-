@@ -47,29 +47,25 @@
 
         const candleSeries = chart.addCandlestickSeries();
 
-        async function updateChart(tokenAddress) {
-            const data = [
-                { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
-                { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
-                { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
-            ];
-            candleSeries.setData(data);
-        }
+    async function updateChart(tokenAddress) {
+        const data = [
+            { time: '2026-06-23', open: 1.0, high: 1.2, low: 0.9, close: 1.1 },
+            { time: '2026-06-24', open: 1.1, high: 1.3, low: 1.0, close: 1.2 },
+            { time: '2026-06-25', open: 1.2, high: 1.4, low: 1.1, close: 1.35 }
+        ];
+        candleSeries.setData(data);
+    }
 
-        document.getElementById('tokenSelector').addEventListener('change', (e) => updateChart(e.target.value));
-        
-        document.getElementById('sendBtn').addEventListener('click', async () => {
-            const tokenAddress = document.getElementById('tokenSelector').value;
-            const to = document.getElementById('destAddress').value;
-            const amount = document.getElementById('amount').value;
-            const transferData = "0xa9059cbb" + to.substring(2).padStart(64, '0') + 
-                                 (BigInt(amount) * BigInt(10**18)).toString(16).padStart(64, '0');
-            await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: window.ethereum.selectedAddress, to: tokenAddress, data: transferData }] });
-        });
+    document.getElementById('tokenSelector').addEventListener('change', (e) => updateChart(e.target.value));
 
-        updateChart('0x1601dc6ff5dbf0b441bd2ff054433730485a8e25');
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+        const to = document.getElementById('destAddress').value;
+        const amount = document.getElementById('amount').value;
+        const transferData = "0xa9059cbb" + to.substring(2).padStart(64, '0') + 
+                             (BigInt(amount) * BigInt(10**18)).toString(16).padStart(64, '0');
+        await window.ethereum.request({ method: 'eth_sendTransaction', params: [{ from: window.ethereum.selectedAddress, to: document.getElementById('tokenSelector').value, data: transferData }] });
     });
-</script>
-    
-</body>
-</html>
+
+    updateChart('0x1601dc6ff5dbf0b441bd2ff054433730485a8e25');
+        
+
