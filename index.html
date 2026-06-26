@@ -67,18 +67,19 @@
     allowfullscreen>
   </iframe>
 </div>
-   <!-- ... tu rótulo y el visor ... -->
-</div> 
+   <!-- Rampa de acceso Transak -->
+<div id="transak-container" style="margin-top: 20px; width: 100%; height: 600px;"></div>
+<script src="https://global.transak.com/sdk/v1.1/widget.js"></script>
+<script>
+    let transak = new TransakSDK.Transak({
+        apiKey: 'TU_API_KEY_AQUI', // Aquí debes poner tu clave de Transak
+        network: 'bsc',
+        containerId: 'transak-container'
+    });
+    transak.init();
+</script>
+    
 
-<!-- Rampa de acceso YAWEHC (Transak) -->
-<div id="transak-container" style="margin-top: 20px; width: 100%;">
-    <!-- Aquí irá el widget que ya tenemos guardado -->
-    <script src="https://global.transak.com/sdk/v1.1/widget.js"></script>
-    <script>
-        // Aquí activamos la rampa con tu configuración
-        // ... (Tu código de configuración aquí)
-    </script>
-</div>
     
     
     <script>
