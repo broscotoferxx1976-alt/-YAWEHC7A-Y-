@@ -67,16 +67,16 @@
     allowfullscreen>
   </iframe>
 </div>
-   <!-- Rampa de acceso Transak -->
-<div id="transak-container" style="margin-top: 20px; width: 100%; height: 600px;"></div>
+ <div id="transak-container" style="margin-top: 20px; width: 100%; height: 600px;"></div>
 <script src="https://global.transak.com/sdk/v1.1/widget.js"></script>
 <script>
     let transak = new TransakSDK.Transak({
-        apiKey: 'TU_API_KEY_AQUI', // Aquí debes poner tu clave de Transak
+        apiKey: 'TU_API_KEY_AQUI',
         network: 'bsc',
         containerId: 'transak-container'
     });
-        transak.init();
+    transak.init();
+
     const datosTransak = {
         "api_key": "TU_API_KEY_AQUI",
         "wallet_address": "DIRECCION_DEL_USUARIO",
@@ -89,24 +89,12 @@
     };
 </script>
     
-    
 
+</script>
+    // 1. Lógica para cambiar contrato automáticamente
     
-    
-    <script>
-        // 1. Lógica para cambiar contrato automáticamente
-        document.getElementById('token-select').addEventListener('change', function() {
-            const selector = document.getElementById('token-select');
-            const inputContrato = document.getElementById('contractAddress');
-            
-            const direcciones = {
-                "YAWEHC1": "0x1601dc6ff5dbf0b441bd2...",
-                "YAWEHC2": "0xTU_DIR_YAWEHC2",
-                "YAWEHC3": "0xTU_DIR_YAWEHC3",
-                "YAWEHC3(B)": "0xTU_DIR_YAWEHC3B",
-                "YAWEHC4": "0xTU_DIR_YAWEHC4",
-                "A&YCOIN TOKEN": "0xTU_DIR_AYCOIN"
             };
+
             inputContrato.value = direcciones[selector.value] || "";
         });
 
