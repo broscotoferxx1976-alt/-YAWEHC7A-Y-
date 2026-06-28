@@ -182,6 +182,15 @@ async function fetchPrices() {
         <strong>${coin.symbol.toUpperCase()}</strong>: $${coin.current_price.toLocaleString()}
       </div>
     `;
+  // Añadir lógica para el token YAYÍ
+if (coin.symbol.toUpperCase() === 'YAYÍ') {
+    cryptoTicker.innerHTML += `
+        <div class="swiper-slide crypto-card">
+            <strong>${coin.symbol.toUpperCase()}</strong>
+            $${coin.price}
+        </div>
+    `;
+}
   });
 }
 
