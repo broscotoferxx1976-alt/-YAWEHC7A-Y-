@@ -176,37 +176,23 @@ async function fetchPrices() {
   const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,cardano,solana');
   const data = await response.json();
   
-  data.forEach(coin => {
-    cryptoTicker.innerHTML += `
-      <div class="swiper-slide crypto-card">
-        <strong>${coin.symbol.toUpperCase()}</strong>: $${coin.current_price.toLocaleString()}
-      </div>
-    `;
-  // Añadir lógica para el token YAYÍ
-if (coin.symbol.toUpperCase() === 'YAYÍ') {
+data.forEach(coin => {
     cryptoTicker.innerHTML += `
         <div class="swiper-slide crypto-card">
             <strong>${coin.symbol.toUpperCase()}</strong>
             $${coin.price}
         </div>
     `;
-}
-  });
-}
-
-fetchPrices();
-   // Actualizar precios cada 60 segundos automáticamente
-setInterval(fetchPrices, 60000);
-    </script>
-   
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.myCryptoSwiper', {
-    loop: true,
-    autoplay: { delay: 2000, disableOnInteraction: false },
-    slidesPerView: 3,
-    spaceBetween: 10
-  });
+});
+ // Añadir YAYÍ manualmente
+cryptoTicker.innerHTML += `
+    <div class="swiper-slide crypto-card">
+        <strong>YAYÍ</strong>
+        $0.00
+    </div>
+`;
+    
+  
 </script>
 </body>
 </html>
