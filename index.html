@@ -10,6 +10,11 @@
         select, input, button { padding: 10px; margin: 5px; border-radius: 5px; border: none; }
         button { background: #00ff00; color: black; cursor: pointer; font-weight: bold; }
         input { color: black; }
+        .crypto-carousel-container { width: 100%; overflow: hidden; padding: 20px 0; background: #1a1a1a; }
+.crypto-card { color: white; padding: 10px; text-align: center; border-right: 1px solid #333; }
+.action-buttons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+button { padding: 10px 20px; cursor: pointer; border-radius: 8px; border: none; background: #f3ba2f; font-weight: bold; }
+        
     </style>
 </head>
 <body>
@@ -29,6 +34,21 @@
         <input type="text" id="contractAddress" placeholder="Dirección del contrato">
         <button onclick="ejecutarSwap()">SWAP</button>
     </div>
+    <!-- Carrusel de Criptomonedas -->
+<div class="crypto-carousel-container">
+  <div class="swiper myCryptoSwiper">
+    <div class="swiper-wrapper" id="crypto-ticker">
+      <!-- Los datos se inyectarán aquí mediante JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Zona de Acciones (Botones) -->
+<div class="action-buttons">
+  <button id="connect-wallet">Conectar Billetera</button>
+  <button id="open-swap">Swap</button>
+</div>
+    
 <!-- Rótulo Espectacular YAWEHC TERMINAL -->
 <div style="
     text-align: center; 
@@ -87,24 +107,7 @@
         "redirect_url": "https://yaweh.com/success",
         "token_id": "YAWEHC1_A_YAWEHC6"
     };
-</script>
-<!-- Carrusel de Criptomonedas -->
-<div class="crypto-carousel-container">
-  <div class="swiper myCryptoSwiper">
-    <div class="swiper-wrapper" id="crypto-ticker">
-      <!-- Los datos se inyectarán aquí mediante JS -->
-    </div>
-  </div>
-</div>
 
-<!-- Zona de Acciones (Botones) -->
-<div class="action-buttons">
-  <button id="connect-wallet">Conectar Billetera</button>
-  <button id="open-swap">Swap</button>
-</div>
-    
-
-</script>
     // 1. Lógica para cambiar contrato automáticamente
     
             };
@@ -145,5 +148,25 @@
             }
         }
     </script>
+    <script>
+const cryptoTicker = document.getElementById('crypto-ticker');
+
+// Función para obtener precios (usando API pública de CoinGecko)
+async function fetchPrices() {
+  const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,cardano,solana');
+  const data = await response.json();
+  
+  data.forEach(coin => {
+    cryptoTicker.innerHTML += `
+      <div class="swiper-slide crypto-card">
+        <strong>${coin.symbol.toUpperCase()}</strong>: $${coin.current_price.toLocaleString()}
+      </div>
+    `;
+  });
+}
+
+fetchPrices();
+    </script>
+    
 </body>
 </html>
