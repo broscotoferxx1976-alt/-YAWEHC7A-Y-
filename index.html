@@ -186,8 +186,10 @@ async function fetchPrices() {
 }
 
 fetchPrices();
+   // Actualizar precios cada 60 segundos automáticamente
+setInterval(fetchPrices, 60000);
     </script>
-    
+   
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   const swiper = new Swiper('.myCryptoSwiper', {
