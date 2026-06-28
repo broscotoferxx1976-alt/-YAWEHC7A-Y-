@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
     <style>
         body { background-color: #1a1a1a; color: white; font-family: monospace; padding: 20px; }
         .section { background: #2d2d2d; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
@@ -162,5 +164,14 @@ async function fetchPrices() {
 fetchPrices();
     </script>
     
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.myCryptoSwiper', {
+    loop: true,
+    autoplay: { delay: 2000, disableOnInteraction: false },
+    slidesPerView: 3,
+    spaceBetween: 10
+  });
+</script>
 </body>
 </html>
