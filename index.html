@@ -1,41 +1,42 @@
-<!-- Buscador de Criptomonedas -->
-<div class="search-container" style="margin-top: 20px;">
-    <input type="text" id="cryptoInput" placeholder="Escribe nombre o contrato..." 
-           style="padding: 10px; width: 70%; background: #000; color: #0f0; border: 1px solid #0f0;">
-    <button onclick="buscarCripto()" style="padding: 10px; background: #0f0; color: #000; border: none; cursor: pointer;">BUSCAR</button>
-</div>
-
-<div id="resultadoBusqueda" style="margin-top: 20px; border-top: 1px solid #0f0; padding-top: 10px;">
-    <!-- Aquí aparecerá la moneda seleccionada con su logo -->
-</div>
-
-<script>
-async function buscarCripto() {
-    const query = document.getElementById('cryptoInput').value.toLowerCase();
-    const resultadoDiv = document.getElementById('resultadoBusqueda');
-    resultadoDiv.innerHTML = "Buscando...";
-
-    try {
-        // Consultamos la API pública de CoinGecko
-        const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
-        const data = await response.json();
-        const coin = data.coins[0]; // Tomamos el primer resultado
-
-        if (coin) {
-            resultadoDiv.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <img src="${coin.large}" width="50">
-                    <div>
-                        <p><strong>${coin.name} (${coin.symbol})</strong></p>
-                        <p>ID: ${coin.id}</p>
-                    </div>
-                </div>
-            `;
-        } else {
-            resultadoDiv.innerHTML = "No se encontró esa moneda. Prueba con otro nombre.";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>YAWEHC TERMINAL v2.0</title>
+    <style>
+        /* ESTO ES LO QUE YA TENÍAS */
+        body { background-color: #000; color: #0f0; font-family: 'Courier New', monospace; padding: 20px; }
+        
+        /* PEGA EL FRAGMENTO AQUÍ DENTRO */
+        #cryptoInput {
+            background: #000 !important;
+            border: 1px solid #0f0 !important;
+            color: #0f0 !important;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            width: 60%;
         }
-    } catch (error) {
-        resultadoDiv.innerHTML = "Error al conectar con el servidor.";
-    }
-}
-</script>
+
+        button {
+            background: #0f0 !important;
+            color: #000 !important;
+            font-weight: bold;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+        }
+
+        #resultadoBusqueda {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #333;
+            background: #111;
+        }
+    </style>
+</head>
+<body>
+    <!-- Tu contenido HTML aquí -->
+</body>
+</html>
+
