@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
     <style>
-        body { background-color: #121212; color: #fff; font-family: monospace; margin: 0; }
-        header { border-bottom: 2px solid #00ff00; padding: 10px; text-align: center; }
-        .controls { padding: 10px; background: #1e1e1e; display: flex; gap: 10px; }
-        #widget-container { width: 100%; height: 600px; }
-        iframe { width: 100%; height: 100%; border: none; }
+        body { background-color: #000; color: #0f0; font-family: monospace; margin: 0; }
+        header { border-bottom: 2px solid #0f0; padding: 15px; text-align: center; }
+        .controls { padding: 15px; display: flex; gap: 10px; justify-content: center; }
+        /* Contenedor para el carrusel */
+        .crypto-ticker { width: 100%; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -25,9 +25,10 @@
         <button>SWAP</button>
     </div>
 
-    <!-- Aquí es donde se debe incrustar el widget correctamente -->
-    <div id="widget-container">
-        <iframe src="https://www.geckoterminal.com/es/bsc/pools/TU_DIRECCION_DE_POOL_AQUI" title="Terminal de Activos"></iframe>
+    <!-- Carrusel de Criptomonedas Global -->
+    <div class="crypto-ticker">
+        <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
+        <div class="coinmarketcap-currency-widget" data-currencyid="1" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statcurrency="USD"></div>
     </div>
 
 </body>
