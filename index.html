@@ -6,33 +6,38 @@
     <style>
         body { background: #000; color: #0f0; font-family: 'Courier New', monospace; padding: 20px; }
         #cryptoInput { background: #000; border: 1px solid #0f0; color: #0f0; padding: 12px; width: 60%; }
-        button { font-weight: bold; padding: 12px 20px; border: none; cursor: pointer; font-family: 'Courier New', monospace; }
+        button { font-weight: bold; padding: 12px 20px; border: none; cursor: pointer; font-family: 'Courier New', monospace; margin-top: 10px; display: block; width: 100%; max-width: 300px; }
         .btn-green { background: #0f0; color: #000; }
-        .btn-blue { background: #00f; color: #fff; margin-top: 10px; }
+        .btn-blue { background: #00f; color: #fff; }
         #resultadoBusqueda { margin-top: 20px; padding: 15px; border: 1px solid #333; background: #111; }
-        .action-area { display: flex; flex-direction: column; align-items: flex-start; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
     <input type="text" id="cryptoInput" placeholder="Nombre o contrato (0x...)">
-    <button class="btn-green" onclick="buscar()">BUSCAR</button>
+    <button class="btn-green" style="width: 20%;" onclick="mostrarBotones()">BUSCAR</button>
 
     <div id="resultadoBusqueda"></div>
 
     <script>
-        function buscar() {
+        function mostrarBotones() {
             const input = document.getElementById('cryptoInput').value.trim();
-            const div = document.getElementById('res') || document.getElementById('resultadoBusqueda');
+            const resDiv = document.getElementById('resultadoBusqueda');
             
-            div.innerHTML = `<div class="action-area">
+            if (!input) {
+                resDiv.innerHTML = "Introduce un nombre o contrato.";
+                return;
+            }
+
+            resDiv.innerHTML = `
                 <p>Opciones para el activo:</p>
-                <a href="https://pancakeswap.finance/swap?outputCurrency=${input}" target="_blank">
+                <a href="https://pancakeswap.finance/swap?outputCurrency=${input}" target="_blank" style="text-decoration:none;">
                     <button class="btn-green">INTERCAMBIO CRIPTO (PANCAKESWAP)</button>
                 </a>
                 <button class="btn-blue" onclick="alert('Integrando pasarela Transak próximamente...')">COMPRAR CON TARJETA (TRANSAK)</button>
-            </div>`;
+            `;
         }
     </script>
 </body>
 </html>
+
