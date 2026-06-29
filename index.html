@@ -49,13 +49,14 @@
                 const data = await response.json();
                 const coin = data.coins[0];
                         if (coin) {
-            <a href="https://pancakeswap.finance/swap?outputCurrency=${coin.id}" target="_blank">
-                
-                <a href="https://pancakeswap.finance/swap?outputCurrency=${coin.api_symbol || ''}" target="_blank">
+                 if (coin) {
+            resDiv.innerHTML = `
+                <a href="https://pancakeswap.finance/swap?outputCurrency=${coin.id}" target="_blank">
                     <img src="${coin.large}" width="50" style="cursor:pointer;" title="Haz clic para comprar">
                 </a>
                 <p>${coin.name} (${coin.symbol})</p>`;
         } else {
+                     
                             
             } catch (e) {
                 resDiv.innerHTML = "Error de conexión.";
