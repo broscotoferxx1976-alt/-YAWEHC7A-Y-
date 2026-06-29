@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
     <style>
-        body { background-color: #000; color: #0f0; font-family: Arial, sans-serif; }
+        body { background-color: #000; color: #0f0; margin: 0; font-family: sans-serif; }
         header { border-bottom: 2px solid #0f0; padding: 20px; text-align: center; }
-        .controls { padding: 20px; text-align: center; }
-        /* Contenedor del Widget */
-        #pancake-swap-widget { display: flex; justify-content: center; margin-top: 30px; }
+        .widget-container { display: flex; justify-content: center; padding-top: 20px; }
     </style>
 </head>
 <body>
@@ -18,20 +16,16 @@
         <p>CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS</p>
     </header>
 
-    <div class="controls">
-        <div id="pancake-swap-widget"></div>
+    <div class="widget-container">
+        <iframe 
+            src="https://pancakeswap.finance/swap?outputCurrency=0x9d8...95ed" 
+            width="400" 
+            height="600" 
+            frameborder="0" 
+            style="border-radius: 10px;">
+        </iframe>
     </div>
-
-    <script src="https://unpkg.com/@pancakeswap/widgets@latest/dist/widgets.bundle.js"></script>
-    <script>
-        window.addEventListener('load', function() {
-            pancakeSwapWidget.init({
-                container: '#pancake-swap-widget',
-                chainId: 56,
-                // Esto cargará el widget con la capacidad de conectar billetera y hacer swap
-            });
-        });
-    </script>
 
 </body>
 </html>
+
