@@ -3,194 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    
     <style>
-        body { background-color: #1a1a1a; color: white; font-family: monospace; padding: 20px; }
-        .section { background: #2d2d2d; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
-        select, input, button { padding: 10px; margin: 5px; border-radius: 5px; border: none; }
-        button { background: #00ff00; color: black; cursor: pointer; font-weight: bold; }
-        input { color: black; }
-    .crypto-carousel-container { 
-    width: 100%; 
-    overflow: hidden; 
-    padding: 20px 0; 
-    background: #121212; 
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
-}
-
-.crypto-card { 
-    color: #ffffff; 
-    padding: 15px; 
-    text-align: center; 
-    background: #1e1e1e; 
-    border: 1px solid #333; 
-    border-radius: 12px; 
-    font-family: 'Courier New', monospace; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
-}
-
-.crypto-card strong {
-    color: #f3ba2f; 
-    display: block;
-    margin-bottom: 5px;
-}
-        
-
-button { padding: 10px 20px; cursor: pointer; border-radius: 8px; border: none; background: #f3ba2f; font-weight: bold; }
-        
+        body { background-color: #121212; color: #fff; font-family: monospace; margin: 0; }
+        header { border-bottom: 2px solid #00ff00; padding: 10px; text-align: center; }
+        .controls { padding: 10px; background: #1e1e1e; display: flex; gap: 10px; }
+        #widget-container { width: 100%; height: 600px; }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
-    <h1>YAWEHC TERMINAL v2.0</h1>
+    <header>
+        <h1>YAWEHC TERMINAL v2.0</h1>
+        <p>CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS</p>
+    </header>
 
-    <div class="section">
-        <button id="btn-connect">Conectar Billetera</button>
-        <select id="token-select">
-            <option value="YAWEHC1">YAWEHC1</option>
-            <option value="YAWEHC2">YAWEHC2</option>
-            <option value="YAWEHC3">YAWEHC3</option>
-            <option value="YAWEHC3(B)">YAWEHC3(B)</option>
-            <option value="YAWEHC4">YAWEHC4</option>
-            <option value="A&YCOIN TOKEN">A&YCOIN TOKEN</option>
-        </select>
-        <input type="text" id="contractAddress" placeholder="Dirección del contrato">
-        <button onclick="ejecutarSwap()">SWAP</button>
+    <div class="controls">
+        <button>Conectar Billetera</button>
+        <select><option>YAWEHC1</option></select>
+        <input type="text" placeholder="Dirección del contrato">
+        <button>SWAP</button>
     </div>
-    <!-- Carrusel de Criptomonedas -->
-<div class="crypto-carousel-container">
-  <div class="swiper myCryptoSwiper">
-    <div class="swiper-wrapper" id="crypto-ticker">
-      <!-- Los datos se inyectarán aquí mediante JS -->
+
+    <!-- Aquí es donde se debe incrustar el widget correctamente -->
+    <div id="widget-container">
+        <iframe src="https://www.geckoterminal.com/es/bsc/pools/TU_DIRECCION_DE_POOL_AQUI" title="Terminal de Activos"></iframe>
     </div>
-  </div>
-</div>
-    
-<!-- Rótulo Espectacular YAWEHC TERMINAL -->
-<div style="
-    text-align: center; 
-    padding: 20px; 
-    background: linear-gradient(90deg, #1a1a1a, #004400, #1a1a1a); 
-    border: 2px solid #00ff00; 
-    border-radius: 10px; 
-    margin-bottom: 10px; 
-    box-shadow: 0 0 15px #00ff00;">
-    <h2 style="
-        color: #00ff00; 
-        font-family: 'Courier New', monospace; 
-        margin: 0; 
-        text-transform: uppercase; 
-        letter-spacing: 3px; 
-        text-shadow: 2px 2px 4px #000;">
-        YAWEHC TERMINAL
-    </h2>
-    <p style="
-        color: #ffffff; 
-        font-family: Arial, sans-serif; 
-        font-size: 0.9em; 
-        margin: 5px 0 0 0; 
-        opacity: 0.8;">
-        CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS
-    </p>
-</div>
-    <div style="width: 100%; height: 500px; overflow: hidden;">
-  <iframe 
-    src="https://www.geckoterminal.com/bsc/0xfc239f1e943934c51d51584848800da61d3d1774?embed=1&info_button=0&swaps_button=0&chain=bsc&theme=dark" 
-    width="100%" 
-    height="100%" 
-    frameborder="0" 
-    style="border:0;"
-    allow="clipboard-write" 
-    allowfullscreen>
-  </iframe>
-</div>
- <div id="transak-container" style="margin-top: 20px; width: 100%; height: 600px;"></div>
-<script src="https://global.transak.com/sdk/v1.1/widget.js"></script>
-<script>
-    let transak = new TransakSDK.Transak({
-        apiKey: 'TU_API_KEY_AQUI',
-        network: 'bsc',
-        containerId: 'transak-container'
-    });
-    transak.init();
 
-    const datosTransak = {
-        "api_key": "TU_API_KEY_AQUI",
-        "wallet_address": "DIRECCION_DEL_USUARIO",
-        "crypto_currency": "BNB",
-        "fiat_currency": "EUR",
-        "fixed_amount": true,
-        "default_amount": 100,
-        "redirect_url": "https://yaweh.com/success",
-        "token_id": "YAWEHC1_A_YAWEHC6"
-    };
-
-    // 1. Lógica para cambiar contrato automáticamente
-    
-            };
-
-            inputContrato.value = direcciones[selector.value] || "";
-        });
-
-        // 2. Conexión de Billetera
-        let account = null;
-        const btnConnect = document.getElementById('btn-connect');
-        btnConnect.addEventListener('click', async () => {
-            if (window.ethereum) {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                account = accounts[0];
-                btnConnect.innerText = "Conectado: " + account.substring(0,6) + "...";
-            } else {
-                alert("Por favor instala MetaMask");
-            }
-        });
-
-        // 3. Función Swap (Definitiva)
-        async function ejecutarSwap() {
-            if (!account) { alert("Conecta tu billetera primero"); return; }
-            const contractAddr = document.getElementById('contractAddress').value;
-
-            try {
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
-
-                const tx = await signer.sendTransaction({
-                    to: contractAddr,
-                    value: ethers.utils.parseEther("0.001") 
-                });
-                alert("Transacción enviada: " + tx.hash);
-            } catch (error) {
-                console.error(error);
-                alert("Error: " + error.message);
-            }
-        }
-    </script>
-    <script>
-const cryptoTicker = document.getElementById('crypto-ticker');
-
-// Función para obtener precios (usando API pública de CoinGecko)
-async function fetchPrices() {
-  const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,cardano,solana');
-data.forEach(coin => {
-    cryptoTicker.innerHTML += `
-        <div class="swiper-slide crypto-card">
-            <strong>${coin.symbol.toUpperCase()}</strong>
-            $${coin.price}
-        </div>
-    `;
-});
- // Añadir YAYÍ manualmente
-cryptoTicker.innerHTML += `
-    <div class="swiper-slide crypto-card">
-        <strong>YAYÍ</strong>
-        $0.00
-    </div>
-`;
-    
-  
-</script>
 </body>
 </html>
