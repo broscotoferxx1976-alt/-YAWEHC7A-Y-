@@ -40,7 +40,26 @@
                     resDiv.innerHTML = "No encontrado.";
                 }
                 <script>
-        async function buscarCripto() {
+                async function buscarCripto() {
+            // .trim() elimina espacios al principio y final
+            const query = document.getElementById('cryptoInput').value.trim();
+            const resDiv = document.getElementById('resultadoBusqueda');
+            
+            if (!query) return;
+            resDiv.innerHTML = "Buscando...";
+
+            // Verificamos si empieza por 0x (ignorando mayúsculas/minúsculas)
+            if (query.toLowerCase().startsWith("0x")) {
+                resDiv.innerHTML = `
+                    <p>Contrato detectado:</p>
+                    <a href="https://pancakeswap.finance/swap?outputCurrency=${query}" target="_blank">
+                        <button style="background:#0f0; border:none; padding:10px; cursor:pointer; font-weight:bold;">COMPRAR EN PANCAKESWAP</button>
+                    </a>`;
+                return;
+            }
+            
+            // ... resto del código (búsqueda en CoinGecko)
+                    
             const query = document.getElementById('cryptoInput').value.trim();
             const resDiv = document.getElementById('resultadoBusqueda');
             
