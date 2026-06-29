@@ -19,7 +19,7 @@
     </header>
 
     <div class="controls">
-        <button>Conectar Billetera</button>
+        <button onclick="conectarWallet()">Conectar Billetera</button>
         <select><option>YAWEHC1</option></select>
         <input type="text" placeholder="Dirección del contrato">
         <button>SWAP</button>
@@ -31,3 +31,15 @@
 
 </body>
 </html>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script>
+    async function conectarWallet() {
+        if (window.ethereum) {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            await provider.send("eth_requestAccounts", []);
+            alert("Billetera conectada profesionalmente.");
+        } else {
+            alert("Por favor, instala MetaMask.");
+        }
+    }
+</script>
