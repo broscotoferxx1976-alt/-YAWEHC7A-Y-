@@ -1,39 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title>YAWEHC TERMINAL v2.0</title>
     <style>
-        body { background: #000; color: #0f0; font-family: monospace; padding: 20px; }
-        #cryptoInput { background: #000; border: 1px solid #0f0; color: #0f0; padding: 10px; width: 70%; }
-        button { background: #0f0; color: #000; padding: 10px; cursor: pointer; font-weight: bold; }
+        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; padding: 20px; }
+        #cryptoInput { background: #000; border: 1px solid #0f0; color: #0f0; padding: 12px; width: 60%; }
+        button { font-weight: bold; padding: 12px 20px; border: none; cursor: pointer; font-family: 'Courier New', monospace; }
+        .btn-green { background: #0f0; color: #000; }
+        .btn-blue { background: #00f; color: #fff; margin-top: 10px; }
+        #resultadoBusqueda { margin-top: 20px; padding: 15px; border: 1px solid #333; background: #111; }
+        .action-area { display: flex; flex-direction: column; align-items: flex-start; }
     </style>
 </head>
 <body>
     <h1>YAWEHC TERMINAL v2.0</h1>
-    <input type="text" id="cryptoInput" placeholder="Nombre o 0x...">
-    <button onclick="buscar()">BUSCAR</button>
-    <div id="res" style="margin-top:20px;"></div>
+    <input type="text" id="cryptoInput" placeholder="Nombre o contrato (0x...)">
+    <button class="btn-green" onclick="buscar()">BUSCAR</button>
+
+    <div id="resultadoBusqueda"></div>
 
     <script>
         function buscar() {
             const input = document.getElementById('cryptoInput').value.trim();
-            const div = document.getElementById('res');
+            const div = document.getElementById('res') || document.getElementById('resultadoBusqueda');
             
-            if (input.startsWith('0x')) {
-                div.innerHTML = `<a href="https://pancakeswap.finance/swap?outputCurrency=${input}" target="_blank" style="color:#0f0;">IR AL SWAP</a>`;
-            } else {
-                fetch('https://api.coingecko.com/api/v3/search?query=' + input)
-                .then(r => r.json())
-                .then(data => {
-                    if (data.coins && data.coins.length > 0) {
-                        const coin = data.coins[0];
-                        div.innerHTML = `<a href="https://pancakeswap.finance/swap?outputCurrency=${coin.id}" target="_blank" style="color:#0f0;">COMPRAR ${coin.name}</a>`;
-                    } else {
-                        div.innerHTML = "No encontrado";
-                    }
-                })
-                .catch(() => div.innerHTML = "Error de red");
-            }
+            div.innerHTML = `<div class="action-area">
+                <p>Opciones para el activo:</p>
+                <a href="https://pancakeswap.finance/swap?outputCurrency=${input}" target="_blank">
+                    <button class="btn-green">INTERCAMBIO CRIPTO (PANCAKESWAP)</button>
+                </a>
+                <button class="btn-blue" onclick="alert('Integrando pasarela Transak próximamente...')">COMPRAR CON TARJETA (TRANSAK)</button>
+            </div>`;
         }
     </script>
 </body>
