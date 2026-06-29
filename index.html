@@ -4,18 +4,11 @@
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
     <style>
-        body { background-color: #000; color: #0f0; font-family: monospace; margin: 0; }
+        body { background-color: #000; color: #0f0; font-family: monospace; margin: 0; padding: 0; }
         header { border-bottom: 2px solid #0f0; padding: 15px; text-align: center; }
-        .top-bar { 
-            display: flex; align-items: center; justify-content: center; 
-            gap: 20px; padding: 10px; background: #111; 
-        }
-        .logo-box { display: flex; align-items: center; gap: 5px; font-size: 12px; }
-        .logo-box img { width: 30px; height: 30px; }
-        .controls { padding: 15px; display: flex; gap: 10px; justify-content: center; }
-        .btn-action { padding: 10px 20px; background: #0f0; color: #000; border: none; font-weight: bold; cursor: pointer; }
-        .main-terminal { width: 90%; margin: 20px auto; border: 2px solid #0f0; height: 600px; }
-        .btn-footer { display: block; width: 300px; margin: 20px auto; padding: 15px; background: #0f0; color: #000; text-align: center; font-weight: bold; text-decoration: none; }
+        .controls { padding: 15px; display: flex; gap: 10px; justify-content: center; background: #111; }
+        .terminal-box { width: 90%; height: 500px; margin: 20px auto; border: 2px solid #0f0; }
+        .footer-btn { display: block; width: 300px; margin: 20px auto; padding: 15px; background: #0f0; color: #000; text-align: center; font-weight: bold; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -25,28 +18,16 @@
         <p>CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS</p>
     </header>
 
-    <div class="top-bar">
-        <div class="logo-box">
-            <img src="https://i.imgur.com/PancakeSwapLogo.png" alt="PancakeSwap"> <!-- Sustituir por URL 76755.jpg -->
-            <span>INTERCAMBIO</span>
-        </div>
-        <div class="logo-box">
-            <img src="https://i.imgur.com/TransakLogo.png" alt="Transak"> <!-- Sustituir por URL 76752.jpg -->
-            <span>PASARELA DE PAGO</span>
-        </div>
-        <div class="controls">
-            <button>Conectar Billetera</button>
-            <select><option>YAWEHC1</option></select>
-            <input type="text" placeholder="Dirección del contrato">
-            <button class="btn-action">SWAP</button>
-        </div>
+    <div class="controls">
+        <button>Conectar Billetera</button>
+        <select><option>YAWEHC1</option></select>
+        <input type="text" placeholder="Dirección del contrato">
+        <button>SWAP</button>
     </div>
 
-    <div class="main-terminal">
-        <!-- Espacio reservado para el Dashboard de análisis -->
-    </div>
+    <div class="terminal-box"></div>
 
-    <a href="#" class="btn-footer">ACCEDER A TERMINAL DE ACTIVOS</a>
+    <a href="https://www.geckoterminal.com/es/bsc/pools" class="footer-btn" target="_blank">ACCEDER A TERMINAL DE ACTIVOS</a>
 
 </body>
 </html>
