@@ -11,89 +11,37 @@
     </style>
 </head>
 <body>
-
     <h1>YAWEHC TERMINAL v2.0</h1>
-    
     <div class="search-container">
-        <input type="text" id="cryptoInput" placeholder="Escribe nombre...">
-        <button onclick="buscarCripto()">BUSCAR</button>
+        <input type="text" id="cryptoInput" placeholder="Escribe nombre o contrato...">
+        <button onclick="ejecutarBusqueda()">BUSCAR</button>
     </div>
-
     <div id="resultadoBusqueda"></div>
 
     <script>
-        async function buscarCripto() {
-            const query = document.getElementById('cryptoInput').value.toLowerCase();
-            const resDiv = document.getElementById('resultadoBusqueda');
-            resDiv.innerHTML = "Buscando...";
-            try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
-                const data = await response.json();
-                const coin = data.coins[0];
-                if (coin) {
-                    resDiv.innerHTML = `
-                        <a href="https://pancakeswap.finance/swap?outputCurrency=${coin.id}" target="_blank">
-                            <img src="${coin.large}" width="50" style="cursor:pointer;" title="Haz clic para comprar">
-                        </a>
-                        <p>${coin.name} (${coin.symbol})</p>`;
-                } else {
-                    resDiv.innerHTML = "No encontrado.";
-                }
-                <script>
-                async function buscarCripto() {
-            // .trim() elimina espacios al principio y final
+        async function ejecutarBusqueda() {
             const query = document.getElementById('cryptoInput').value.trim();
             const resDiv = document.getElementById('resultadoBusqueda');
-            
             if (!query) return;
-            resDiv.innerHTML = "Buscando...";
+            resDiv.innerHTML = "Procesando...";
 
-            // Verificamos si empieza por 0x (ignorando mayúsculas/minúsculas)
-            if (query.toLowerCase().startsWith("0x")) {
-                resDiv.innerHTML = `
-                    <p>Contrato detectado:</p>
-                    <a href="https://pancakeswap.finance/swap?outputCurrency=${query}" target="_blank">
-                        <button style="background:#0f0; border:none; padding:10px; cursor:pointer; font-weight:bold;">COMPRAR EN PANCAKESWAP</button>
-                    </a>`;
-                return;
-            }
-            
-            // ... resto del código (búsqueda en CoinGecko)
-                    
-            const query = document.getElementById('cryptoInput').value.trim();
-            const resDiv = document.getElementById('resultadoBusqueda');
-            
-            if (!query) return;
-            resDiv.innerHTML = "Buscando...";
-
-            // Si el usuario escribe una dirección de contrato (empieza por 0x)
             if (query.startsWith("0x")) {
-                resDiv.innerHTML = `
-                    <p>Contrato detectado. Pulsa para ir al Swap:</p>
-                    <a href="https://pancakeswap.finance/swap?outputCurrency=${query}" target="_blank">
-                        <button style="background:#0f0; border:none; padding:10px; cursor:pointer;">ABRIR SWAP DIRECTO</button>
-                    </a>`;
-                return;
-            }
-
-            // Si no es un contrato, busca en CoinGecko
-            try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
-                const data = await response.json();
-                
-                if (data.coins && data.coins.length > 0) {
-                    const coin = data.coins[0];
-                    resDiv.innerHTML = `
-                        <a href="https://pancakeswap.finance/swap?outputCurrency=${coin.id}" target="_blank">
-                            <img src="${coin.large}" width="50" style="cursor:pointer;" title="Haz clic para comprar">
-                        </a>
-                        <p>${coin.name} (${coin.symbol})</p>`;
-                } else {
-                    resDiv.innerHTML = "No se encontró nada. ¿Es un contrato nuevo? Pégalo directamente.";
+                resDiv.innerHTML = `<p>Contrato detectado:</p><a href="https://pancakeswap.finance/swap?outputCurrency=${query}" target="_blank"><button style="background:#0f0; padding:10px;">COMPRAR EN PANCAKESWAP</button></a>`;
+            } else {
+                try {
+                    const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
+                    const data = await response.json();
+                    if (data.coins && data.coins.length > 0) {
+                        const coin = data.coins[0];
+                        resDiv.innerHTML = `<a href="https://pancakeswap.finance/swap?outputCurrency=${coin.id}" target="_blank"><img src="${coin.large}" width="50"></a><p>${coin.name} (${coin.symbol})</p>`;
+                    } else {
+                        resDiv.innerHTML = "No encontrado.";
+                    }
+                } catch (e) {
+                    resDiv.innerHTML = "Error de red.";
                 }
-            } catch (e) {
-                resDiv.innerHTML = "Error de red.";
             }
         }
     </script>
-    
+</body>
+</html>
