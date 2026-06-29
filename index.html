@@ -4,29 +4,22 @@
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
     <style>
-        /* ESTO ES LO QUE YA TENÍAS */
         body { background-color: #000; color: #0f0; font-family: 'Courier New', monospace; padding: 20px; }
-        
-        /* PEGA EL FRAGMENTO AQUÍ DENTRO */
         #cryptoInput {
-            background: #000 !important;
-            border: 1px solid #0f0 !important;
-            color: #0f0 !important;
+            background: #000;
+            border: 1px solid #0f0;
+            color: #0f0;
             padding: 12px;
-            font-family: 'Courier New', monospace;
             width: 60%;
         }
-
         button {
-            background: #0f0 !important;
-            color: #000 !important;
+            background: #0f0;
+            color: #000;
             font-weight: bold;
             padding: 12px 20px;
             border: none;
             cursor: pointer;
-            font-family: 'Courier New', monospace;
         }
-
         #resultadoBusqueda {
             margin-top: 20px;
             padding: 15px;
@@ -36,7 +29,34 @@
     </style>
 </head>
 <body>
-    <!-- Tu contenido HTML aquí -->
+
+    <h1>YAWEHC TERMINAL v2.0</h1>
+    
+    <div class="search-container">
+        <input type="text" id="cryptoInput" placeholder="Escribe nombre...">
+        <button onclick="buscarCripto()">BUSCAR</button>
+    </div>
+
+    <div id="resultadoBusqueda"></div>
+
+    <script>
+        async function buscarCripto() {
+            const query = document.getElementById('cryptoInput').value.toLowerCase();
+            const resDiv = document.getElementById('resultadoBusqueda');
+            resDiv.innerHTML = "Buscando...";
+            try {
+                const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
+                const data = await response.json();
+                const coin = data.coins[0];
+                if (coin) {
+                    resDiv.innerHTML = `<img src="${coin.large}" width="50"><p>${coin.name} (${coin.symbol})</p>`;
+                } else {
+                    resDiv.innerHTML = "No encontrado.";
+                }
+            } catch (e) {
+                resDiv.innerHTML = "Error de conexión.";
+            }
+        }
+    </script>
 </body>
 </html>
-
