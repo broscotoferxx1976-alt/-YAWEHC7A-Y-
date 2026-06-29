@@ -20,7 +20,11 @@
 
     <div class="controls">
         <button onclick="conectarWallet()">Conectar Billetera</button>
-        <select><option>YAWEHC1</option></select>
+        <select id="tokenSelect">
+    <option value="0x9d8947d7031A1EB3D305f03071e32EaAbfBC95ed">YAYIBTC</option>
+    <option value="0xB4f0bC1b6140ca52E5810b76C1fB1adFE74F515c">YAYICOIN</option>
+        </select>
+        
         <input type="text" placeholder="Dirección del contrato">
         <button>SWAP</button>
     </div>
@@ -47,23 +51,20 @@
             alert("No se detecta ninguna billetera (MetaMask).");
         }
     }
-</script>
+ </script>
     
-</body>
-</html>
-<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-<script>
-    async function conectarWallet() {
-        if (window.ethereum) {
-            try {
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                await provider.send("eth_requestAccounts", []);
-                alert("Conectado correctamente");
-            } catch (error) {
-                alert("Error: " + error.message);
-            }
-        } else {
-            alert("No se detecta ninguna billetera (MetaMask).");
+    async function ejecutarSwap() {
+        const direccionContrato = document.getElementById("tokenSelect").value;
+        try {
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            alert("Iniciando SWAP para el contrato seleccionado: " + direccionContrato);
+        } catch (error) {
+            alert("Error: " + error.message);
         }
     }
 </script>
+</body>
+</html>
+
+        
+    
