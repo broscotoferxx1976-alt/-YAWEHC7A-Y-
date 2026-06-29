@@ -28,7 +28,27 @@
     <div class="terminal-box"></div>
 
     <a href="https://www.geckoterminal.com/es/bsc/pools" class="btn-footer" target="_blank">ACCEDER A TERMINAL DE ACTIVOS</a>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+<script>
+    async function conectarWallet() {
+        if (typeof ethers === 'undefined') {
+            alert("Error: La librería ethers no se ha cargado. Revisa tu conexión.");
+            return;
+        }
+        if (window.ethereum) {
+            try {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+                alert("Conectado correctamente");
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        } else {
+            alert("No se detecta ninguna billetera (MetaMask).");
+        }
+    }
+</script>
+    
 </body>
 </html>
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
