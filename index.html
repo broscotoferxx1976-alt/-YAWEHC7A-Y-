@@ -48,11 +48,14 @@
                 const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
                 const data = await response.json();
                 const coin = data.coins[0];
-                if (coin) {
-                    resDiv.innerHTML = `<img src="${coin.large}" width="50"><p>${coin.name} (${coin.symbol})</p>`;
-                } else {
-                    resDiv.innerHTML = "No encontrado.";
-                }
+                        if (coin) {
+            resDiv.innerHTML = `
+                <a href="https://pancakeswap.finance/swap?outputCurrency=${coin.api_symbol || ''}" target="_blank">
+                    <img src="${coin.large}" width="50" style="cursor:pointer;" title="Haz clic para comprar">
+                </a>
+                <p>${coin.name} (${coin.symbol})</p>`;
+        } else {
+                            
             } catch (e) {
                 resDiv.innerHTML = "Error de conexión.";
             }
