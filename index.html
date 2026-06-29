@@ -1,32 +1,41 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC TERMINAL v2.0</title>
-    <style>
-        /* Estilos básicos para un diseño profesional oscuro */
-        body {
-            background-color: #000;
-            color: #0f0;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid #0f0;
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
+<!-- Buscador de Criptomonedas -->
+<div class="search-container" style="margin-top: 20px;">
+    <input type="text" id="cryptoInput" placeholder="Escribe nombre o contrato..." 
+           style="padding: 10px; width: 70%; background: #000; color: #0f0; border: 1px solid #0f0;">
+    <button onclick="buscarCripto()" style="padding: 10px; background: #0f0; color: #000; border: none; cursor: pointer;">BUSCAR</button>
+</div>
 
-    <div class="container">
-        <h1>YAWEHC TERMINAL v2.0</h1>
-        <p>Estado del sistema: Listo para nuevos módulos.</p>
-    </div>
+<div id="resultadoBusqueda" style="margin-top: 20px; border-top: 1px solid #0f0; padding-top: 10px;">
+    <!-- Aquí aparecerá la moneda seleccionada con su logo -->
+</div>
 
-</body>
-</html>
+<script>
+async function buscarCripto() {
+    const query = document.getElementById('cryptoInput').value.toLowerCase();
+    const resultadoDiv = document.getElementById('resultadoBusqueda');
+    resultadoDiv.innerHTML = "Buscando...";
+
+    try {
+        // Consultamos la API pública de CoinGecko
+        const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
+        const data = await response.json();
+        const coin = data.coins[0]; // Tomamos el primer resultado
+
+        if (coin) {
+            resultadoDiv.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="${coin.large}" width="50">
+                    <div>
+                        <p><strong>${coin.name} (${coin.symbol})</strong></p>
+                        <p>ID: ${coin.id}</p>
+                    </div>
+                </div>
+            `;
+        } else {
+            resultadoDiv.innerHTML = "No se encontró esa moneda. Prueba con otro nombre.";
+        }
+    } catch (error) {
+        resultadoDiv.innerHTML = "Error al conectar con el servidor.";
+    }
+}
+</script>
