@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <title>YAWEHC TERMINAL v2.0</title>
     <style>
-        body { background-color: #000; color: #0f0; font-family: monospace; margin: 0; padding: 0; text-align: center; }
-        header { border-bottom: 2px solid #0f0; padding: 20px; }
-        .controls { padding: 20px; display: flex; gap: 10px; justify-content: center; background: #111; }
-        .terminal-box { width: 90%; height: 500px; margin: 20px auto; border: 2px solid #0f0; }
-        .btn-footer { display: inline-block; width: 300px; padding: 15px; background: #0f0; color: #000; font-weight: bold; text-decoration: none; border: none; cursor: pointer; }
+        body { background-color: #000; color: #0f0; font-family: monospace; }
+        .controls { padding: 20px; }
+        .terminal-box { width: 90%; height: 200px; border: 1px solid #0f0; margin: 20px 0; }
     </style>
 </head>
 <body>
-
     <header>
         <h1>YAWEHC TERMINAL v2.0</h1>
         <p>CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS</p>
@@ -21,50 +18,39 @@
     <div class="controls">
         <button onclick="conectarWallet()">Conectar Billetera</button>
         <select id="tokenSelect">
-    <option value="0x9d8947d7031A1EB3D305f03071e32EaAbfBC95ed">YAYIBTC</option>
-    <option value="0xB4f0bC1b6140ca52E5810b76C1fB1adFE74F515c">YAYICOIN</option>
+            <option value="0x9d8947d7031A1EB3D305f03071e32EaAbfBC95ed">YAYIBTC</option>
+            <option value="0xB4f0bC1b6140ca52E5810b76C1fB1adFE74F515c">YAYICOIN</option>
         </select>
-        
-        <input type="text" placeholder="Dirección del contrato">
-        <button>SWAP</button>
+        <button onclick="ejecutarSwap()">SWAP</button>
     </div>
 
     <div class="terminal-box"></div>
 
-    <a href="https://www.geckoterminal.com/es/bsc/pools" class="btn-footer" target="_blank">ACCEDER A TERMINAL DE ACTIVOS</a>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-<script>
-    async function conectarWallet() {
-        if (typeof ethers === 'undefined') {
-            alert("Error: La librería ethers no se ha cargado. Revisa tu conexión.");
-            return;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script>
+        async function conectarWallet() {
+            if (window.ethereum) {
+                try {
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    await provider.send("eth_requestAccounts", []);
+                    alert("Conectado correctamente");
+                } catch (error) {
+                    alert("Error: " + error.message);
+                }
+            } else {
+                alert("No se detecta ninguna billetera (MetaMask).");
+            }
         }
-        if (window.ethereum) {
+
+        async function ejecutarSwap() {
+            const direccionContrato = document.getElementById("tokenSelect").value;
             try {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
-                await provider.send("eth_requestAccounts", []);
-                alert("Conectado correctamente");
+                alert("Iniciando SWAP para el contrato: " + direccionContrato);
             } catch (error) {
                 alert("Error: " + error.message);
             }
-        } else {
-            alert("No se detecta ninguna billetera (MetaMask).");
         }
-    }
- </script>
-    
-    async function ejecutarSwap() {
-        const direccionContrato = document.getElementById("tokenSelect").value;
-        try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            alert("Iniciando SWAP para el contrato seleccionado: " + direccionContrato);
-        } catch (error) {
-            alert("Error: " + error.message);
-        }
-    }
-</script>
+    </script>
 </body>
 </html>
-
-        
-    
