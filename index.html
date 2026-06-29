@@ -35,11 +35,15 @@
 <script>
     async function conectarWallet() {
         if (window.ethereum) {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            await provider.send("eth_requestAccounts", []);
-            alert("Billetera conectada profesionalmente.");
+            try {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+                alert("Conectado correctamente");
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
         } else {
-            alert("Por favor, instala MetaMask.");
+            alert("No se detecta ninguna billetera (MetaMask).");
         }
     }
 </script>
