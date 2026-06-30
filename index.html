@@ -24,7 +24,18 @@
         <button onclick="ejecutarSwap()">SWAP</button>
     </div>
 
-    <div class="terminal-box"></div>
+    <!-- Este script va en el head o antes de cerrar el body -->
+<script src="https://widgets.coingecko.com/gecko-coin-price-chart-widget.js"></script>
+
+<!-- Este es el widget que carga el gráfico -->
+<gecko-coin-price-chart-widget 
+  locale="es" 
+  dark-mode="true" 
+  transparent-background="true" 
+  coin-id="bitcoin" 
+  initial-currency="usd">
+</gecko-coin-price-chart-widget>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
     <script>
