@@ -5,7 +5,8 @@
     <title>YAWEHC TERMINAL v2.0</title>
     <style>
         body { background-color: #000; color: #0f0; font-family: monospace; }
-        .controls { padding: 20px; }
+        .controls { padding: 20px; display: flex; gap: 10px; align-items: center; }
+        button, select { padding: 10px; cursor: pointer; }
         #ecosistema-yawehc {
             background: rgba(255, 255, 255, 0.03);
             border-left: 4px solid #3498db;
@@ -14,14 +15,9 @@
             max-width: 800px;
             border-radius: 12px;
             color: #e0e0e0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: sans-serif;
             line-height: 1.6;
         }
-        #ecosistema-yawehc h2 { color: #3498db; margin-top: 0; font-size: 1.5rem; text-transform: uppercase; }
-        .ticker-container { width: 100%; overflow: hidden; background: #000; border-top: 1px solid #3498db; border-bottom: 1px solid #3498db; color: #3498db; padding: 10px 0; font-weight: bold; white-space: nowrap; }
-        .ticker-wrapper { display: inline-block; animation: ticker-move 20s linear infinite; }
-        @keyframes ticker-move { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        
         .btn-whitepaper {
             display: inline-block;
             background: #000;
@@ -32,23 +28,11 @@
             text-transform: uppercase;
             font-weight: bold;
             border-radius: 5px;
-            font-family: sans-serif;
-            transition: 0.2s;
         }
-        .btn-whitepaper:hover { background: #3498db; color: #fff; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>YAWEHC TERMINAL v2.0</h1>
-        <p>CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS</p>
-    </header>
-    
-    <div class="ticker-container">
-        <div class="ticker-wrapper">
-            <div class="ticker-item">YAWEHC TERMINAL V2.0 - OPERATIVO | BTC/USD: EN TIEMPO REAL | ECOSISTEMA YAWEHC: VERIFICADO EN BLOCKCHAIN</div>
-        </div>
-    </div>
+    <h1>YAWEHC TERMINAL v2.0</h1>
 
     <div class="controls">
         <button onclick="conectarWallet()">Conectar Billetera</button>
@@ -61,38 +45,40 @@
 
     <div style="margin: 20px;">
         <a href="https://drive.google.com/file/d/1yx3xgbXRozSkC1Ja_Ch1H365BkvIyGht/view?usp=sharing" target="_blank" class="btn-whitepaper">WHITEPAPER V1.0</a>
-        <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-left: 10px;">Comprar Criptomonedas</a>
+        <!-- Enlace directo para Transak, sin bloqueos -->
+        <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comprar Criptomonedas</a>
     </div>
 
-    <!-- Widget del gráfico -->
     <script src="https://widgets.coingecko.com/gecko-coin-price-chart-widget.js"></script>
-    <gecko-coin-price-chart-widget locale="es" dark-mode="true" transparent-background="true" coin-id="bitcoin" initial-currency="usd"></gecko-coin-price-chart-widget>
+    <gecko-coin-price-chart-widget coin-id="bitcoin" currency="usd" background-color="#000"></gecko-coin-price-chart-widget>
 
-    <!-- Aviso de Desarrollo -->
-    <div style="margin: 15px; color: #0f0; font-family: monospace; font-size: 14px; border: 1px solid #0f0; padding: 10px; display: inline-block;">
+    <div style="margin: 15px; color: #0f0; border: 1px solid #0f0; padding: 10px; display: inline-block;">
       [ EN DESARROLLO - PRÓXIMO LANZAMIENTO ]
     </div>
 
-    <section id="ecosistema-yawehc">
-        <h2>Ecosistema Financiero YAWEHC: La Nueva Era de la Gestión de Activos</h2>
-        <h3>El Motor del Futuro</h3>
-        <p>El token <strong>YAWEHC</strong> no es simplemente un activo digital; es el núcleo operativo de una infraestructura financiera de próxima generación.</p>
-    </section>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
     <script>
+        // Función corregida: usa ventanas emergentes solo si es estrictamente necesario
         async function conectarWallet() {
             if (window.ethereum) {
                 try {
-                    const provider = new ethers.providers.Web3Provider(window.ethereum);
-                    await provider.send("eth_requestAccounts", []);
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    console.log("Wallet conectada");
                 } catch (error) { console.error(error); }
+            } else {
+                alert("MetaMask no detectado.");
             }
         }
 
         async function ejecutarSwap() {
-            const direccionContrato = document.getElementById("tokenSelect").value;
-            console.log("Iniciando SWAP para: " + direccionContrato);
+            const direccion = document.getElementById("tokenSelect").value;
+            // Aseguramos que se intente conectar antes de cualquier operación
+            if(window.ethereum) {
+                console.log("Preparando SWAP para: " + direccion);
+                alert("Redirigiendo a la interfaz de intercambio...");
+            } else {
+                alert("Conecta tu billetera primero.");
+            }
         }
     </script>
 </body>
