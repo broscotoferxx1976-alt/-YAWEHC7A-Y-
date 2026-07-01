@@ -52,6 +52,33 @@
     font-weight: bold;
 }
         
+   .ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+    border-top: 1px solid #3498db;
+    border-bottom: 1px solid #3498db;
+    color: #3498db;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.ticker-wrapper {
+    display: inline-block;
+    animation: ticker-move 20s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 40px;
+}
+
+@keyframes ticker-move {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
         
     </style>
 </head>
@@ -60,6 +87,15 @@
         <h1>YAWEHC TERMINAL v2.0</h1>
         <p>CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS</p>
     </header>
+    <div class="ticker-container">
+    <div class="ticker-wrapper">
+        <div class="ticker-item">YAWEHC TERMINAL V2.0 - OPERATIVO</div>
+        <div class="ticker-item">| BTC/USD: EN TIEMPO REAL</div>
+        <div class="ticker-item">| ECOSISTEMA YAWEHC: VERIFICADO EN BLOCKCHAIN</div>
+        <div class="ticker-item">| GESTIÓN DE ACTIVOS DE ÚLTIMA GENERACIÓN</div>
+    </div>
+    </div>
+    
 
     <div class="controls">
         <button onclick="conectarWallet()">Conectar Billetera</button>
