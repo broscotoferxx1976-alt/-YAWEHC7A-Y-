@@ -6,117 +6,37 @@
     <style>
         body { background-color: #000; color: #0f0; font-family: monospace; }
         .controls { padding: 20px; }
-        .terminal-box { width: 90%; height: 200px; border: 1px solid #0f0; margin: 20px 0; }
-#ecosistema-yawehc {
-    background: rgba(255, 255, 255, 0.03);
-    border-left: 4px solid #3498db;
-    padding: 25px;
-    margin: 20px auto;
-    max-width: 800px;
-    border-radius: 12px;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-}
-
-#ecosistema-yawehc h2 {
-    color: #3498db;
-    margin-top: 0;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-#ecosistema-yawehc h3 {
-    color: #ffffff;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-#ecosistema-yawehc ul {
-    list-style: none;
-    padding: 0;
-}
-
-#ecosistema-yawehc li {
-    margin-bottom: 12px;
-    padding-left: 20px;
-    position: relative;
-}
-
-#ecosistema-yawehc li::before {
-    content: "◈";
-    color: #3498db;
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-}
+        #ecosistema-yawehc {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #3498db;
+            padding: 25px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 12px;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+        }
+        #ecosistema-yawehc h2 { color: #3498db; margin-top: 0; font-size: 1.5rem; text-transform: uppercase; }
+        #ecosistema-yawehc h3 { color: #ffffff; font-size: 1.2rem; }
+        .ticker-container { width: 100%; overflow: hidden; background: #000; border-top: 1px solid #3498db; border-bottom: 1px solid #3498db; color: #3498db; padding: 10px 0; font-weight: bold; white-space: nowrap; }
+        .ticker-wrapper { display: inline-block; animation: ticker-move 20s linear infinite; }
+        @keyframes ticker-move { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         
-   .ticker-container {
-    width: 100%;
-    overflow: hidden;
-    background: #000;
-    border-top: 1px solid #3498db;
-    border-bottom: 1px solid #3498db;
-    color: #3498db;
-    padding: 10px 0;
-    font-size: 0.9rem;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.ticker-wrapper {
-    display: inline-block;
-    animation: ticker-move 20s linear infinite;
-}
-
-.ticker-item {
-    display: inline-block;
-    padding: 0 40px;
-}
-
-@keyframes ticker-move {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-   .btn-whitepaper {
-    background: linear-gradient(45deg, #000, #111);
-    border: 2px solid #3498db;
-    color: #3498db;
-    padding: 12px 24px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    letter-spacing: 3px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3), inset 0 0 10px rgba(52, 152, 219, 0.2);
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-}
-
-.btn-whitepaper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.6), transparent);
-    transition: 0.4s;
-}
-<div style="display: flex; gap: 10px; margin-top: 20px;">
-    <a href="https://drive.google.com/file/d/1yx3xgbXRozSkC1Ja_Ch1H365BkvIyGht/view?usp=sharing" target="_blank" style="padding: 10px 20px; background-color: #3498db; color: white; text-decoration: none; border-radius: 5px; font-family: sans-serif;">WHITEPAPER V1.0</a>
-    <button style="padding: 10px 20px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-family: sans-serif;">Comprar Criptomonedas</button>
-</div>
-        
-
-.btn-whitepaper:active {
-    transform: translateY(1px);
-}
-        
+        .btn-whitepaper {
+            display: inline-block;
+            background: #000;
+            border: 2px solid #3498db;
+            color: #3498db;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 5px;
+            font-family: sans-serif;
+            transition: 0.2s;
+        }
+        .btn-whitepaper:hover { background: #3498db; color: #fff; }
     </style>
 </head>
 <body>
@@ -124,62 +44,32 @@
         <h1>YAWEHC TERMINAL v2.0</h1>
         <p>CENTRO DE CONTROL Y ANÁLISIS DE ACTIVOS</p>
     </header>
-    <div class="ticker-container">
-    <div class="ticker-wrapper">
-        <div class="ticker-item">YAWEHC TERMINAL V2.0 - OPERATIVO</div>
-        <div class="ticker-item">| BTC/USD: EN TIEMPO REAL</div>
-        <div class="ticker-item">| ECOSISTEMA YAWEHC: VERIFICADO EN BLOCKCHAIN</div>
-        <div class="ticker-item">| GESTIÓN DE ACTIVOS DE ÚLTIMA GENERACIÓN</div>
-    </div>
-    </div>
     
+    <div class="ticker-container">
+        <div class="ticker-wrapper">
+            <div class="ticker-item">YAWEHC TERMINAL V2.0 - OPERATIVO | BTC/USD: EN TIEMPO REAL | ECOSISTEMA YAWEHC: VERIFICADO EN BLOCKCHAIN</div>
+        </div>
+    </div>
 
     <div class="controls">
         <button onclick="conectarWallet()">Conectar Billetera</button>
         <select id="tokenSelect">
-            
-            
             <option value="0x9d8947d7031A1EB3D305f03071e32EaAbfBC95ed">YAYIBTC</option>
             <option value="0xB4f0bC1b6140ca52E5810b76C1fB1adFE74F515c">YAYICOIN</option>
         </select>
         <button onclick="ejecutarSwap()">SWAP</button>
-         </div>
-<div style="margin-top: 10px;">
-  <button class="btn-whitepaper" onclick="alert('Accediendo al Whitepaper Oficial de YAWEHC...')">
-    <span></span>WHITEPAPER V1.0
-  </button>
-    
-  <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comprar Criptomonedas</a>
-</div>
- <div style="margin-top: 15px; color: #0f0; font-family: monospace; font-size: 14px; border: 1px solid #0f0; padding: 10px; display: inline-block;">
-  [ EN DESARROLLO - PRÓXIMO LANZAMIENTO ]
- </div>
-    
-    <!-- Este script va en el head o antes de cerrar el body -->
-<script src="https://widgets.coingecko.com/gecko-coin-price-chart-widget.js"></script>
+    </div>
 
-<!-- Este es el widget que carga el gráfico -->
-<gecko-coin-price-chart-widget 
-  locale="es" 
-  dark-mode="true" 
-  transparent-background="true" 
-  coin-id="bitcoin" 
-  initial-currency="usd">
-</gecko-coin-price-chart-widget>
-   <section id="ecosistema-yawehc">
-    <h2>Ecosistema Financiero YAWEHC: La Nueva Era de la Gestión de Activos</h2>
-    
-    <h3>El Motor del Futuro</h3>
-    <p>El token <strong>YAWEHC</strong> no es simplemente un activo digital; es el núcleo operativo de una infraestructura financiera de próxima generación diseñada para maximizar el rendimiento y la eficiencia.</p>
-    
-    <h3>Propuesta de Valor de Última Generación</h3>
-    <ul>
-        <li><strong>Utilidad Exclusiva:</strong> El token actúa como la llave maestra del ecosistema, indispensable para acceder a herramientas avanzadas y análisis en tiempo real.</li>
-        <li><strong>Diseño Deflacionario:</strong> Un modelo donde la actividad dentro de la terminal promueve la escasez del activo, optimizando su valor a largo plazo.</li>
-        <li><strong>Gobernanza y Transparencia:</strong> Ecosistema verificado en blockchain para garantizar trazabilidad absoluta y seguridad técnica total.</li>
-    </ul>
-   </section>
-    
+    <div style="margin: 20px;">
+        <a href="https://drive.google.com/file/d/1yx3xgbXRozSkC1Ja_Ch1H365BkvIyGht/view?usp=sharing" target="_blank" class="btn-whitepaper">WHITEPAPER V1.0</a>
+        <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-left: 10px;">Comprar Criptomonedas</a>
+    </div>
+
+    <section id="ecosistema-yawehc">
+        <h2>Ecosistema Financiero YAWEHC: La Nueva Era de la Gestión de Activos</h2>
+        <h3>El Motor del Futuro</h3>
+        <p>El token <strong>YAWEHC</strong> no es simplemente un activo digital; es el núcleo operativo de una infraestructura financiera de próxima generación.</p>
+    </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
     <script>
@@ -188,23 +78,13 @@
                 try {
                     const provider = new ethers.providers.Web3Provider(window.ethereum);
                     await provider.send("eth_requestAccounts", []);
-                    alert("Conectado correctamente");
-                } catch (error) {
-                    alert("Error: " + error.message);
-                }
-            } else {
-                alert("No se detecta ninguna billetera (MetaMask).");
+                } catch (error) { console.error(error); }
             }
         }
 
         async function ejecutarSwap() {
             const direccionContrato = document.getElementById("tokenSelect").value;
-            try {
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                alert("Iniciando SWAP para el contrato: " + direccionContrato);
-            } catch (error) {
-                alert("Error: " + error.message);
-            }
+            console.log("Iniciando SWAP para: " + direccionContrato);
         }
     </script>
 </body>
