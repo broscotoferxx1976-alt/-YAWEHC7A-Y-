@@ -79,6 +79,50 @@
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
 }
+   .btn-whitepaper {
+    background: linear-gradient(45deg, #000, #111);
+    border: 2px solid #3498db;
+    color: #3498db;
+    padding: 12px 24px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3), inset 0 0 10px rgba(52, 152, 219, 0.2);
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.btn-whitepaper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.6), transparent);
+    transition: 0.4s;
+}
+
+.btn-whitepaper:hover::before {
+    left: 100%;
+}
+
+.btn-whitepaper:hover {
+    color: #fff;
+    background: #3498db;
+    box-shadow: 0 0 25px #3498db, 0 0 50px rgba(52, 152, 219, 0.5);
+    text-shadow: 0 0 5px #fff;
+    transform: translateY(-2px);
+}
+
+.btn-whitepaper:active {
+    transform: translateY(1px);
+}
         
     </style>
 </head>
@@ -106,8 +150,12 @@
             <option value="0xB4f0bC1b6140ca52E5810b76C1fB1adFE74F515c">YAYICOIN</option>
         </select>
         <button onclick="ejecutarSwap()">SWAP</button>
-    </div>
+         </div>
 <div style="margin-top: 10px;">
+  <button class="btn-whitepaper" onclick="alert('Accediendo al Whitepaper Oficial de YAWEHC...')">
+    <span></span>WHITEPAPER V1.0
+  </button>
+    
   <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comprar Criptomonedas</a>
 </div>
  <div style="margin-top: 15px; color: #0f0; font-family: monospace; font-size: 14px; border: 1px solid #0f0; padding: 10px; display: inline-block;">
