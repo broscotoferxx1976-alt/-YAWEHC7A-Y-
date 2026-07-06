@@ -2,56 +2,60 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Terminal de Custodia - ESPIRITU SANTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal de Activos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; background: #0f172a; color: white; padding: 20px; }
-        .container { max-width: 1000px; margin: auto; }
-        .card { background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
-        .custodia { border: 2px solid #eab308; text-align: center; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #334155; }
-        h1 { color: #38bdf8; }
-        .valor { font-size: 1.5em; font-weight: bold; color: #eab308; }
+        body { background-color: #0b1120; color: white; }
+        .card-bg { background-color: #1e293b; }
+        .text-cyan { color: #38bdf8; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Sección de Custodia -->
-        <div class="card custodia">
-            <h2>ESPIRITU SANTO</h2>
-            <p>Contador de Activos Bajo Custodia</p>
-            <div class="valor">1,000,000,000 Toneladas de Oro</div>
-            <div class="valor">700 USD</div>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <input type="text" placeholder="Search" class="bg-[#1e293b] p-2 rounded border border-gray-700 w-64">
+            <select class="bg-[#1e293b] p-2 rounded border border-gray-700">
+                <option>Todas las Cadenas</option>
+            </select>
         </div>
 
-        <!-- Panel de Mercado -->
-        <h1>Terminal de Activos</h1>
-        <div class="card">
-            <table>
-                <thead><tr><th>Activo</th><th>Precio (USD)</th><th>Cambio 24h</th></tr></thead>
-                <tbody id="crypto-data"></tbody>
+        <div class="flex gap-4 mb-8">
+            <button class="bg-[#1e293b] px-4 py-2 rounded border border-gray-700">Gráfico Avanzado</button>
+            <button class="bg-[#1e293b] px-4 py-2 rounded border border-gray-700">Alertas</button>
+            <button class="bg-[#1e293b] px-4 py-2 rounded border border-gray-700">Mis Favoritos</button>
+            <button class="bg-[#1e293b] px-4 py-2 rounded border border-gray-700">Gestión de Portafolio</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="card-bg p-4 rounded-lg border border-gray-700">
+                <h3 class="text-green-400 mb-2">Top Ganadores</h3>
+                <div id="top-ganadores"></div>
+            </div>
+            <div class="card-bg p-4 rounded-lg border border-gray-700">
+                <h3 class="text-red-400 mb-2">Top Perdedores</h3>
+                <div id="top-perdedores"></div>
+            </div>
+        </div>
+
+        <h2 class="text-cyan text-xl mb-4">Terminal de Activos</h2>
+        <div class="card-bg rounded-lg border border-gray-700 overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="border-b border-gray-700 text-gray-400 text-sm">
+                    <tr>
+                        <th class="p-4">Activo</th>
+                        <th class="p-4">Precio (USD)</th>
+                        <th class="p-4">Capitalización</th>
+                        <th class="p-4">Volumen 24h</th>
+                        <th class="p-4">Cambio 24h</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-activos" class="text-sm">
+                    </tbody>
             </table>
         </div>
     </div>
 
-    <script>
-        async function fetchPrices() {
-            const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&sparkline=false';
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                const container = document.getElementById('crypto-data');
-                container.innerHTML = data.map(coin => `
-                    <tr>
-                        <td>${coin.name}</td>
-                        <td>$${coin.current_price.toLocaleString()}</td>
-                        <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
-                    </tr>
-                `).join('');
-            } catch (e) { console.error("Error al cargar datos", e); }
-        }
-        fetchPrices();
-        setInterval(fetchPrices, 60000);
-    </script>
 </body>
 </html>
