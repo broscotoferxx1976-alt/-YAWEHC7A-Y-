@@ -56,6 +56,35 @@
             </table>
         </div>
     </div>
+<div class="mt-6 p-4 card-bg rounded-lg border border-gray-700">
+    <h3 class="text-yellow-400 mb-4">Gestión de Activos Propios</h3>
+    <table class="w-full text-left">
+        <thead>
+            <tr class="text-gray-400 text-xs">
+                <th>Activo</th><th>Precio Pool</th><th>Acción</th>
+            </tr>
+        </thead>
+        <tbody class="text-sm">
+            <tr>
+                <td>YAYICOIN</td>
+                <td id="price-yayicoin">Cargando...</td>
+                <td><button onclick="comprarCrypto()" class="bg-blue-600 px-3 py-1 rounded text-xs">Comprar con Transak</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
+<script>
+    // Función para invocar Transak
+    function comprarCrypto() {
+        // Esta es la URL oficial de Transak para tu integración
+        window.open("https://global.transak.com/?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f&walletAddress=0x3c0F9cf635C485Bef2D423Ac447daCaf38Da1Ef4", "_blank", "width=500,height=700");
+        
+    }
+
+    // Aquí iría la lógica que mañana conectaremos para leer tus pools
+    console.log("Módulo de activos cargado. Esperando datos de pools...");
+</script>
+    
 </body>
 </html>
