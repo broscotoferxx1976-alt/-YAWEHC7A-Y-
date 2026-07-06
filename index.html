@@ -67,11 +67,17 @@
 </div>
 
 <script>
-function actualizarGrafico() {
-    const token = document.getElementById('tokenSelect').value;
+
+   function actualizarGrafico() {
+    const selector = document.getElementById('tokenSelect');
+    const symbol = selector.value; // Esto tomará 'YAYICOIN' o 'YAYIBTC'
     const contenedor = document.getElementById('visor-grafico');
-    // Aquí actualizamos el widget con el token seleccionado
-    contenedor.innerHTML = '<iframe src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js?ids=' + token + '..."></iframe>';
+    
+    // Aquí usamos tu objeto YAWEH_TOKENS para obtener la info
+    // Nota: CoinGecko necesita un ID específico, si tus tokens son nuevos, 
+    // usaremos el contrato para llamar a la gráfica.
+    contenedor.innerHTML = '<iframe src="https://www.geckoterminal.com/es/bsc/pools/' + YAWEH_TOKENS[symbol].address + '?embed=1&info_button=0&swaps=0" width="100%" height="300" frameborder="0"></iframe>';
+   }
 }
 </script>
     
@@ -80,9 +86,6 @@ function actualizarGrafico() {
         <!-- Enlace directo para Transak, sin bloqueos -->
         <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comprar Criptomonedas</a>
     </div>
-
-    
-    <gecko-coin-price-chart-widget coin-id="bitcoin" currency="usd" background-color="#000"></gecko-coin-price-chart-widget>
 
     <div style="margin: 15px; color: #0f0; border: 1px solid #0f0; padding: 10px; display: inline-block;">
       [ EN DESARROLLO - PRÓXIMO LANZAMIENTO ]
