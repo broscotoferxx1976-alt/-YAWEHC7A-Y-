@@ -55,6 +55,25 @@
    style="background-color: #F0B90B; color: black; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;">
    Comprar YAYIBTC
 </a>
+ <!-- Selector que dispara el cambio de gráfico -->
+<select id="tokenSelect" onchange="actualizarGrafico()">
+    <option value="bitcoin">YAYIBTC</option>
+    <option value="yayicoin-id-en-coingecko">YAYICOIN</option>
+</select>
+
+<!-- Contenedor del Visor -->
+<div id="visor-grafico">
+    <!-- Aquí se cargará el gráfico dinámicamente -->
+</div>
+
+<script>
+function actualizarGrafico() {
+    const token = document.getElementById('tokenSelect').value;
+    const contenedor = document.getElementById('visor-grafico');
+    // Aquí actualizamos el widget con el token seleccionado
+    contenedor.innerHTML = '<iframe src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js?ids=' + token + '..."></iframe>';
+}
+</script>
     
     <div style="margin: 20px;">
         <a href="https://drive.google.com/file/d/1yx3xgbXRozSkC1Ja_Ch1H365BkvIyGht/view?usp=sharing" target="_blank" class="btn-whitepaper">WHITEPAPER V1.0</a>
@@ -62,7 +81,7 @@
         <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comprar Criptomonedas</a>
     </div>
 
-    <script src="https://widgets.coingecko.com/gecko-coin-price-chart-widget.js"></script>
+    
     <gecko-coin-price-chart-widget coin-id="bitcoin" currency="usd" background-color="#000"></gecko-coin-price-chart-widget>
 
     <div style="margin: 15px; color: #0f0; border: 1px solid #0f0; padding: 10px; display: inline-block;">
