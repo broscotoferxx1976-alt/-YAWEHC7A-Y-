@@ -2,135 +2,45 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL v2.0</title>
+    <title>Dashboard Financiero - ESPIRITU SANTO</title>
     <style>
-        body { background-color: #000; color: #0f0; font-family: monospace; }
-        .controls { padding: 20px; display: flex; gap: 10px; align-items: center; }
-        button, select { padding: 10px; cursor: pointer; }
-        #ecosistema-yawehc {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #3498db;
-            padding: 25px;
-            margin: 20px auto;
-            max-width: 800px;
-            border-radius: 12px;
-            color: #e0e0e0;
-            font-family: sans-serif;
-            line-height: 1.6;
-        }
-        .btn-whitepaper {
-            display: inline-block;
-            background: #000;
-            border: 2px solid #3498db;
-            color: #3498db;
-            padding: 10px 20px;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            border-radius: 5px;
-        }
+        body { font-family: sans-serif; background: #0f172a; color: white; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; }
+        .card { background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #334155; }
+        h1 { color: #38bdf8; }
     </style>
 </head>
 <body>
-    <h1>YAWEHC TERMINAL v2.0</h1>
-
-    <div class="controls">
-        <button onclick="conectarWallet()">Conectar Billetera</button>
-        <select id="tokenSelect">
-            <option value="0x9d8947d7031A1EB3D305f03071e32EaAbfBC95ed">YAYIBTC</option>
-            <option value="0xB4f0bC1b6140ca52E5810b76C1fB1adFE74F515c">YAYICOIN</option>
-        </select>
-          <button onclick="ejecutarSwap()">SWAP</button>
-    </div>
-<!-- Botón para YAYICOIN -->
-<a href="https://pancakeswap.finance/swap?outputCurrency=0xb4f0bc1b6140ca52e5810b76c1fb1adfe74f515c" 
-   target="_blank" 
-   style="background-color: #F0B90B; color: black; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-   Comprar YAYICOIN
-</a>
-
-<!-- Botón para YAYIBTC -->
-<a href="https://pancakeswap.finance/swap?outputCurrency=0x9d8947d7031a1eb3d305f03071e32eaabfbc95ed" 
-   target="_blank" 
-   style="background-color: #F0B90B; color: black; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-   Comprar YAYIBTC
-</a>
- <!-- Selector que dispara el cambio de gráfico -->
-<select id="tokenSelect" onchange="actualizarGrafico()">
-    
-    <option value="bitcoin">YAYIBTC</option>
-    <option value="yayicoin-id-en-coingecko">YAYICOIN</option>
-</select>
-
-<!-- Contenedor del Visor -->
-<div id="visor-grafico">
-    <!-- Aquí se cargará el gráfico dinámicamente -->
-</div>
-
-<script>
-
-function actualizarGrafico() {
-    const selector = document.getElementById('tokenSelect');
-    const symbol = selector.value;
-    const contenedor = document.getElementById('visor-grafico');
-    if (YAWEH_TOKENS[symbol]) {
-        contenedor.innerHTML = '<iframe src="https://www.geckoterminal.com/es/bsc/pools/' + YAWEH_TOKENS[symbol].address + '?embed=1&info_button=0&swaps=0" width="100%" height="300" frameborder="0"></iframe>';
-    }
-}
-    
-}
-</script>
-    
-    <div style="margin: 20px;">
-        <a href="https://drive.google.com/file/d/1yx3xgbXRozSkC1Ja_Ch1H365BkvIyGht/view?usp=sharing" target="_blank" class="btn-whitepaper">WHITEPAPER V1.0</a>
-        <!-- Enlace directo para Transak, sin bloqueos -->
-        <a href="https://global.transak.com?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #0056b3; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Comprar Criptomonedas</a>
+    <div class="container">
+        <h1>Dashboard - Terminal de Activos</h1>
+        <div class="card">
+            <table>
+                <thead><tr><th>Activo</th><th>Precio (USD)</th><th>Cambio 24h</th></tr></thead>
+                <tbody id="crypto-data"></tbody>
+            </table>
+        </div>
     </div>
 
-    <div style="margin: 15px; color: #0f0; border: 1px solid #0f0; padding: 10px; display: inline-block;">
-      [ EN DESARROLLO - PRÓXIMO LANZAMIENTO ]
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
     <script>
-       // Configuración de activos del ecosistema YAWEHC
-const YAWEH_TOKENS = {
-    YAYICOIN: {
-        address: "0xb4f0bc1b6140ca52e5810b76c1fb1adfe74f515c",
-        symbol: "YAYICOIN",
-        creationDate: "2026-06-28", // Calculado hace 5 días
-        network: "BNB/ETH"
-    },
-    YAYIBTC: {
-        address: "0x9d8947d7031a1eb3d305f03071e32eaabfbc95ed",
-        symbol: "YAYIBTC",
-        creationDate: "2026-06-29", // Calculado hace 4 días
-        network: "BNB/ETH"
-    }
-};
-        
-        // Función corregida: usa ventanas emergentes solo si es estrictamente necesario
-        async function conectarWallet() {
-            if (window.ethereum) {
-                try {
-                    await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    console.log("Wallet conectada");
-                } catch (error) { console.error(error); }
-            } else {
-                alert("MetaMask no detectado.");
-            }
+        async function fetchPrices() {
+            const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&sparkline=false';
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const container = document.getElementById('crypto-data');
+                container.innerHTML = data.map(coin => `
+                    <tr>
+                        <td>${coin.name}</td>
+                        <td>$${coin.current_price.toLocaleString()}</td>
+                        <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
+                    </tr>
+                `).join('');
+            } catch (e) { console.error("Error al cargar datos", e); }
         }
-
-        async function ejecutarSwap() {
-            const direccion = document.getElementById("tokenSelect").value;
-            // Aseguramos que se intente conectar antes de cualquier operación
-            if(window.ethereum) {
-                console.log("Preparando SWAP para: " + direccion);
-                alert("Redirigiendo a la interfaz de intercambio...");
-            } else {
-                alert("Conecta tu billetera primero.");
-            }
-        }
+        fetchPrices();
+        setInterval(fetchPrices, 60000); // Actualiza cada minuto
     </script>
 </body>
 </html>
