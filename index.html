@@ -23,7 +23,7 @@
 
         <div class="flex gap-4 mb-8">
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Gráfico Avanzado</button>
-  <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Alertas</button>
+  <button onclick="alert('Sistema de Alertas listo para el volcado')" class="bg-[#1e293b] ...">Alertas</button>
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Mis Favoritos</button>
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Gestión de Portafolio</button>
         </div>
@@ -107,7 +107,14 @@
         </tbody>
     </table>
 </div>
-
+function gestionarAccion(tipo) {
+  console.log("Acción ejecutada: " + tipo);
+  // Aquí es donde mañana conectaremos la llamada a tu MetaMask
+  if (tipo === 'portafolio') {
+     alert("Conectando con el contador del Espíritu Santo...");
+  }
+}
+    
 <script>
     // Función para invocar Transak
     function comprarCrypto() {
