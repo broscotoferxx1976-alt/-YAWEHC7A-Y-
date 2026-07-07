@@ -109,8 +109,29 @@
                 <td id="price-yayicoin">Cargando...</td>
                 <td><button onclick="comprarCrypto()" class="bg-blue-600 px-3 py-1 rounded text-xs">Comprar con Transak</button></td>
             </tr>
-        </tbody>
+               </tbody>
     </table>
+
+function registrarOperacion(tipo, activo) {
+  const tbody = document.getElementById("historial-traders");
+  
+  // Crear la fila nueva de forma segura
+  const fila = document.createElement("tr");
+  
+  // Añadir las celdas con el contenido
+  fila.innerHTML = `
+    <td class="p-2">07/07/2026</td>
+    <td class="p-2">${tipo}</td>
+    <td class="p-2">${activo}</td>
+    <td class="text-green-500 p-2">Procesada</td>
+  `;
+  
+  // Añadir la fila al final de la tabla sin borrar lo anterior
+  tbody.appendChild(fila);
+}
+    
+</div>
+    
 </div>
 
     
