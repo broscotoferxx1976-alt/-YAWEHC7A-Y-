@@ -154,6 +154,8 @@
   
   fila.innerHTML = `
     <td class="p-2">07/07/2026</td>
+
+            
     <td class="p-2">${tipo}</td>
     <td class="p-2">${activo}</td>
     <td class="text-green-500 p-2">Procesada</td>
@@ -161,6 +163,24 @@
   
   tbody.appendChild(fila);
 }
+    
+} // Aquí termina registrarOperacion
+
+
+function accederPatrimonio() {
+    const clave = prompt("Introduce la palabra clave para acceder al contador real:");
+    if (clave === "ESPÍRITU SANTO") {
+        const cifraPatrimonio = "1.000.000.000.000"; 
+        const elementoContador = document.getElementById("patrimonio-real");
+        if (elementoContador) {
+            elementoContador.innerText = cifraPatrimonio + " Toneladas";
+            alert("Acceso autorizado. Patrimonio verificado y activo.");
+        }
+    } else {
+        alert("Acceso denegado. Clave incorrecta.");
+    }
+}
+    
     // Configuración de Pools Activos
 const pools = [
     { nombre: "YAYICOIN", address: "0xda656c8dbf2eb15fe3d9a849bb9d71e652610097" },
