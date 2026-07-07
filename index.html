@@ -27,6 +27,10 @@
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Mis Favoritos</button>
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Gestión de Portafolio</button>
         </div>
+       <!-- Acceso Seguro al Patrimonio -->
+<button onclick="accederPatrimonio()" class="bg-yellow-600 hover:bg-yellow-700 text-black font-bold px-6 py-2 rounded-lg transition-all border border-black">
+  ESPÍRITU SANTO
+</button>
         
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -107,13 +111,7 @@
         </tbody>
     </table>
 </div>
-function gestionarAccion(tipo) {
-  console.log("Acción ejecutada: " + tipo);
-  // Aquí es donde mañana conectaremos la llamada a tu MetaMask
-  if (tipo === 'portafolio') {
-     alert("Conectando con el contador del Espíritu Santo...");
-  }
-}
+
     
 <script>
     // Función para invocar Transak
@@ -122,7 +120,16 @@ function gestionarAccion(tipo) {
        window.open("https://global.transak.com/?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f&walletAddress=0x3c0F9cf635C485Bef2D423Ac447daCaf38Da1Ef4", "_blank");
             
     }
-
+function accederPatrimonio() {
+  const clave = prompt("Introduce la palabra clave para acceder al contador real:");
+  if (clave === "ESPÍRITU SANTO") {
+    alert("Acceso autorizado. Mostrando el contador real del Billón de Toneladas...");
+    document.getElementById("terminal-body").innerHTML = "<tr><td>PATRIMONIO TOTAL</td><td>1 BILLÓN DE TONELADAS</td><td colspan='3'>VERIFICADO</td></tr>";
+  } else {
+    alert("Acceso denegado. Clave incorrecta.");
+  }
+}
+    
     // Aquí iría la lógica que mañana conectaremos para leer tus pools
     console.log("Módulo de activos cargado. Esperando datos de pools...");
 </script>
