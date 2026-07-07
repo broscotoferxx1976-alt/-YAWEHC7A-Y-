@@ -140,6 +140,7 @@
     
 </div>
 <script>
+    
   function registrarOperacion(tipo, activo) {
   const tbody = document.getElementById("historial-traders");
   const fila = document.createElement("tr");
@@ -153,6 +154,27 @@
   
   tbody.appendChild(fila);
 }
+    // Configuración de Pools Activos
+const pools = [
+    { nombre: "YAYICOIN", address: "0xda656c8dbf2eb15fe3d9a849bb9d71e652610097" },
+    { nombre: "YAYIBTC", address: "0x9b1897144834659b68cf62f0a5fc7599544487e0" }
+];
+
+function cargarPools() {
+    pools.forEach(pool => {
+        console.log(`Conectando con pool ${pool.nombre}: ${pool.address}`);
+        // Aquí integraremos la consulta real a la blockchain
+        // Por ahora, inicializamos la interfaz con los valores del pool
+        const elemento = document.getElementById(`price-${pool.nombre.toLowerCase()}`);
+        if(elemento) {
+            elemento.innerText = "Sincronizado";
+        }
+    });
+}
+
+// Ejecutar al cargar la página
+window.onload = cargarPools;
+    
 
     // Función para invocar Transak
     function comprarCrypto() {
