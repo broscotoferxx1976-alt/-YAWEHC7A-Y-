@@ -2,31 +2,29 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL v2.9</title>
+    <title>YAWEHC TERMINAL v3.0</title>
     <style>
         body { background-color: #050505; color: #3b82f6; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
         .dashboard { max-width: 650px; margin: auto; }
         .card { background-color: #080a0f; border: 1px solid #3b82f6; padding: 20px; border-radius: 5px; margin-bottom: 15px; }
-        .log-box { background: #000; color: #00ff00; font-size: 10px; padding: 10px; height: 80px; overflow-y: scroll; border: 1px solid #004400; }
-        .status-on { color: #34d399; font-weight: bold; }
+        .grid-status { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11px; }
+        .stat-box { border: 1px solid #1e293b; padding: 10px; text-align: center; }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="card">
-            <div style="font-weight: bold; border-bottom: 1px solid #3b82f6; padding-bottom: 5px;">SISTEMA OPERATIVO YAWEHC</div>
-            <div style="margin-top: 10px; font-size: 11px;">
-                PASTOR/PROFETA: A. MARTÍNEZ ARACIL | PROFETA: Y. RAMÍREZ GARRIDO
-            </div>
+            <h2>MANDO CENTRAL</h2>
+            <p style="font-size: 11px;">PASTOR Y PROFETA: ANDRÉS MARTÍNEZ ARACIL<br>PROFETA: YOANKA RAMÍREZ GARRIDO</p>
         </div>
 
         <div class="card">
-            <h2>LOG DE ACTIVIDAD (TIEMPO REAL)</h2>
-            <div class="log-box" id="log">
-                > Sistema inicializado...<br>
-                > Protocolo Iglesia Mandarache cargado...<br>
-                > Custodia de Oro y Activos en vigilancia...
+            <h2>GESTIÓN ESTRUCTURAL: IGLESIA MANDARACHE</h2>
+            <div class="grid-status">
+                <div class="stat-box">BUTACAS<br><b style="color:#fff;">7,000</b></div>
+                <div class="stat-box">COLUMNAS<br><b style="color:#fff;">70</b></div>
             </div>
+            <p style="font-size: 10px; margin-top: 10px;">ESTADO: PROYECTO CUSTODIADO Y EN VIGILANCIA ACTIVA.</p>
         </div>
 
         <div class="card">
@@ -43,7 +41,6 @@
             const out = document.getElementById('output');
             if(k.toUpperCase() === "ESPIRITU SANTO") {
                 out.innerHTML = "BÓVEDA ABIERTA:<br>ORO: 1 Billón de Toneladas<br>USD: 700";
-                document.getElementById('log').innerHTML += "<br>> Bóveda abierta por Pastor Aracil.";
             } else {
                 out.innerText = "ACCESO RESTRINGIDO";
             }
