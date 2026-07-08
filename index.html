@@ -5,35 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YAWEHC TERMINAL PROFESIONAL</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #0b0e14; color: #fff; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        .card { background-color: #161a21; padding: 20px; border-radius: 10px; border: 1px solid #2b3139; }
-        h1 { color: #3b82f6; font-size: 20px; }
-        .price-box { font-size: 24px; font-weight: bold; margin-top: 10px; }
+        body { font-family: sans-serif; background-color: #0b0e14; color: #fff; margin: 0; padding: 15px; }
+        .panel { background-color: #161a21; padding: 15px; border-radius: 8px; border: 1px solid #2b3139; margin-bottom: 15px; }
+        h2 { color: #3b82f6; font-size: 16px; margin-top: 0; }
+        .grid { display: grid; gap: 10px; }
+        .btn { background: #2563eb; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h1>YAWEHC TERMINAL PROFESIONAL</h1>
-            <div id="status">Conectado a mercado...</div>
-            <div id="precios" class="price-box">Cargando datos...</div>
+    <div class="panel">
+        <h2>ESTADO DEL MERCADO</h2>
+        <div id="mercado">Cargando precios...</div>
+    </div>
+
+    <div class="panel">
+        <h2>GESTIÓN DE PATRIMONIO</h2>
+        <div class="grid">
+            <div><strong>Token YAWEHC1:</strong> [VERIFICADO]</div>
+            <div><strong>Token YAWEHC3:</strong> [DESPLEGADO]</div>
+            <button class="btn" onclick="alert('Funcionalidad de Transacción en desarrollo')">INICIAR OPERATIVA</button>
         </div>
     </div>
+
     <script>
-        async function obtenerPrecios() {
+        async function actualizar() {
             try {
                 const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
                 const data = await res.json();
-                document.getElementById('precios').innerHTML = 
-                    `BTC: $${data.bitcoin.usd.toLocaleString()}<br>ETH: $${data.ethereum.usd.toLocaleString()}`;
-                document.getElementById('status').innerText = "Estado: Actualizado en tiempo real";
-            } catch (err) {
-                document.getElementById('precios').innerText = "Error al cargar precios";
-            }
+                document.getElementById('mercado').innerHTML = `BTC: $${data.bitcoin.usd.toLocaleString()} | ETH: $${data.ethereum.usd.toLocaleString()}`;
+            } catch (e) { document.getElementById('mercado').innerText = "Error de conexión"; }
         }
-        obtenerPrecios();
-        setInterval(obtenerPrecios, 30000);
+        actualizar();
     </script>
 </body>
 </html>
