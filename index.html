@@ -27,12 +27,11 @@
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Mis Favoritos</button>
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Gestión de Portafolio</button>
         </div>
-       <!-- Acceso Seguro al Patrimonio -->
-<button onclick="accederPatrimonio()" class="bg-[#1e293b] text-white font-bold py-2 px-4 rounded">ESPÍRITU SANTO</button>
+       <!-- Botón único de Acceso al Patrimonio -->
+<button onclick="accederPatrimonio()" class="bg-[#1e293b] text-cyan-400 font-bold py-2 px-4 rounded border border-cyan-400">
     ESPÍRITU SANTO
 </button>
         
-</div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div class="card-bg p-4 rounded-lg border border-gray-700">
@@ -172,12 +171,18 @@ function accederPatrimonio() {
     const clave = prompt("Introduce la palabra clave:");
     if (clave === "ESPÍRITU SANTO") {
         alert("Acceso autorizado.");
-        // Aquí pondremos tu cifra:
-        document.body.insertAdjacentHTML('beforeend', '<div style="color:white; font-size:24px;">Patrimonio: 1.000.000.000.000 Toneladas</div>');
+        // Esto mostrará tu patrimonio real en la pantalla
+        const contenedor = document.createElement('div');
+        contenedor.style.color = "#38bdf8";
+        contenedor.style.fontSize = "24px";
+        contenedor.style.marginTop = "20px";
+        contenedor.innerHTML = "Patrimonio Real: 1.000.000.000.000 Toneladas";
+        document.body.appendChild(contenedor);
     } else {
         alert("Acceso denegado.");
     }
 }
+    
     
     
     // Configuración de Pools Activos
