@@ -2,40 +2,53 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC TERMINAL PROFESIONAL</title>
+    <title>YAWEHC TERMINAL PROFESIONAL v2.1</title>
     <style>
-        body { font-family: sans-serif; background-color: #0b0e14; color: #fff; margin: 0; padding: 15px; }
-        .panel { background-color: #161a21; padding: 15px; border-radius: 8px; border: 1px solid #2b3139; margin-bottom: 15px; }
-        h2 { color: #3b82f6; font-size: 16px; margin-top: 0; }
-        .grid { display: grid; gap: 10px; }
-        .btn { background: #2563eb; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; text-align: center; }
+        body { background-color: #050505; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
+        .dashboard { max-width: 600px; margin: auto; }
+        .header { border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-bottom: 20px; }
+        .card { background-color: #111; border: 1px solid #333; padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+        .asset { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; }
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        button { background: #3b82f6; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #2563eb; }
+        .status-pill { font-size: 12px; background: #064e3b; color: #34d399; padding: 4px 8px; border-radius: 12px; }
     </style>
 </head>
 <body>
-    <div class="panel">
-        <h2>ESTADO DEL MERCADO</h2>
-        <div id="mercado">Cargando precios...</div>
-    </div>
+    <div class="dashboard">
+        <div class="header">
+            <h1>YAWEHC TERMINAL <span style="color:#3b82f6;">v2.1</span></h1>
+        </div>
+        
+        <div class="card">
+            <h2>MERCADO GLOBAL</h2>
+            <div id="mercado">Cargando datos...</div>
+        </div>
 
-    <div class="panel">
-        <h2>GESTIÓN DE PATRIMONIO</h2>
-        <div class="grid">
-            <div><strong>Activo YAYIBTC:</strong> [ACTIVO]</div>
-            <div><strong>Activo YAYICOIN:</strong> [ACTIVO]</div>
-            <button class="btn" onclick="alert('Conectando a pasarela de pagos...')">INICIAR OPERATIVA</button>
+        <div class="card">
+            <h2>PATRIMONIO PRINCIPAL</h2>
+            <div class="asset"><span>YAYIBTC</span> <span class="status-pill">VERIFICADO</span></div>
+            <div class="asset"><span>YAYICOIN</span> <span class="status-pill">ACTIVO</span></div>
+            
+            <div class="btn-group">
+                <button onclick="alert('Accediendo a Transak...')">COMPRAR</button>
+                <button onclick="alert('Accediendo a PancakeSwap...')">SWAP</button>
+            </div>
         </div>
     </div>
 
     <script>
-        async function actualizar() {
+        async function fetchMarket() {
             try {
                 const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
                 const data = await res.json();
-                document.getElementById('mercado').innerHTML = `BTC: $${data.bitcoin.usd.toLocaleString()} | ETH: $${data.ethereum.usd.toLocaleString()}`;
-            } catch (e) { document.getElementById('mercado').innerText = "Error de conexión"; }
+                document.getElementById('mercado').innerHTML = 
+                    `<p>Bitcoin (BTC): <b>$${data.bitcoin.usd.toLocaleString()}</b></p>` +
+                    `<p>Ethereum (ETH): <b>$${data.ethereum.usd.toLocaleString()}</b></p>`;
+            } catch(e) { document.getElementById('mercado').innerText = "Conexión interrumpida"; }
         }
-        actualizar();
+        fetchMarket();
     </script>
 </body>
 </html>
