@@ -185,15 +185,17 @@ const pools = [
 ];
 function cargarPools() {
     pools.forEach(pool => {
-        console.log(`Conectando con pool ${pool.nombre}: ${pool.address}`);
-        // Aquí integraremos la consulta real a la blockchain
-        // Por ahora, inicializamos la interfaz con los valores del pool
-        const elemento = document.getElementById(`price-${pool.nombre.toLowerCase()}`);
-        if(elemento) {
-            elemento.innerText = "Sincronizado";
+        // Simulamos la obtención del precio real
+        const idElemento = "price-" + pool.nombre.toLowerCase();
+        const elemento = document.getElementById(idElemento);
+        if (elemento) {
+            // Aquí puedes conectar con tu API o contrato. 
+            // Por ahora, le damos un valor base para verificar que funciona:
+            elemento.innerText = "$1,00"; 
         }
     });
 }
+    
 // Ejecutar al cargar la página
 window.onload = cargarPools;
        // Función para invocar Transak
