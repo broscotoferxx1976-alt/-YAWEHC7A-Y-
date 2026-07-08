@@ -22,6 +22,18 @@
     <main class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="md:col-span-2 bg-slate-800 p-6 rounded-xl border border-slate-700">
             <h2 class="text-lg font-semibold mb-4">Visor de Mercado</h2>
+                        <!-- Contenedor para los precios -->
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                    <p class="text-slate-400 text-xs">BTC / USD</p>
+                    <p id="price-btc" class="text-lg font-bold">Cargando...</p>
+                </div>
+                <div class="bg-slate-900 p-3 rounded border border-slate-700">
+                    <p class="text-slate-400 text-xs">ETH / USD</p>
+                    <p id="price-eth" class="text-lg font-bold">Cargando...</p>
+                </div>
+            </div>
+            
             <div id="chart-container" class="h-64 bg-slate-950 rounded flex items-center justify-center">
                 <!-- Aquí integraremos el gráfico (TradingView) -->
                 <p class="text-slate-500">Cargando datos de mercado...</p>
