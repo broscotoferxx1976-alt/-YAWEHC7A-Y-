@@ -3,42 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAWEHC TERMINAL</title>
+    <title>YAWEHC TERMINAL PROFESIONAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .terminal-panel { background-color: #1e293b; border: 1px solid #334155; }
+        .table-row-hover:hover { background-color: #334155; }
+    </style>
 </head>
-<body class="bg-black text-white font-sans">
-    <div class="max-w-md mx-auto mt-10 p-6 bg-gray-900 rounded-2xl border border-gray-800 shadow-2xl">
-        <header class="mb-8 border-b border-gray-700 pb-4">
-            <h1 class="text-2xl font-bold text-green-500 tracking-tight">YAWEHC TERMINAL</h1>
-            <p class="text-gray-400 text-xs mt-1">SISTEMA DE GESTIÓN DE PATRIMONIO</p>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center bg-[#1e293b] p-4 rounded-xl border border-[#334155] mb-6">
+            <h1 class="text-xl font-bold text-white mb-4 md:mb-0">YAWEHC TERMINAL</h1>
+            <div class="flex gap-2">
+                <button class="px-4 py-2 bg-slate-700 rounded text-xs font-bold hover:bg-slate-600">GRÁFICO</button>
+                <button class="px-4 py-2 bg-slate-700 rounded text-xs font-bold hover:bg-slate-600">ALERTAS</button>
+                <button class="px-4 py-2 bg-blue-600 rounded text-xs font-bold">FAVORITOS</button>
+            </div>
         </header>
 
-        <section class="space-y-4">
-            <div class="bg-gray-800 p-4 rounded-lg flex justify-between items-center border border-gray-700">
-                <div>
-                    <p class="text-sm font-semibold">YAYICOIN</p>
-                    <p class="text-[10px] text-gray-500 font-mono mt-1">0x05e2...7Db8</p>
-                </div>
-                <p class="font-mono text-green-400">$0.0000001014</p>
+        <!-- Contenedor Principal -->
+        <main class="terminal-panel p-6 rounded-xl">
+            <h2 class="text-lg font-semibold mb-4">Terminal de Activos</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-slate-400 text-[10px] uppercase border-b border-[#334155]">
+                            <th class="pb-3">Activo</th>
+                            <th class="pb-3">Precio (USD)</th>
+                            <th class="pb-3">Cap. Mercado</th>
+                            <th class="pb-3">Volumen 24h</th>
+                            <th class="pb-3">Cambio</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm font-mono">
+                        <tr class="table-row-hover border-b border-[#334155]">
+                            <td class="py-4 font-bold text-white">Bitcoin</td>
+                            <td class="py-4">$61.418</td>
+                            <td class="py-4">$142,033,760</td>
+                            <td class="py-4">$66,574,958</td>
+                            <td class="py-4 text-red-400">-1.96%</td>
+                        </tr>
+                        <tr class="table-row-hover border-b border-[#334155]">
+                            <td class="py-4 font-bold text-white">Ethereum</td>
+                            <td class="py-4">$1.733,44</td>
+                            <td class="py-4">$173,949,229</td>
+                            <td class="py-4">$58,721,550</td>
+                            <td class="py-4 text-red-400">-1.62%</td>
+                        </tr>
+                        <tr class="table-row-hover border-b border-[#334155]">
+                            <td class="py-4 font-bold text-white">Binance</td>
+                            <td class="py-4">$1.999,44</td>
+                            <td class="py-4">$20,669,657</td>
+                            <td class="py-4">$60,561,216</td>
+                            <td class="py-4 text-red-400">-0.06%</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </main>
 
-            <div class="bg-gray-800 p-4 rounded-lg flex justify-between items-center border border-gray-700">
-                <div>
-                    <p class="text-sm font-semibold">YAYIBTC</p>
-                    <p class="text-[10px] text-gray-500 font-mono mt-1">ACTIVO VERIFICADO</p>
-                </div>
-                <p class="font-mono text-green-400">$0.001043</p>
-            </div>
-        </section>
-
-        <footer class="mt-8 flex gap-3">
-            <button onclick="window.location.reload()" class="flex-1 py-3 bg-green-600 hover:bg-green-700 font-bold rounded-lg transition-all shadow-lg">
-                ACTUALIZAR
-            </button>
-            <button onclick="alert('Conectando a MetaMask...')" class="flex-1 py-3 bg-gray-700 hover:bg-gray-600 font-bold rounded-lg transition-all border border-gray-600">
-                CONECTAR
+        <!-- Footer Acción -->
+        <footer class="mt-6">
+            <button onclick="window.location.reload()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition-all shadow-lg">
+                ACTUALIZAR TERMINAL
             </button>
         </footer>
     </div>
+
 </body>
 </html>
