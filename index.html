@@ -2,30 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL v2.7</title>
+    <title>YAWEHC TERMINAL v2.8</title>
     <style>
         body { background-color: #050505; color: #3b82f6; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
         .dashboard { max-width: 650px; margin: auto; }
         .card { background-color: #080a0f; border: 1px solid #3b82f6; padding: 20px; border-radius: 5px; margin-bottom: 15px; }
-        .rol-tag { font-size: 11px; color: #fff; border: 1px solid #3b82f6; padding: 2px 5px; margin-bottom: 5px; display: inline-block; }
+        .monitor-row { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid #111; }
+        .status-on { color: #34d399; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="card">
-            <div style="font-weight: bold; border-bottom: 1px solid #3b82f6; padding-bottom: 5px;">ESTRUCTURA DE MANDO</div>
+            <div style="font-weight: bold; border-bottom: 1px solid #3b82f6; padding-bottom: 5px;">ESTADO OPERATIVO DEL SISTEMA</div>
             <div style="margin-top: 10px;">
-                <div class="rol-tag">PASTOR Y PROFETA: ANDRÉS MARTÍNEZ ARACIL</div><br>
-                <div class="rol-tag">PROFETA: YOANKA RAMÍREZ GARRIDO</div>
-            </div>
-        </div>
-        
-        <div class="card">
-            <h2>PROYECTO: IGLESIA DE MANDARACHE</h2>
-            <div style="font-size: 12px; color: #fff;">
-                • Capacidad: 7,000 butacas<br>
-                • Estructura: 70 columnas<br>
-                • Nivel: Doble sótano
+                <div class="monitor-row">PROTOCOLO IGLESIA MANDARACHE <span class="status-on">ONLINE</span></div>
+                <div class="monitor-row">PROTOCOLO CUSTODIA ORO <span class="status-on">ACTIVO</span></div>
+                <div class="monitor-row">AUTORIDAD: PASTOR A. MARTÍNEZ Y PROFETA Y. RAMÍREZ <span class="status-on">VERIFICADO</span></div>
             </div>
         </div>
 
