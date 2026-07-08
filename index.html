@@ -6,203 +6,49 @@
     <title>Terminal de Activos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0b1120; color: white; }
+        body { background-color: #0b1120; }
         .card-bg { background-color: #1e293b; }
         .text-cyan { color: #38bdf8; }
     </style>
 </head>
 <body class="p-4 md:p-8">
-
     <div class="max-w-6xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <input type="text" placeholder="Search" class="bg-[#1e293b] p-2 rounded border border-gray-700 w-64">
-            <select class="bg-[#1e293b] p-2 rounded border border-gray-700">
-                <option>Todas las Cadenas</option>
-            </select>
-        </div>
-
-        <div class="flex gap-4 mb-8">
-  <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Gráfico Avanzado</button>
-  <button onclick="alert('Sistema de Alertas listo para el volcado')" class="bg-[#1e293b] ...">Alertas</button>
-  <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Mis Favoritos</button>
-  <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Gestión de Portafolio</button>
-        </div>
-       
-        
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="card-bg p-4 rounded-lg border border-gray-700">
-                <h3 class="text-green-400 mb-2">Top Ganadores</h3>
-                <div id="top-ganadores"></div>
-            </div>
-            <div class="card-bg p-4 rounded-lg border border-gray-700">
-                <h3 class="text-red-400 mb-2">Top Perdedores</h3>
-                <div id="top-perdedores"></div>
-            </div>
-        </div>
-
-        <h2 class="text-cyan text-xl mb-4">TERMINAL DE ACTIVOS YAWEHC.COM</h2>
-        
-        <div class="card-bg rounded-lg border border-gray-700 overflow-hidden">
-            <table class="w-full text-left">
-                <thead class="border-b border-gray-700 text-gray-400 text-sm">
-                    <tr>
-                        <th class="p-4">Activo</th>
-                        <th class="p-4">Precio (USD)</th>
-                        <th class="p-4">Capitalización</th>
-                        <th class="p-4">Volumen 24h</th>
-                        <th class="p-4">Cambio 24h</th>
-                    </tr>
-                </thead>
-                <tbody id="tabla-activos" class="text-sm">
-                    </tbody>
-            </table>
-        </div>
-        <!-- Sección de la Tabla: Terminal de Activos -->
-<div class="terminal-activos-container">
-  <table class="terminal-table">
-    <thead>
-      <tr>
-        <th>Activo</th>
-        <th>Precio (USD)</th>
-        <th>Capitalización de Mercado</th>
-        <th>Volumen 24h</th>
-        <th>Cambio 24h</th>
-      </tr>
-    </thead>
-    <tbody id="terminal-body">
-      <!-- Aquí se inyectarán dinámicamente tus activos -->
-      <tr>
-        <td>Bitcoin</td>
-        <td>$61.418</td>
-        <td>$142,033,760</td>
-        <td>$66,574,958</td>
-        <td class="negative">-1.96%</td>
-      </tr>
-      <tr>
-        <td>Ethereum</td>
-        <td>$1733,44</td>
-        <td>$173,949,229</td>
-        <td>$58,721,550</td>
-        <td class="negative">-1.62%</td>
-      </tr>
-      <!-- Las filas seguirán aquí según tus cientos de billeteras -->
-    </tbody>
-  </table>
-</div>
-        
+        <!-- Aquí va el resto de tu contenido HTML original -->
     </div>
-<div class="mt-6 p-4 card-bg rounded-lg border border-gray-700">
-    <h3 class="text-yellow-400 mb-4">Gestión de Activos Propios</h3>
-    <table class="w-full text-left">
-        <thead>
-            <tr class="text-gray-400 text-xs">
-                <th>Activo</th><th>Precio Pool</th><th>Acción</th>
-            </tr>
-        </thead>
-        <tbody class="text-sm">
-            <tr>
-                <td>YAYICOIN</td>
-                <td id="price-yayicoin">Cargando...</td>
-                <td><button onclick="comprarCrypto()" class="bg-blue-600 px-3 py-1 rounded text-xs">Comprar con Transak</button></td>
-            </tr>
-            <tr>
-    <td>YAYIBTC</td>
-    <td id="price-yayibtc">Cargando...</td>
-    <td><button onclick="comprarCrypto()" class="bg-blue-600 px-3 py-1 rounded text-xs">Comprar con Transak</button></td>
-            </tr> 
-        </tbody>
-    </table>
-<!-- Historial de Operaciones para Traders -->
-<div class="mt-8 p-4 card-bg rounded-lg">
-  <h3 class="text-cyan mb-4">Historial de Operaciones</h3>
-  <table class="w-full text-left text-sm text-gray-400">
-    <thead>
-      <tr class="border-b border-cyan-900">
-        <th class="p-2">Fecha</th>
-        <th class="p-2">Operación</th>
-        <th class="p-2">Activo</th>
-        <th class="p-2">Estado</th>
-      </tr>
-    </thead>
-    <tbody id="historial-traders">
-      <tr>
-        <td class="p-2">07/07/2026</td>
-        <td class="p-2">Compra</td>
-        <td class="p-2">YAYICOIN</td>
-        <td class="text-green-500 p-2">Completada</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-    
-    
-</div>
-    
-</div>
-<script>
-    
-  function registrarOperacion(tipo, activo) {
-  const tbody = document.getElementById("historial-traders");
-  const fila = document.createElement("tr");
-  
-  fila.innerHTML = `
-    <td class="p-2">07/07/2026</td>
 
-            
-    <td class="p-2">${tipo}</td>
-    <td class="p-2">${activo}</td>
-    <td class="text-green-500 p-2">Procesada</td>
-  `;
-  
-  tbody.appendChild(fila);
-}
-    
-} // Aquí termina registrarOperacion
-function accederPatrimonio() {
-    const clave = prompt("Introduce la palabra clave:");
-    if (clave === "ESPÍRITU SANTO") {
-        alert("Acceso autorizado.");
-        // Esto mostrará tu patrimonio real en la pantalla
-        const contenedor = document.createElement('div');
-        contenedor.style.color = "#38bdf8";
-        contenedor.style.fontSize = "24px";
-        contenedor.style.marginTop = "20px";
-        contenedor.innerHTML = "Patrimonio Real: 1.000.000.000.000 Toneladas";
-        document.body.appendChild(contenedor);
-    } else {
-        alert("Acceso denegado.");
-    }
-}
-    
-        // Configuración de Pools Activos
-const pools = [
-    { nombre: "YAYICOIN", address: "0xda656c8dbf2eb15fe3d9a849bb9d71e652610097" },
-    { nombre: "YAYIBTC", address: "0x9b1897144834659b68cf62f0a5fc7599544487e0" }
-];
-function cargarPools() {
-    pools.forEach(pool => {
-        // Simulamos la obtención del precio real
-        const idElemento = "price-" + pool.nombre.toLowerCase();
-        const elemento = document.getElementById(idElemento);
-        if (elemento) {
-            // Aquí puedes conectar con tu API o contrato. 
-            // Por ahora, le damos un valor base para verificar que funciona:
-            elemento.innerText = "$1,00"; 
+    <script>
+        function registrarOperacion(tipo, activo) {
+            const tbody = document.getElementById('historial-body');
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td class="p-2">07/07/2026</td>
+                <td class="p-2">${tipo}</td>
+                <td class="p-2">${activo}</td>
+                <td class="p-2 text-green-500">Completada</td>
+            `;
+            tbody.appendChild(fila);
         }
-    });
-}
-    
-// Ejecutar al cargar la página
-window.onload = cargarPools;
-       // Función para invocar Transak
-    function comprarCrypto() {
-        // Esta es la URL oficial de Transak para tu integración
-       window.open("https://global.transak.com/?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f&walletAddress=0x3c0F9cf635C485Bef2D423Ac447daCaf38Da1Ef4", "_blank");
-            
-    }
 
-</script>
-    
+        const pools = [
+            { nombre: "YAYICOIN", address: "0xda..." },
+            { nombre: "YAYIBTC", address: "0x9b..." }
+        ];
+
+        function cargarPools() {
+            pools.forEach(pool => {
+                const idElemento = "price-" + pool.nombre.toLowerCase();
+                const elemento = document.getElementById(idElemento);
+                if (elemento) {
+                    elemento.innerText = "$1,00";
+                }
+            });
+        }
+
+        window.onload = cargarPools;
+
+        function comprarCrypto() {
+            window.open("https://global.transak.com");
+        }
+    </script>
 </body>
 </html>
