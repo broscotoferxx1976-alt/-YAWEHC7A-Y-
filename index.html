@@ -3,52 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal de Activos</title>
+    <title>YAWEHC TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #0b1120; }
-        .card-bg { background-color: #1e293b; }
-        .text-cyan { color: #38bdf8; }
-    </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="max-w-6xl mx-auto">
-        <!-- Aquí va el resto de tu contenido HTML original -->
+<body class="bg-black text-white font-sans">
+    <div class="max-w-md mx-auto mt-10 p-6 bg-gray-900 rounded-2xl border border-gray-800 shadow-2xl">
+        <header class="mb-8 border-b border-gray-700 pb-4">
+            <h1 class="text-2xl font-bold text-green-500 tracking-tight">YAWEHC TERMINAL</h1>
+            <p class="text-gray-400 text-xs mt-1">SISTEMA DE GESTIÓN DE PATRIMONIO</p>
+        </header>
+
+        <section class="space-y-4">
+            <div class="bg-gray-800 p-4 rounded-lg flex justify-between items-center border border-gray-700">
+                <div>
+                    <p class="text-sm font-semibold">YAYICOIN</p>
+                    <p class="text-[10px] text-gray-500 font-mono mt-1">0x05e2...7Db8</p>
+                </div>
+                <p class="font-mono text-green-400">$0.0000001014</p>
+            </div>
+
+            <div class="bg-gray-800 p-4 rounded-lg flex justify-between items-center border border-gray-700">
+                <div>
+                    <p class="text-sm font-semibold">YAYIBTC</p>
+                    <p class="text-[10px] text-gray-500 font-mono mt-1">ACTIVO VERIFICADO</p>
+                </div>
+                <p class="font-mono text-green-400">$0.001043</p>
+            </div>
+        </section>
+
+        <footer class="mt-8 flex gap-3">
+            <button onclick="window.location.reload()" class="flex-1 py-3 bg-green-600 hover:bg-green-700 font-bold rounded-lg transition-all shadow-lg">
+                ACTUALIZAR
+            </button>
+            <button onclick="alert('Conectando a MetaMask...')" class="flex-1 py-3 bg-gray-700 hover:bg-gray-600 font-bold rounded-lg transition-all border border-gray-600">
+                CONECTAR
+            </button>
+        </footer>
     </div>
-
-    <script>
-        function registrarOperacion(tipo, activo) {
-            const tbody = document.getElementById('historial-body');
-            const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td class="p-2">07/07/2026</td>
-                <td class="p-2">${tipo}</td>
-                <td class="p-2">${activo}</td>
-                <td class="p-2 text-green-500">Completada</td>
-            `;
-            tbody.appendChild(fila);
-        }
-
-        const pools = [
-            { nombre: "YAYICOIN", address: "0xda..." },
-            { nombre: "YAYIBTC", address: "0x9b..." }
-        ];
-
-        function cargarPools() {
-            pools.forEach(pool => {
-                const idElemento = "price-" + pool.nombre.toLowerCase();
-                const elemento = document.getElementById(idElemento);
-                if (elemento) {
-                    elemento.innerText = "$1,00";
-                }
-            });
-        }
-
-        window.onload = cargarPools;
-
-        function comprarCrypto() {
-            window.open("https://global.transak.com");
-        }
-    </script>
 </body>
 </html>
