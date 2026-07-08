@@ -2,35 +2,37 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL v2.6</title>
+    <title>YAWEHC TERMINAL v2.7</title>
     <style>
         body { background-color: #050505; color: #3b82f6; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
         .dashboard { max-width: 650px; margin: auto; }
         .card { background-color: #080a0f; border: 1px solid #3b82f6; padding: 20px; border-radius: 5px; margin-bottom: 15px; }
-        .nav-btn { background: #050505; color: #3b82f6; border: 1px solid #3b82f6; padding: 10px; margin: 5px; cursor: pointer; }
+        .rol-tag { font-size: 11px; color: #fff; border: 1px solid #3b82f6; padding: 2px 5px; margin-bottom: 5px; display: inline-block; }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="card">
-            <div style="font-weight: bold; border-bottom: 1px solid #3b82f6; padding-bottom: 5px;">SISTEMA DE MANDO Y CONTROL</div>
-            <p id="reloj-cápsula" style="font-size: 12px;"></p>
+            <div style="font-weight: bold; border-bottom: 1px solid #3b82f6; padding-bottom: 5px;">ESTRUCTURA DE MANDO</div>
+            <div style="margin-top: 10px;">
+                <div class="rol-tag">PASTOR Y PROFETA: ANDRÉS MARTÍNEZ ARACIL</div><br>
+                <div class="rol-tag">PROFETA: YOANKA RAMÍREZ GARRIDO</div>
+            </div>
         </div>
         
         <div class="card">
             <h2>PROYECTO: IGLESIA DE MANDARACHE</h2>
             <div style="font-size: 12px; color: #fff;">
-                • Capacidad: 7,000 asientos/butacas<br>
-                • Estructura: 70 columnas de soporte<br>
-                • Nivel: Doble sótano y parking
+                • Capacidad: 7,000 butacas<br>
+                • Estructura: 70 columnas<br>
+                • Nivel: Doble sótano
             </div>
-            <button class="nav-btn" onclick="alert('Accediendo a Planos Secretos...')">VER PLANOS</button>
         </div>
 
         <div class="card">
             <h2>CUSTODIA DE ACTIVOS</h2>
             <input type="password" id="key" style="background:#000; color:#fff; border:1px solid #3b82f6; width:100%; padding:8px;">
-            <button class="nav-btn" onclick="acceder()" style="width:100%;">DESBLOQUEAR BÓVEDA</button>
+            <button onclick="acceder()" style="background:#050505; color:#3b82f6; border:1px solid #3b82f6; width:100%; padding:10px; margin-top:10px; cursor:pointer;">DESBLOQUEAR BÓVEDA</button>
             <div id="output" style="margin-top:15px; font-size: 12px;"></div>
         </div>
     </div>
@@ -45,11 +47,6 @@
                 out.innerText = "ACCESO RESTRINGIDO";
             }
         }
-        setInterval(() => {
-            const diff = new Date('2046-07-08T00:00:00').getTime() - new Date().getTime();
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('reloj-cápsula').innerText = "CICLO DE APERTURA CÁPSULA: " + d + " DÍAS";
-        }, 1000);
     </script>
 </body>
 </html>
