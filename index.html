@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>YAWEHC TERMINAL PROFESIONAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        body { background-color: #0b0e14; color: #ffffff; }
+        .panel { background-color: #161a21; border: 1px solid #2b3139; }
+    </style>
+</head>
+<body class="p-4">
+    <div class="max-w-7xl mx-auto space-y-4">
+        <header class="panel p-4 rounded-lg flex justify-between items-center">
+            <h1 class="font-bold text-xl text-blue-500">YAWEHC TERMINAL PROFESIONAL</h1>
+            <div id="status" class="text-xs text-gray-400">Estado: Conectado a Mercado</div>
+        </header>
+
+        <div class="grid grid-cols-3 gap-4">
+            <div class="col-span-2 panel p-4 rounded-lg h-96" id="chart-container">
+                <h3 class="mb-4 font-bold">Visor Gráfico 📈 (Tiempo Real)</h3>
+            </div>
+            <div class="panel p-4 rounded-lg overflow-y-auto h-96">
+                <h3 class="mb-4 font-bold">Terminal de Activos</h3>
+                <table class="w-full text-left text-xs">
+                    <thead><tr class="text-gray-500 uppercase"><th>Activo</th><th>Precio (USD)</th><th>Cambio</th></tr></thead>
+                    <tbody id="assets-table"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chart = LightweightCharts.createChart(document.getElementById('chart-container'), { width: 800, height: 300 });
+        const lineSeries = chart.addLineSeries();
+
+        async function updateData() {
+            try {
+                const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin&vs_currencies=usd&include_24hr_change=true');
+                const data = await response.json();
+                const container = document.getElementById('assets-table');
+                container.innerHTML = '';
+
+                Object.keys(data).forEach(id => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td class="py-3 capitalize font-bold">${id}</td>
+                                     <td class="py-3">$${data[id].usd}</td>
+                                     <td class="py-3 ${data[id].usd_24h_change > 0 ? 'text-green-500' : 'text-red-500'}">
+                                     ${data[id].usd_24h_change.toFixed(2)}%</td>`;
+                    container.appendChild(row);
+                });
+            } catch (e) {
+                console.error("Error al conectar con el mercado");
+            }
+        }
+
+        updateData();
+        setInterval(updateData, 60000);
+    </script>
+</body>
+</html>
 
