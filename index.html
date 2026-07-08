@@ -2,58 +2,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL v2.3</title>
+    <title>YAWEHC TERMINAL v2.4</title>
     <style>
         body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
         .dashboard { max-width: 650px; margin: auto; }
         .card { background-color: #0f172a; border: 1px solid #1e293b; padding: 20px; border-radius: 10px; margin-bottom: 15px; }
         .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-bottom: 20px; }
-        .asset-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1e293b; }
-        .btn-action { background: #1e293b; color: #3b82f6; border: 1px solid #3b82f6; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .status-badge { font-size: 10px; padding: 3px 6px; border-radius: 4px; background: #064e3b; color: #34d399; }
-        .network-selector { font-size: 12px; color: #94a3b8; }
+        .input-key { background: #050505; border: 1px solid #3b82f6; color: white; padding: 8px; width: 100%; box-sizing: border-box; margin-top: 10px; }
+        .btn-action { background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
+        #clock { color: #3b82f6; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="dashboard">
         <div class="header">
             <h1>YAWEHC <span style="color:#3b82f6;">TERMINAL</span></h1>
-            <div class="network-selector">RED: BSC MAINNET</div>
+            <div id="clock">00:00:00</div>
         </div>
         
         <div class="card">
             <h2>MERCADO GLOBAL (LIVE)</h2>
-            <div id="mercado">Conectando...</div>
+            <div id="mercado">Cargando datos...</div>
         </div>
 
         <div class="card">
-            <h2>PATRIMONIO CUSTODIADO</h2>
-            <div class="asset-row"><span>YAYIBTC</span> <span class="status-badge">VALORADO</span></div>
-            <div class="asset-row"><span>YAYICOIN</span> <span class="status-badge">ACTIVO</span></div>
-            <div style="margin-top: 15px; display: flex; gap: 10px;">
-                <button class="btn-action" onclick="window.location.href='https://transak.com'">COMPRAR</button>
-                <button class="btn-action" onclick="window.location.href='https://pancakeswap.finance'">SWAP</button>
-            </div>
-        </div>
-
-        <div class="card" id="alert-box" style="border-left: 4px solid #f59e0b;">
-            <h2>NOTIFICACIONES DEL SISTEMA</h2>
-            <p id="system-msg" style="font-size: 13px; color: #f59e0b;">Sistema operando bajo vigilancia de custodia total.</p>
+            <h2>ACCESO A CUSTODIA PRIVADA</h2>
+            <input type="password" id="keyInput" class="input-key" placeholder="Introduce clave...">
+            <button class="btn-action" onclick="verificarClave()">DESBLOQUEAR CONTADOR</button>
+            <p id="resultado" style="margin-top: 10px; font-size: 12px;"></p>
         </div>
     </div>
 
     <script>
+        function updateClock() { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }
+        setInterval(updateClock, 1000);
+        
+        function verificarClave() {
+            const clave = document.getElementById('keyInput').value;
+            const res = document.getElementById('resultado');
+            if(clave.toUpperCase() === "ESPIRITU SANTO") {
+                res.innerHTML = "ACCESO CONCEDIDO: <br>USD: 700 <br>ORO: 1 Billón de Toneladas";
+                res.style.color = "#34d399";
+            } else {
+                res.innerHTML = "ACCESO DENEGADO";
+                res.style.color = "#ef4444";
+            }
+        }
+
         async function updateTerminal() {
             try {
                 const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
                 const data = await res.json();
-                document.getElementById('mercado').innerHTML = 
-                    `<p>BTC: <b>$${data.bitcoin.usd.toLocaleString()}</b></p>` +
-                    `<p>ETH: <b>$${data.ethereum.usd.toLocaleString()}</b></p>`;
-            } catch(e) { document.getElementById('mercado').innerText = "Error crítico de conexión"; }
+                document.getElementById('mercado').innerHTML = `BTC: $${data.bitcoin.usd.toLocaleString()} | ETH: $${data.ethereum.usd.toLocaleString()}`;
+            } catch(e) { document.getElementById('mercado').innerText = "Error de conexión"; }
         }
         updateTerminal();
-        setInterval(updateTerminal, 30000);
     </script>
 </body>
 </html>
