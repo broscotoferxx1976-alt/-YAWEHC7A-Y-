@@ -36,6 +36,33 @@
             </div>
         </div>
     </main>
+<script>
+    // Función para conectar la wallet
+    async function connectWallet() {
+        if (window.ethereum) {
+            try {
+                // Solicita acceso a la cuenta del usuario
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
+                
+                // Actualiza el botón con la dirección acortada
+                const connectBtn = document.querySelector('button.bg-blue-600');
+                connectBtn.innerText = account.substring(0, 6) + "..." + account.substring(38);
+                connectBtn.classList.replace('bg-blue-600', 'bg-green-600');
+                
+                console.log("Conectado a: " + account);
+            } catch (error) {
+                console.error("Error al conectar la wallet:", error);
+                alert("Error al conectar: " + error.message);
+            }
+        } else {
+            alert("Por favor, instala MetaMask para continuar.");
+        }
+    }
 
+    // Vinculamos la función al botón de conectar
+    document.querySelector('button.bg-blue-600').addEventListener('click', connectWallet);
+</script>
+    
 </body>
 </html>
