@@ -27,10 +27,7 @@
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Mis Favoritos</button>
   <button class="bg-[#1e293b] hover:bg-cyan-900 text-white px-6 py-2 rounded-lg transition-all border border-cyan-800">Gestión de Portafolio</button>
         </div>
-       <!-- Botón único de Acceso al Patrimonio -->
-<button onclick="accederPatrimonio()" class="bg-[#1e293b] text-cyan-400 font-bold py-2 px-4 rounded border border-cyan-400">
-    ESPÍRITU SANTO
-</button>
+       
         
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -165,8 +162,6 @@
 }
     
 } // Aquí termina registrarOperacion
-
-
 function accederPatrimonio() {
     const clave = prompt("Introduce la palabra clave:");
     if (clave === "ESPÍRITU SANTO") {
@@ -183,14 +178,11 @@ function accederPatrimonio() {
     }
 }
     
-    
-    
-    // Configuración de Pools Activos
+        // Configuración de Pools Activos
 const pools = [
     { nombre: "YAYICOIN", address: "0xda656c8dbf2eb15fe3d9a849bb9d71e652610097" },
     { nombre: "YAYIBTC", address: "0x9b1897144834659b68cf62f0a5fc7599544487e0" }
 ];
-
 function cargarPools() {
     pools.forEach(pool => {
         console.log(`Conectando con pool ${pool.nombre}: ${pool.address}`);
@@ -202,29 +194,15 @@ function cargarPools() {
         }
     });
 }
-
 // Ejecutar al cargar la página
 window.onload = cargarPools;
-    
-
-    // Función para invocar Transak
+       // Función para invocar Transak
     function comprarCrypto() {
         // Esta es la URL oficial de Transak para tu integración
        window.open("https://global.transak.com/?apiKey=14655fa9-3736-46a4-b03b-fa0edf6b3d4f&walletAddress=0x3c0F9cf635C485Bef2D423Ac447daCaf38Da1Ef4", "_blank");
             
     }
-function accederPatrimonio() {
-  const clave = prompt("Introduce la palabra clave para acceder al contador real:");
-  if (clave === "ESPÍRITU SANTO") {
-    alert("Acceso autorizado. Mostrando el contador real del Billón de Toneladas...");
-    document.getElementById("terminal-body").innerHTML = "<tr><td>PATRIMONIO TOTAL</td><td>1 BILLÓN DE TONELADAS</td><td colspan='3'>VERIFICADO</td></tr>";
-  } else {
-    alert("Acceso denegado. Clave incorrecta.");
-  }
-}
-    
-    // Aquí iría la lógica que mañana conectaremos para leer tus pools
-    console.log("Módulo de activos cargado. Esperando datos de pools...");
+
 </script>
     
 </body>
