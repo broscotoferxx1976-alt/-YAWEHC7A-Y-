@@ -2,61 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>YAWEHC TERMINAL v2.4</title>
+    <title>YAWEHC TERMINAL v2.5</title>
     <style>
-        body { background-color: #050505; color: #e0e0e0; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
+        body { background-color: #050505; color: #3b82f6; font-family: 'Courier New', monospace; margin: 0; padding: 20px; }
         .dashboard { max-width: 650px; margin: auto; }
-        .card { background-color: #0f172a; border: 1px solid #1e293b; padding: 20px; border-radius: 10px; margin-bottom: 15px; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; margin-bottom: 20px; }
-        .input-key { background: #050505; border: 1px solid #3b82f6; color: white; padding: 8px; width: 100%; box-sizing: border-box; margin-top: 10px; }
-        .btn-action { background: #3b82f6; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: bold; }
-        #clock { color: #3b82f6; font-size: 14px; }
+        .card { background-color: #080a0f; border: 1px solid #3b82f6; padding: 20px; border-radius: 5px; margin-bottom: 15px; }
+        .status-header { border-bottom: 1px solid #3b82f6; padding-bottom: 10px; margin-bottom: 10px; font-weight: bold; }
+        .btn-time { background: #050505; color: #3b82f6; border: 1px solid #3b82f6; padding: 10px; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="dashboard">
-        <div class="header">
-            <h1>YAWEHC <span style="color:#3b82f6;">TERMINAL</span></h1>
-            <div id="clock">00:00:00</div>
+        <div class="card">
+            <div class="status-header">SISTEMA CUSTODIA v2.5 | MODO: VIGILANCIA</div>
+            <div id="reloj-cápsula">Cargando ciclo de tiempo...</div>
         </div>
         
         <div class="card">
-            <h2>MERCADO GLOBAL (LIVE)</h2>
-            <div id="mercado">Cargando datos...</div>
-        </div>
-
-        <div class="card">
             <h2>ACCESO A CUSTODIA PRIVADA</h2>
-            <input type="password" id="keyInput" class="input-key" placeholder="Introduce clave...">
-            <button class="btn-action" onclick="verificarClave()">DESBLOQUEAR CONTADOR</button>
-            <p id="resultado" style="margin-top: 10px; font-size: 12px;"></p>
+            <input type="password" id="key" style="background:#000; color:#fff; border:1px solid #3b82f6; width:100%; padding:8px;">
+            <button class="btn-time" onclick="acceder()">VERIFICAR CREDENCIAL</button>
+            <div id="output" style="margin-top:15px;"></div>
         </div>
     </div>
 
     <script>
-        function updateClock() { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }
-        setInterval(updateClock, 1000);
-        
-        function verificarClave() {
-            const clave = document.getElementById('keyInput').value;
-            const res = document.getElementById('resultado');
-            if(clave.toUpperCase() === "ESPIRITU SANTO") {
-                res.innerHTML = "ACCESO CONCEDIDO: <br>USD: 700 <br>ORO: 1 Billón de Toneladas";
-                res.style.color = "#34d399";
+        function acceder() {
+            const k = document.getElementById('key').value;
+            const out = document.getElementById('output');
+            if(k.toUpperCase() === "ESPIRITU SANTO") {
+                out.innerHTML = "DATOS ACTIVOS:<br>USD: 700<br>ORO: 1 Billón de Toneladas<br><br><i>Estado de la Cápsula: Bloqueo activo hasta 2046</i>";
             } else {
-                res.innerHTML = "ACCESO DENEGADO";
-                res.style.color = "#ef4444";
+                out.innerText = "ACCESO RESTRINGIDO";
             }
         }
-
-        async function updateTerminal() {
-            try {
-                const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd');
-                const data = await res.json();
-                document.getElementById('mercado').innerHTML = `BTC: $${data.bitcoin.usd.toLocaleString()} | ETH: $${data.ethereum.usd.toLocaleString()}`;
-            } catch(e) { document.getElementById('mercado').innerText = "Error de conexión"; }
-        }
-        updateTerminal();
+        // Cronómetro de la cápsula (20 años)
+        setInterval(() => {
+            const fechaFin = new Date('2046-07-08T00:00:00').getTime();
+            const ahora = new Date().getTime();
+            const diff = fechaFin - ahora;
+            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('reloj-cápsula').innerText = "CÁPSULA DEL TIEMPO: " + dias + " DÍAS RESTANTES PARA APERTURA TOTAL";
+        }, 1000);
     </script>
 </body>
 </html>
