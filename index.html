@@ -50,7 +50,6 @@
 <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700">
   <div class="flex justify-between items-center mb-4">
     <div>
-    </script>
       <h2 class="text-xl font-bold">YAYITOKEN / USDT</h2>
       <p id="precio-token" class="text-green-400 font-mono text-2xl">$0.0000...</p>
         
@@ -67,6 +66,7 @@
             
         </div>
     </main>
+    <script>
 async function updatePrices() {
     try {
         // Consultamos la API de GeckoTerminal para el pool de BSC
@@ -88,6 +88,7 @@ async function updatePrices() {
     
         } catch (error) {
             console.error("Error al conectar", error);
+    
         }
     } else {
         alert("Por favor, instala MetaMask");
